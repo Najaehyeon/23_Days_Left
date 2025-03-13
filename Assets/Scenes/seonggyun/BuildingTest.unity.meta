@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/seonggyun/BuildingTest.unity.meta
 guid: 03e5ecc6e4f24fd4f9ace80baaf9ca7f
+========
+guid: 8f470f27528803e4eb8bfaefb3a2c8ca
+folderAsset: yes
+>>>>>>>> feat/monster:Assets/Animation.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
