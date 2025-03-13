@@ -17,13 +17,13 @@ namespace _23DaysLeft.Monsters
         protected CreatureStateMachine stateMachine;
         protected CreatureData creatureData;
         protected NavMeshAgent navMeshAgent;
-        
+
         // state
         private WaitForSeconds idleWaitTime;
         protected Transform playerTr;
         private Vector3 lastDestination;
         private float lastAttackTime;
-        
+
         // status
         protected float currentHp;
         protected bool isDead;
@@ -33,7 +33,7 @@ namespace _23DaysLeft.Monsters
             stateMachine = creature.StateMachine;
             creatureData = creature.CreatureData;
             navMeshAgent = creature.NavMeshAgent;
-            
+
             currentHp = creatureData.MaxHp;
             lastAttackTime = creatureData.AttackDelay;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
@@ -45,9 +45,10 @@ namespace _23DaysLeft.Monsters
             if (!playerTr) return;
             PlayerDetected();
         }
-        
+
         private IEnumerator Idle()
         {
+            navMeshAgent.isStopped = true;
             stateMachine.StateChange(CreatureState.Idle);
             yield return idleWaitTime;
             StartCoroutine(Wandering());
@@ -55,6 +56,7 @@ namespace _23DaysLeft.Monsters
 
         private IEnumerator Wandering()
         {
+            navMeshAgent.isStopped = false;
             stateMachine.StateChange(CreatureState.Walk);
             navMeshAgent.SetDestination(GetWanderPoint());
 
@@ -97,7 +99,7 @@ namespace _23DaysLeft.Monsters
             navMeshAgent.speed = creatureData.CombatSpeed;
             navMeshAgent.isStopped = false;
             stateMachine.StateChange(CreatureState.Run);
-            
+
             switch (creatureData.CombatType)
             {
                 case CombatType.Fleeing:
@@ -110,27 +112,33 @@ namespace _23DaysLeft.Monsters
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         private void Fleeing()
         {
             Vector3 fleeDir = (transform.position - playerTr.position).normalized;
             Vector3 fleeTarget = transform.position + fleeDir * creatureData.FleeDistance;
 
-            if (NavMesh.SamplePosition(fleeTarget, out var hit, creatureData.FleeDistance, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(fleeTarget, out var hit, 2f, NavMesh.AllAreas))
             {
-                if ((lastDestination - hit.position).sqrMagnitude < 0.2f) return;
+                if ((lastDestination - hit.position).sqrMagnitude < 0.1f) return;
                 lastDestination = hit.position;
                 navMeshAgent.SetDestination(hit.position);
             }
         }
-        
+
         private void Chasing()
         {
-            if ((transform.position - playerTr.position).sqrMagnitude > creatureData.AttackDistance)
+            Vector3 direction = (playerTr.position - transform.position).normalized;
+            Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
+
+            if ((transform.position - playerTr.position).sqrMagnitude > creatureData.SafeDistance)
             {
-                if ((lastDestination - playerTr.position).sqrMagnitude < 0.2f) return;
-                lastDestination = playerTr.position;
-                navMeshAgent.SetDestination(playerTr.position);
+                if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
+                {
+                    if ((lastDestination - hit.position).sqrMagnitude < 0.1f) return;
+                    lastDestination = hit.position;
+                    navMeshAgent.SetDestination(hit.position);
+                }
             }
             else
             {
@@ -142,7 +150,7 @@ namespace _23DaysLeft.Monsters
                 }
             }
         }
-        
+
         private bool IsPlayerInFieldOfView()
         {
             Vector3 directionToPlayer = playerTr.position - transform.position;
@@ -152,14 +160,12 @@ namespace _23DaysLeft.Monsters
 
         private void Attack()
         {
+            stateMachine.StateChange(CreatureState.Idle);
             stateMachine.StateChange(CreatureState.Attack);
             // player.OnHit(creatureData.AttackPower);
         }
-        
-        private void Hit()
-        {
-            
-        }
+
+        private void Hit() { }
 
         private void Die()
         {
@@ -171,6 +177,7 @@ namespace _23DaysLeft.Monsters
             if (isDead || playerTr) return;
             playerTr = player;
             navMeshAgent.speed = creatureData.CombatSpeed;
+            stateMachine.OnPlayerDetected?.Invoke();
             StopAllCoroutines();
         }
 
@@ -179,6 +186,7 @@ namespace _23DaysLeft.Monsters
             if (isDead || !playerTr) return;
             playerTr = null;
             navMeshAgent.speed = creatureData.OriginSpeed;
+            stateMachine.OnPlayerFaraway?.Invoke();
             StopAllCoroutines();
             StartCoroutine(Wandering());
         }

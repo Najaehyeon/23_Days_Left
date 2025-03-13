@@ -17,13 +17,14 @@ MonoBehaviour:
   AttackPower: 10
   AttackDelay: 1
   Defense: 3
-  Speed: 3
+  OriginSpeed: 2
   CombatSpeed: 5
-  CombatType: 1
+  CombatType: 0
   MinWanderDistance: 10
   MaxWanderDistance: 15
   WanderTime: 10
   IdleTime: 5
   FleeDistance: 10
   FieldOfView: 120
+  SafeDistance: 2
   AttackDistance: 1

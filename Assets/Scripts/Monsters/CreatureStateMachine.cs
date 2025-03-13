@@ -1,22 +1,28 @@
+using System;
 using UnityEngine;
 
 namespace _23DaysLeft.Monsters
 {
     public class CreatureStateMachine : StateMachine<Creature>
     {
+        public Action OnPlayerDetected;
+        public Action OnPlayerFaraway;
+        
         private readonly int hashWalk = Animator.StringToHash("IsWalk");
         private readonly int hashRun = Animator.StringToHash("IsRun");
-        private readonly int hashAttack = Animator.StringToHash("IsAttack");
+        private readonly int hashCombat = Animator.StringToHash("IsCombat");
+        private readonly int hashAttack = Animator.StringToHash("Attack");
 
         public override void Init(Creature creature)
         {
             anim = creature.Animator;
-            navMeshAgent = creature.NavMeshAgent;
+
+            OnPlayerDetected += () => { anim.SetBool(hashCombat, true); };
+            OnPlayerFaraway += () => { anim.SetBool(hashCombat, false); };
         }
 
         protected override void Idle_Enter()
         {
-            navMeshAgent.isStopped = false;
             anim.SetBool(hashWalk, false);
         }
         
@@ -26,7 +32,6 @@ namespace _23DaysLeft.Monsters
         
         protected override void Idle_Exit()
         {
-            navMeshAgent.isStopped = true;
         }
         
         protected override void Walk_Enter()
@@ -59,7 +64,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Enter()
         {
-            anim.SetTrigger(hashAttack);
+            anim.SetBool(hashAttack, true);
         }
         
         protected override void Attack_Update()
@@ -68,6 +73,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Exit()
         {
+            anim.SetBool(hashAttack, false);
         }
         
         protected override void Hit_Enter()

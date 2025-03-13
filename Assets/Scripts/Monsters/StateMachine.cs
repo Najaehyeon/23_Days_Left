@@ -9,8 +9,6 @@ namespace _23DaysLeft.Monsters
     public class StateMachine<T> : MonoBehaviour
     {
         protected Animator anim;
-        protected NavMeshAgent navMeshAgent;
-
         public CreatureState creatureState = CreatureState.None;
 
         public virtual void Init(T actor) { }
