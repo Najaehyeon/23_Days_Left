@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace _23DaysLeft.Managers
 {
-
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T instance;
