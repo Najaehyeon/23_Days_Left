@@ -3,13 +3,13 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-public class DataLoadManager
+public class DataLoadManager : MonoBehaviour 
 {
     private List<ItemData> itemDatas;
 
     void Awake()
     {
-        itemDatas = Resources.LoadAll<ItemData>("Resource/Item").ToList();
+        itemDatas = Resources.LoadAll<ItemData>("Item").ToList(); 
     }
 
     /// <summary>
