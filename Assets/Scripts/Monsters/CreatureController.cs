@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace _23DaysLeft.Monsters
@@ -14,19 +15,20 @@ namespace _23DaysLeft.Monsters
 
     public class CreatureController : MonoBehaviour, IDetectable
     {
-        protected CreatureStateMachine stateMachine;
-        protected CreatureData creatureData;
-        protected NavMeshAgent navMeshAgent;
+        private CreatureStateMachine stateMachine;
+        private CreatureData creatureData;
+        private NavMeshAgent navMeshAgent;
 
         // state
         private WaitForSeconds idleWaitTime;
-        protected Transform playerTr;
+        private Transform playerTr;
         private Vector3 lastDestination;
         private float lastAttackTime;
+        private float lastHitTime;
 
         // status
-        protected float currentHp;
-        protected bool isDead;
+        private float currentHp;
+        private bool isDead;
 
         public void Init(Creature creature)
         {
@@ -36,19 +38,24 @@ namespace _23DaysLeft.Monsters
 
             currentHp = creatureData.MaxHp;
             lastAttackTime = creatureData.AttackDelay;
+            stateMachine.OnHitAnimationEnd += OnHitEnd;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
             StartCoroutine(Wandering());
         }
 
         private void Update()
         {
+            if (lastHitTime < creatureData.HitDelay)
+            {
+                lastHitTime += Time.deltaTime;
+            }
+
             if (!playerTr) return;
             PlayerDetected();
         }
 
         private IEnumerator Idle()
         {
-            navMeshAgent.isStopped = true;
             stateMachine.StateChange(CreatureState.Idle);
             yield return idleWaitTime;
             StartCoroutine(Wandering());
@@ -56,7 +63,6 @@ namespace _23DaysLeft.Monsters
 
         private IEnumerator Wandering()
         {
-            navMeshAgent.isStopped = false;
             stateMachine.StateChange(CreatureState.Walk);
             navMeshAgent.SetDestination(GetWanderPoint());
 
@@ -90,14 +96,12 @@ namespace _23DaysLeft.Monsters
             var maxWanderDistance = creatureData.MaxWanderDistance;
 
             var randomPoint = Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance);
-            NavMesh.SamplePosition(transform.position + randomPoint, out var hit, maxWanderDistance, NavMesh.AllAreas);
+            NavMesh.SamplePosition(transform.position + randomPoint, out var hit, 5f, NavMesh.AllAreas);
             return hit.position;
         }
 
         private void PlayerDetected()
         {
-            navMeshAgent.speed = creatureData.CombatSpeed;
-            navMeshAgent.isStopped = false;
             stateMachine.StateChange(CreatureState.Run);
 
             switch (creatureData.CombatType)
@@ -115,30 +119,26 @@ namespace _23DaysLeft.Monsters
 
         private void Fleeing()
         {
+            float noiseWeight = Mathf.PingPong(Time.time, 1f);
             Vector3 fleeDir = (transform.position - playerTr.position).normalized;
-            Vector3 fleeTarget = transform.position + fleeDir * creatureData.FleeDistance;
-
-            if (NavMesh.SamplePosition(fleeTarget, out var hit, 2f, NavMesh.AllAreas))
-            {
-                if ((lastDestination - hit.position).sqrMagnitude < 0.1f) return;
-                lastDestination = hit.position;
-                navMeshAgent.SetDestination(hit.position);
-            }
+            Vector3 finalDir = (fleeDir * (noiseWeight * 0.5f)).normalized;
+            transform.position += finalDir * (creatureData.CombatSpeed * Time.deltaTime);
+            
+            Quaternion targetRot = Quaternion.LookRotation(fleeDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 5f * Time.deltaTime);
         }
+        
+        
 
         private void Chasing()
         {
-            Vector3 direction = (playerTr.position - transform.position).normalized;
-            Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
-
-            if ((transform.position - playerTr.position).sqrMagnitude > creatureData.SafeDistance)
+            Debug.Log((playerTr.position - transform.position).sqrMagnitude);
+            if ((playerTr.position - transform.position).sqrMagnitude > creatureData.AttackDistance)
             {
-                if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
-                {
-                    if ((lastDestination - hit.position).sqrMagnitude < 0.1f) return;
-                    lastDestination = hit.position;
-                    navMeshAgent.SetDestination(hit.position);
-                }
+                transform.position = Vector3.MoveTowards(transform.position, playerTr.position, creatureData.CombatSpeed * Time.deltaTime);
+                
+                Quaternion targetRot = Quaternion.LookRotation(playerTr.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 5f * Time.deltaTime);
             }
             else
             {
@@ -160,16 +160,34 @@ namespace _23DaysLeft.Monsters
 
         private void Attack()
         {
-            stateMachine.StateChange(CreatureState.Idle);
             stateMachine.StateChange(CreatureState.Attack);
             // player.OnHit(creatureData.AttackPower);
         }
 
-        private void Hit() { }
+        public void OnHit(float damage)
+        {
+            lastHitTime = 0f;
+            if (lastHitTime < creatureData.HitDelay) return;
+
+            StopAllCoroutines();
+            stateMachine.StateChange(CreatureState.Hit);
+            currentHp = Mathf.Max(currentHp - damage, 0);
+            if (currentHp <= 0)
+            {
+                Die();
+            }
+        }
+
+        public void OnHitEnd()
+        {
+            if (isDead) return;
+            StartCoroutine(Wandering());
+        }
 
         private void Die()
         {
             isDead = true;
+            stateMachine.StateChange(CreatureState.Die);
         }
 
         public void OnPlayerDetected(Transform player)

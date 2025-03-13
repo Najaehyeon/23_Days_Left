@@ -2,12 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _23DaysLeft.Managers;
+using _23DaysLeft.Monsters;
 using UnityEngine;
 
 public class OnGui : MonoBehaviour
 {
     public bool isDebug = true;
     private List<GameObject> spawnObjects = new();
+    [SerializeField] private CreatureController creaure;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
 
     public void OnGUI()
     {
@@ -30,6 +40,12 @@ public class OnGui : MonoBehaviour
             {
                 PoolManager.Instance.Despawn(spawnObjects[i]);
             }
+        }
+        
+        // Creature Hit 테스트
+        if (GUI.Button(new Rect(10, 130, 200, 50), "Creature Hit", buttonStyle))
+        {
+            creaure.OnHit(0.1f);
         }
     }
 }

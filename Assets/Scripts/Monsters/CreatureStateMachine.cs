@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace _23DaysLeft.Monsters
@@ -7,15 +8,20 @@ namespace _23DaysLeft.Monsters
     {
         public Action OnPlayerDetected;
         public Action OnPlayerFaraway;
+        public Action OnHitAnimationEnd;
         
         private readonly int hashWalk = Animator.StringToHash("IsWalk");
         private readonly int hashRun = Animator.StringToHash("IsRun");
         private readonly int hashCombat = Animator.StringToHash("IsCombat");
         private readonly int hashAttack = Animator.StringToHash("Attack");
+        private readonly int hashHit = Animator.StringToHash("Hit");
 
+        private AnimatorStateInfo currentState;
+        
         public override void Init(Creature creature)
         {
             anim = creature.Animator;
+            navMeshAgent = creature.NavMeshAgent;
 
             OnPlayerDetected += () => { anim.SetBool(hashCombat, true); };
             OnPlayerFaraway += () => { anim.SetBool(hashCombat, false); };
@@ -23,6 +29,7 @@ namespace _23DaysLeft.Monsters
 
         protected override void Idle_Enter()
         {
+            navMeshAgent.isStopped = true;
             anim.SetBool(hashWalk, false);
         }
         
@@ -36,6 +43,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Walk_Enter()
         {
+            navMeshAgent.isStopped = false;
             anim.SetBool(hashWalk, true);
         }
         
@@ -55,6 +63,11 @@ namespace _23DaysLeft.Monsters
         
         protected override void Run_Update()
         {
+            currentState = anim.GetCurrentAnimatorStateInfo(0);
+            if (currentState.normalizedTime >= 1f)
+            {
+                OnHitAnimationEnd?.Invoke();
+            }
         }
         
         protected override void Run_Exit()
@@ -64,6 +77,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Enter()
         {
+            navMeshAgent.isStopped = true;
             anim.SetBool(hashAttack, true);
         }
         
@@ -78,17 +92,16 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Enter()
         {
-            base.Hit_Enter();
+            navMeshAgent.isStopped = true;
+            anim.SetTrigger(hashHit);
         }
         
         protected override void Hit_Update()
         {
-            base.Hit_Update();
         }
         
         protected override void Hit_Exit()
         {
-            base.Hit_Exit();
         }
         
         protected override void Die_Enter()

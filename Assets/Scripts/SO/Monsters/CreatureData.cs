@@ -10,6 +10,7 @@ namespace _23DaysLeft.Monsters
         public float MaxHp;
         public float AttackPower;
         public float AttackDelay;
+        public float HitDelay;
         public float Defense;
         public float OriginSpeed;
         public float CombatSpeed;

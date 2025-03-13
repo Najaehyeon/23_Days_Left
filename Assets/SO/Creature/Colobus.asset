@@ -16,10 +16,11 @@ MonoBehaviour:
   MaxHp: 100
   AttackPower: 10
   AttackDelay: 1
+  HitDelay: 0
   Defense: 3
   OriginSpeed: 2
   CombatSpeed: 5
-  CombatType: 0
+  CombatType: 1
   MinWanderDistance: 10
   MaxWanderDistance: 15
   WanderTime: 10
