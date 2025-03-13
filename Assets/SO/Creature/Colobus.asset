@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Colobus
   m_EditorClassIdentifier: 
   Name: "\uC6D0\uC22D\uC774"
-  CombatType: 0
   MaxHp: 100
   AttackPower: 10
-  AttackDelay: 0.2
+  AttackDelay: 1
   Defense: 3
-  Speed: 5
-  detectionRange: 5
+  Speed: 3
+  CombatSpeed: 5
+  CombatType: 1
+  MinWanderDistance: 10
+  MaxWanderDistance: 15
+  WanderTime: 10
+  IdleTime: 5
+  FleeDistance: 10
+  FieldOfView: 120
+  AttackDistance: 1

@@ -1,50 +1,73 @@
+using UnityEngine;
+
 namespace _23DaysLeft.Monsters
 {
-    public class CreatureStateMachine : StateMachine
+    public class CreatureStateMachine : StateMachine<Creature>
     {
+        private readonly int hashWalk = Animator.StringToHash("IsWalk");
+        private readonly int hashRun = Animator.StringToHash("IsRun");
+        private readonly int hashAttack = Animator.StringToHash("IsAttack");
+
+        public override void Init(Creature creature)
+        {
+            anim = creature.Animator;
+            navMeshAgent = creature.NavMeshAgent;
+        }
+
         protected override void Idle_Enter()
         {
-            base.Idle_Enter();
+            navMeshAgent.isStopped = false;
+            anim.SetBool(hashWalk, false);
         }
         
         protected override void Idle_Update()
         {
-            base.Idle_Update();
         }
         
         protected override void Idle_Exit()
         {
-            base.Idle_Exit();
+            navMeshAgent.isStopped = true;
+        }
+        
+        protected override void Walk_Enter()
+        {
+            anim.SetBool(hashWalk, true);
+        }
+        
+        protected override void Walk_Update()
+        {
+        }
+        
+        protected override void Walk_Exit()
+        {
+            anim.SetBool(hashWalk, false);
         }
 
         protected override void Run_Enter()
         {
-            base.Run_Enter();
+            anim.SetBool(hashRun, true);
         }
         
         protected override void Run_Update()
         {
-            base.Run_Update();
         }
         
         protected override void Run_Exit()
         {
-            base.Run_Exit();
+            anim.SetBool(hashRun, false);
         }
         
         protected override void Attack_Enter()
         {
-            base.Attack_Enter();
+            anim.SetTrigger(hashAttack);
         }
         
         protected override void Attack_Update()
         {
-            base.Attack_Update();
         }
         
         protected override void Attack_Exit()
         {
-            base.Attack_Exit();
         }
         
         protected override void Hit_Enter()

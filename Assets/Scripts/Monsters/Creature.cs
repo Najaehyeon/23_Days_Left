@@ -1,31 +1,27 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using _23DaysLeft.Monsters;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace _23DaysLeft.Monsters
+public class Creature : MonoBehaviour
 {
-    public class Creature : MonoBehaviour
-    {
-        [SerializeField] protected CreatureStateMachine stateMachine;
-        [SerializeField] protected CreatureData creatureData;
-        [SerializeField] protected NavMeshAgent navMeshAgent;
+    [SerializeField] private CreatureData creatureData;
+    [SerializeField] private CreatureStateMachine stateMachine;
+    [SerializeField] private CreatureController controller;
+    [SerializeField] private Animator animator;
+    [SerializeField] private NavMeshAgent savMeshAgent;
+    
+    public CreatureData CreatureData => creatureData;
+    public CreatureStateMachine StateMachine => stateMachine;
+    public CreatureController Controller => controller;
+    public Animator Animator => animator;
+    public NavMeshAgent NavMeshAgent => savMeshAgent;
 
-        protected float currentHp;
-        
-        // patrol
-        // chase
-        // attack
-        // hit
-        // die
-    }
-
-    public enum CreatureState
+    private void Start()
     {
-        None,
-        Idle,
-        Walk,
-        Run,
-        Attack,
-        Hit,
-        Die
+        stateMachine.Init(this);
+        controller.Init(this);
     }
 }
