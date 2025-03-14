@@ -6,16 +6,17 @@ namespace _23DaysLeft.Monsters
     public class CreatureData : ScriptableObject
     {
         [Header("Creature Info")]
-        public int Id;
         public string Name;
         public float MaxHp;
+        public float OriginSpeed;
+        
+        [Header("Combat Info")]
+        public CombatType CombatType;
+        public float Defense;
         public float AttackPower;
         public float AttackDelay;
         public float HitDelay;
-        public float Defense;
-        public float OriginSpeed;
         public float CombatSpeed;
-        public CombatType CombatType;
 
         [Header("Creature AI")]
         public float MinWanderDistance = 10f;

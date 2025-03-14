@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: "\uCF5C\uB85C\uBD80\uC2A4"
   MaxHp: 100
+  OriginSpeed: 2
+  CombatType: 0
+  Defense: 3
   AttackPower: 10
   AttackDelay: 1
-  HitDelay: 0
-  Defense: 3
-  OriginSpeed: 2
+  HitDelay: 1
   CombatSpeed: 5
-  CombatType: 1
   MinWanderDistance: 10
   MaxWanderDistance: 15
   WanderTime: 10

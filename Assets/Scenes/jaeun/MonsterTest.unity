@@ -2312,10 +2312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbfaf507a13b1a4bbc8dac849346ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnList: b80b0000
   radius: 10
   spawnY: 3
   maxCount: 10
-  creatureIds: 
+  spawnDelay: 10
 --- !u!4 &940948426
 Transform:
   m_ObjectHideFlags: 0
