@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: "\uCF5C\uB85C\uBD80\uC2A4"
   MaxHp: 100
   OriginSpeed: 2
-  CombatType: 1
+  CombatType: 0
   Defense: 3
   AttackPower: 10
-  AttackDelay: 1
+  AttackDelay: 2
   HitDelay: 1
   CombatSpeed: 4
   MinWanderDistance: 10

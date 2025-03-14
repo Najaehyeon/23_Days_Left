@@ -32,10 +32,12 @@ public class CreatureSpawner : MonoBehaviour
 
     private IEnumerator SpawnCoroutine()
     {
+        yield return new WaitForSeconds(2f);
+        
         while (true)
         {
-            yield return waitTime;
             Spawn();
+            yield return waitTime;
         }
     }
     

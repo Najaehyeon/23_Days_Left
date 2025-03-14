@@ -14,8 +14,8 @@ namespace _23DaysLeft.Monsters
         public CombatType CombatType;
         public float Defense;
         public float AttackPower;
-        public float AttackDelay;
-        public float HitDelay;
+        public float AttackDelay = 1.5f;
+        public float HitDelay = 1.5f;
         public float CombatSpeed;
 
         [Header("Creature AI")]

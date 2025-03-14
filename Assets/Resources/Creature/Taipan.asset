@@ -18,7 +18,7 @@ MonoBehaviour:
   CombatType: 1
   Defense: 3
   AttackPower: 10
-  AttackDelay: 1
+  AttackDelay: 1.5
   HitDelay: 1
   CombatSpeed: 5
   MinWanderDistance: 10

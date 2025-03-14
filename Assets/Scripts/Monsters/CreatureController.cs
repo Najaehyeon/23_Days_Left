@@ -22,7 +22,7 @@ namespace _23DaysLeft.Monsters
 
         // state
         private WaitForSeconds idleWaitTime;
-        private Transform playerTr;
+        [SerializeField] private Transform playerTr;
         private Vector3 lastDestination;
         private float lastAttackTime;
         private float lastHitTime;
@@ -54,12 +54,10 @@ namespace _23DaysLeft.Monsters
         private void Update()
         {
             if (isDead) return;
-            
-            if (lastHitTime < creatureData.HitDelay)
-            {
-                lastHitTime += Time.deltaTime;
-            }
 
+            if (lastHitTime <= creatureData.HitDelay) lastHitTime += Time.deltaTime;
+            if (lastAttackTime <= creatureData.AttackDelay) lastAttackTime += Time.deltaTime;
+            
             if (!playerTr) return;
             PlayerDetected();
         }
@@ -141,8 +139,7 @@ namespace _23DaysLeft.Monsters
             Vector3 direction = (playerTr.position - transform.position).normalized;
             Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
 
-            lastAttackTime += Time.deltaTime;
-            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.2f)
+            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
             {
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
                 {
@@ -154,7 +151,6 @@ namespace _23DaysLeft.Monsters
                 if (lastAttackTime >= creatureData.AttackDelay && IsPlayerInFieldOfView())
                 {
                     Attack();
-                    lastAttackTime = 0f;
                 }
             }
         }
@@ -168,10 +164,10 @@ namespace _23DaysLeft.Monsters
 
         private void Attack()
         {
+            lastAttackTime = 0f;
             stateMachine.StateChange(CreatureState.Attack);
             if (IsTargetInAttackRange())
             {
-                Debug.Log("Attack");
                 // player.OnHit(creatureData.AttackPower);
             }
         }
@@ -190,8 +186,8 @@ namespace _23DaysLeft.Monsters
         public void OnHit(float damage)
         {
             if (isDead) return;
-            lastHitTime = 0f;
             if (lastHitTime < creatureData.HitDelay) return;
+            lastHitTime = 0f;
 
             StopAllCoroutines();
             stateMachine.StateChange(CreatureState.Hit);
@@ -229,7 +225,7 @@ namespace _23DaysLeft.Monsters
             // 아이템 드롭
             PoolManager.Instance.Despawn(gameObject);
         }
-        
+
         public void OnPlayerDetected(Transform player)
         {
             if (isDead || playerTr) return;
