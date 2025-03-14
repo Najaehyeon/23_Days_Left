@@ -29,7 +29,7 @@ public class DataLoadManager : MonoBehaviour
     public ItemData Query(string name)
         => (from item in itemDatas where item.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase) select item).FirstOrDefault();
     
-    public void LoadCreatureData()
+    private void LoadCreatureData()
     {
         creatureDatas = new Dictionary<string, CreatureData>();
         var creatureData = Resources.LoadAll<CreatureData>("Creature");
