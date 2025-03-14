@@ -18,17 +18,21 @@ public class Tree : ResourceObject
 
     private void Update()
     {
-        RespawnTree();
+        RespawnResource();
     }
 
-    public override void RespawnTree()
+    public override void RespawnResource()
     {
         if (_dayNightCycle.currentTime == 0.4f && !isObjectAtPosition)
         {
             _meshRenderer.enabled = true;
             _boxCollider.isTrigger = false;
-            remainDigCount = digCount;
         }
+    }
+
+    public override void DigAndDropResource()
+    {
+        
     }
 
     private void OnCollisionEnter(Collision collision)  // 플레이어가 캘 때

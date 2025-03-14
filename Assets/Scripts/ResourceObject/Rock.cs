@@ -6,7 +6,7 @@ public class Rock : ResourceObject
 {
     private void Update()
     {
-        RespawnTree();
+        RespawnResource();
     }
 
     private void OnCollisionEnter(Collision collision)  // ÇÃ·¹ÀÌ¾î°¡ Ä¶ ¶§
@@ -16,7 +16,6 @@ public class Rock : ResourceObject
             if (remainDigCount >= 0)
             {
                 Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
-                remainDigCount--;
                 // ±ø±ø ¼Ò¸®
             }
             else 
