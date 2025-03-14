@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 6867432940345623587}
   - component: {fileID: 6330685402771358934}
   - component: {fileID: 4017099722579820322}
-  - component: {fileID: 613112652722099655}
+  - component: {fileID: 1365386597648725214}
   m_Layer: 10
   m_Name: Colobus
   m_TagString: Untagged
@@ -657,8 +657,8 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 3
---- !u!65 &613112652722099655
-BoxCollider:
+--- !u!136 &1365386597648725214
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -675,9 +675,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.48, y: 0.84, z: 0.96}
-  m_Center: {x: 0, y: 0.4, z: 0.11}
+  serializedVersion: 2
+  m_Radius: 0.35
+  m_Height: 0.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.37, z: 0}
 --- !u!1 &7877067775808722803
 GameObject:
   m_ObjectHideFlags: 0

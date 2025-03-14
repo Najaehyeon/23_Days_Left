@@ -7,6 +7,8 @@ public static class Extensions
         return creatures switch
         {
             Creatures.Colobus => "Colobus",
+            Creatures.Squid   => "Squid",
+            Creatures.Taipan  => "Taipan",
             _                 => throw new ArgumentOutOfRangeException(nameof(creatures), creatures, null)
         };
     }

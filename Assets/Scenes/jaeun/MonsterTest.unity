@@ -2404,11 +2404,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbfaf507a13b1a4bbc8dac849346ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnList: b80b0000
+  spawnList: 00000000
   radius: 10
   spawnY: 3
-  maxCount: 10
-  spawnDelay: 10
+  maxCount: 1
+  spawnDelay: 2
 --- !u!4 &940948426
 Transform:
   m_ObjectHideFlags: 0
@@ -4362,6 +4362,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolDatas:
   - Prefab: {fileID: 7834390628042090126, guid: 2f4affb9f87a4ec4cb6553fba306784e, type: 3}
+    PoolSize: 10
+  - Prefab: {fileID: 6663036545537708639, guid: f7bd5c34239803445a553f8a9888a186, type: 3}
+    PoolSize: 10
+  - Prefab: {fileID: 5352326183732966833, guid: f55f972169b5e004c93ad4be732da195, type: 3}
     PoolSize: 10
 --- !u!4 &1472869080
 Transform:

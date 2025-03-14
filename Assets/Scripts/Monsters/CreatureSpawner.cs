@@ -50,12 +50,10 @@ public class CreatureSpawner : MonoBehaviour
 
     private string GetSpawnCreature()
     {
-        // var index = Random.Range(0, spawnList.Length);
-        // var key = spawnList[index].ToKey();
-        // var data = Global.Instance.DataLoadManager.GetCreatureData(key);
-        // return data.name;
-        
-        return "Colobus";
+        var index = Random.Range(0, spawnList.Length);
+        var key = spawnList[index].ToKey();
+        var data = Global.Instance.DataLoadManager.GetCreatureData(key);
+        return data.name;
     }
     
     private Vector3 GetSpawnPos()
@@ -91,5 +89,7 @@ public class CreatureSpawner : MonoBehaviour
 
 public enum Creatures
 {
-    Colobus = 3000,
+    Colobus,
+    Squid,
+    Taipan,
 }

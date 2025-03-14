@@ -53,6 +53,8 @@ namespace _23DaysLeft.Monsters
 
         private void Update()
         {
+            if (isDead) return;
+            
             if (lastHitTime < creatureData.HitDelay)
             {
                 lastHitTime += Time.deltaTime;
@@ -140,7 +142,7 @@ namespace _23DaysLeft.Monsters
             Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
 
             lastAttackTime += Time.deltaTime;
-            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.1f)
+            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.2f)
             {
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
                 {
@@ -216,6 +218,7 @@ namespace _23DaysLeft.Monsters
         private void Die()
         {
             isDead = true;
+            navMeshAgent.enabled = false;
             stateMachine.StateChange(CreatureState.Die);
             StartCoroutine(DieCoroutine());
         }
