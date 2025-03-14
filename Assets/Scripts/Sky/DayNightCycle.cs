@@ -6,7 +6,7 @@ public class DayNightCycle : MonoBehaviour
 {
     [Range(0f, 1f)]
     public float currentTime;
-    public float fullDayLength;
+    public float fullDayLength = 120; // 하루 길이 (초 단위)
     public float startTime = 0.4f;
     private float timeRate;
     public Vector3 noon;
@@ -25,15 +25,27 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
 
+    public int dayCount = 1; // 현재 일수
+    private float elapsedTime; // 경과한 시간
+
     private void Start()
     {
         timeRate = 1.0f / fullDayLength;
+        elapsedTime = fullDayLength * startTime; // 시작 시간 반영
         currentTime = startTime;
     }
 
     private void Update()
     {
-        currentTime = (currentTime + timeRate * Time.deltaTime) % 1.0f;
+        elapsedTime += Time.deltaTime;
+        currentTime = (elapsedTime % fullDayLength) / fullDayLength;
+
+        // 하루가 지나면 일수 증가
+        if (elapsedTime >= fullDayLength * dayCount + (fullDayLength * startTime))
+        {
+            dayCount++;
+        }
+
         UpdateLighting(sun, sunColor, sunIntensity);
         UpdateLighting(moon, moonColor, moonIntensity);
 
