@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _23DaysLeft.Managers;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -28,7 +29,8 @@ namespace _23DaysLeft.Monsters
 
         // status
         private float currentHp;
-        private bool isDead;
+        private bool isSpawned;
+        private bool isDead = true;
 
         public void Init(Creature creature)
         {
@@ -39,6 +41,7 @@ namespace _23DaysLeft.Monsters
             currentHp = creatureData.MaxHp;
             lastAttackTime = creatureData.AttackDelay;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
+            isDead = false;
 
             // 이벤트 등록
             stateMachine.OnHitAnimationEnd += OnHitEnd;
@@ -137,7 +140,7 @@ namespace _23DaysLeft.Monsters
             Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
 
             lastAttackTime += Time.deltaTime;
-            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance)
+            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.1f)
             {
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
                 {
@@ -164,7 +167,16 @@ namespace _23DaysLeft.Monsters
         private void Attack()
         {
             stateMachine.StateChange(CreatureState.Attack);
-            // player.OnHit(creatureData.AttackPower);
+            if (IsTargetInAttackRange())
+            {
+                Debug.Log("Attack");
+                // player.OnHit(creatureData.AttackPower);
+            }
+        }
+
+        private bool IsTargetInAttackRange()
+        {
+            return Vector3.Distance(playerTr.position, transform.position) <= creatureData.AttackDistance;
         }
 
         private void OnAttackEnd()
@@ -175,6 +187,7 @@ namespace _23DaysLeft.Monsters
 
         public void OnHit(float damage)
         {
+            if (isDead) return;
             lastHitTime = 0f;
             if (lastHitTime < creatureData.HitDelay) return;
 
@@ -204,8 +217,16 @@ namespace _23DaysLeft.Monsters
         {
             isDead = true;
             stateMachine.StateChange(CreatureState.Die);
+            StartCoroutine(DieCoroutine());
         }
 
+        private IEnumerator DieCoroutine()
+        {
+            yield return new WaitForSeconds(1.5f);
+            // 아이템 드롭
+            PoolManager.Instance.Despawn(gameObject);
+        }
+        
         public void OnPlayerDetected(Transform player)
         {
             if (isDead || playerTr) return;

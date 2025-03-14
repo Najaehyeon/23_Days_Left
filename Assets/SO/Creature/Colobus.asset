@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2923f2fce787b6945a64368c3dd72ab7, type: 3}
   m_Name: Colobus
   m_EditorClassIdentifier: 
-  Name: "\uC6D0\uC22D\uC774"
+  Name: "\uCF5C\uB85C\uBD80\uC2A4"
   MaxHp: 100
   AttackPower: 10
   AttackDelay: 1
@@ -27,5 +27,4 @@ MonoBehaviour:
   IdleTime: 5
   FleeDistance: 10
   FieldOfView: 120
-  SafeDistance: 2
   AttackDistance: 1

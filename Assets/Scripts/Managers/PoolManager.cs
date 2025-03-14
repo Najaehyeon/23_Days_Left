@@ -89,6 +89,16 @@ namespace _23DaysLeft.Managers
             Debug.LogWarning($"PoolManager: {poolKey}<{typeof(T)}> is not exist.");
             return null;
         }
+        
+        public T Spawn<T>(string poolKey, Transform parent) where T : Component
+        {
+            GameObject obj = Spawn(poolKey);
+            obj.transform.SetParent(parent);
+            if (obj.TryGetComponent(out T component)) return component;
+            
+            Debug.LogWarning($"PoolManager: {poolKey}<{typeof(T)}> is not exist.");
+            return null;
+        }
 
         public void Despawn(GameObject obj)
         {

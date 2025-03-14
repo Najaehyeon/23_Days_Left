@@ -16,6 +16,7 @@ namespace _23DaysLeft.Monsters
         private readonly int hashCombat = Animator.StringToHash("IsCombat");
         private readonly int hashAttack = Animator.StringToHash("Attack");
         private readonly int hashHit = Animator.StringToHash("Hit");
+        private readonly int hashDie = Animator.StringToHash("Die");
 
         private AnimatorStateInfo currentState;
         
@@ -81,6 +82,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Update()
         {
+            navMeshAgent.velocity = Vector3.zero;
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             if (currentState.normalizedTime >= 1f)
             {
@@ -95,12 +97,13 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Enter()
         {
-            navMeshAgent.isStopped = true;
             anim.SetTrigger(hashHit);
+            navMeshAgent.isStopped = true;
         }
         
         protected override void Hit_Update()
         {
+            navMeshAgent.velocity = Vector3.zero;
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             if (currentState.normalizedTime >= 1f)
             {
@@ -114,17 +117,16 @@ namespace _23DaysLeft.Monsters
         
         protected override void Die_Enter()
         {
-            base.Die_Enter();
+            anim.SetTrigger(hashDie);
+            navMeshAgent.isStopped = true;
         }
         
         protected override void Die_Update()
         {
-            base.Die_Update();
         }
         
         protected override void Die_Exit()
         {
-            base.Die_Exit();
         }
     }
 }

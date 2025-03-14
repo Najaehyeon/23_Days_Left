@@ -9,7 +9,8 @@ public class OnGui : MonoBehaviour
 {
     public bool isDebug = true;
     private List<GameObject> spawnObjects = new();
-    [SerializeField] private CreatureController creaure;
+    [SerializeField] private CreatureSpawner spawner;
+    [SerializeField] private CreatureController creature;
 
     private void Update()
     {
@@ -45,7 +46,13 @@ public class OnGui : MonoBehaviour
         // Creature Hit 테스트
         if (GUI.Button(new Rect(10, 130, 200, 50), "Creature Hit", buttonStyle))
         {
-            creaure.OnHit(0.1f);
+            creature.OnHit(20f);
+        }
+        
+        // Creature 스폰 테스트
+        if (GUI.Button(new Rect(10, 190, 200, 50), "Creature Spawn", buttonStyle))
+        {
+            spawner.Spawn();
         }
     }
 }

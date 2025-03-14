@@ -11,16 +11,18 @@ public class Creature : MonoBehaviour
     [SerializeField] private CreatureStateMachine stateMachine;
     [SerializeField] private CreatureController controller;
     [SerializeField] private Animator animator;
-    [SerializeField] private NavMeshAgent savMeshAgent;
+    [SerializeField] private NavMeshAgent navMeshAgent;
     
     public CreatureData CreatureData => creatureData;
     public CreatureStateMachine StateMachine => stateMachine;
     public CreatureController Controller => controller;
     public Animator Animator => animator;
-    public NavMeshAgent NavMeshAgent => savMeshAgent;
+    public NavMeshAgent NavMeshAgent => navMeshAgent;
 
-    private void Start()
+    public void Init(Vector3 spawnPos)
     {
+        transform.position = spawnPos;
+        navMeshAgent.enabled = true;
         stateMachine.Init(this);
         controller.Init(this);
     }

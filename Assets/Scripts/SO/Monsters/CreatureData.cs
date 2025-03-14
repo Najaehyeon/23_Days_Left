@@ -6,6 +6,7 @@ namespace _23DaysLeft.Monsters
     public class CreatureData : ScriptableObject
     {
         [Header("Creature Info")]
+        public int Id;
         public string Name;
         public float MaxHp;
         public float AttackPower;
