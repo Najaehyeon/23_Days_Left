@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f0862f4f42c931944ad12d8381df61f1
+=======
+guid: 6019b4735340ca44b8ddc08e0ef565e9
+>>>>>>> feat/monster
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

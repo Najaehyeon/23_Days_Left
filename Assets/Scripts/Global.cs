@@ -5,12 +5,6 @@ using UnityEngine;
 public class Global : Singleton<Global>
 {
     [Header("Monobehaviour")]
-    public AudioManager     audioManager;
-
-    public DataLoadManager  dataLoadManager = new();
-
-    private void Start()
-    {
-        
-    }
+    public AudioManager     AudioManager;
+    public DataLoadManager  DataLoadManager;
 }
