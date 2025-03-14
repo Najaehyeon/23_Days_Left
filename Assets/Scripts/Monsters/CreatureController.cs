@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace _23DaysLeft.Monsters
@@ -15,6 +14,7 @@ namespace _23DaysLeft.Monsters
 
     public class CreatureController : MonoBehaviour, IDetectable
     {
+        // components
         private CreatureStateMachine stateMachine;
         private CreatureData creatureData;
         private NavMeshAgent navMeshAgent;
@@ -32,14 +32,19 @@ namespace _23DaysLeft.Monsters
 
         public void Init(Creature creature)
         {
+            // 초기화
             stateMachine = creature.StateMachine;
             creatureData = creature.CreatureData;
             navMeshAgent = creature.NavMeshAgent;
-
             currentHp = creatureData.MaxHp;
             lastAttackTime = creatureData.AttackDelay;
-            stateMachine.OnHitAnimationEnd += OnHitEnd;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
+
+            // 이벤트 등록
+            stateMachine.OnHitAnimationEnd += OnHitEnd;
+            stateMachine.OnAttackAnimationEnd += OnAttackEnd;
+
+            // 상태 코루틴
             StartCoroutine(Wandering());
         }
 
@@ -102,8 +107,6 @@ namespace _23DaysLeft.Monsters
 
         private void PlayerDetected()
         {
-            stateMachine.StateChange(CreatureState.Run);
-
             switch (creatureData.CombatType)
             {
                 case CombatType.Fleeing:
@@ -119,30 +122,30 @@ namespace _23DaysLeft.Monsters
 
         private void Fleeing()
         {
-            float noiseWeight = Mathf.PingPong(Time.time, 1f);
             Vector3 fleeDir = (transform.position - playerTr.position).normalized;
-            Vector3 finalDir = (fleeDir * (noiseWeight * 0.5f)).normalized;
-            transform.position += finalDir * (creatureData.CombatSpeed * Time.deltaTime);
-            
-            Quaternion targetRot = Quaternion.LookRotation(fleeDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 5f * Time.deltaTime);
+            Vector3 fleeTarget = transform.position + fleeDir * creatureData.FleeDistance;
+
+            if (NavMesh.SamplePosition(fleeTarget, out var hit, 2f, NavMesh.AllAreas))
+            {
+                navMeshAgent.SetDestination(hit.position);
+            }
         }
-        
-        
 
         private void Chasing()
         {
-            Debug.Log((playerTr.position - transform.position).sqrMagnitude);
-            if ((playerTr.position - transform.position).sqrMagnitude > creatureData.AttackDistance)
+            Vector3 direction = (playerTr.position - transform.position).normalized;
+            Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
+
+            lastAttackTime += Time.deltaTime;
+            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance)
             {
-                transform.position = Vector3.MoveTowards(transform.position, playerTr.position, creatureData.CombatSpeed * Time.deltaTime);
-                
-                Quaternion targetRot = Quaternion.LookRotation(playerTr.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 5f * Time.deltaTime);
+                if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
+                {
+                    navMeshAgent.SetDestination(hit.position);
+                }
             }
             else
             {
-                lastAttackTime += Time.deltaTime;
                 if (lastAttackTime >= creatureData.AttackDelay && IsPlayerInFieldOfView())
                 {
                     Attack();
@@ -164,6 +167,12 @@ namespace _23DaysLeft.Monsters
             // player.OnHit(creatureData.AttackPower);
         }
 
+        private void OnAttackEnd()
+        {
+            if (isDead) return;
+            stateMachine.StateChange(CreatureState.Run);
+        }
+
         public void OnHit(float damage)
         {
             lastHitTime = 0f;
@@ -178,10 +187,17 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        public void OnHitEnd()
+        private void OnHitEnd()
         {
             if (isDead) return;
-            StartCoroutine(Wandering());
+            if (playerTr)
+            {
+                stateMachine.StateChange(CreatureState.Run);
+            }
+            else
+            {
+                StartCoroutine(Wandering());
+            }
         }
 
         private void Die()
@@ -195,6 +211,7 @@ namespace _23DaysLeft.Monsters
             if (isDead || playerTr) return;
             playerTr = player;
             navMeshAgent.speed = creatureData.CombatSpeed;
+            stateMachine.StateChange(CreatureState.Run);
             stateMachine.OnPlayerDetected?.Invoke();
             StopAllCoroutines();
         }

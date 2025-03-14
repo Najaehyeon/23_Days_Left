@@ -23,7 +23,6 @@ namespace _23DaysLeft.Monsters
         public float IdleTime = 5f;
         public float FleeDistance = 10f;
         public float FieldOfView = 120f;
-        public float SafeDistance = 2f;
         public float AttackDistance = 1f;
         
         // [Header("Creature Drops")]

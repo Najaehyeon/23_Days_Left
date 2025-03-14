@@ -9,6 +9,7 @@ namespace _23DaysLeft.Monsters
         public Action OnPlayerDetected;
         public Action OnPlayerFaraway;
         public Action OnHitAnimationEnd;
+        public Action OnAttackAnimationEnd;
         
         private readonly int hashWalk = Animator.StringToHash("IsWalk");
         private readonly int hashRun = Animator.StringToHash("IsRun");
@@ -58,16 +59,13 @@ namespace _23DaysLeft.Monsters
 
         protected override void Run_Enter()
         {
+            navMeshAgent.isStopped = false;
             anim.SetBool(hashRun, true);
         }
         
         protected override void Run_Update()
         {
-            currentState = anim.GetCurrentAnimatorStateInfo(0);
-            if (currentState.normalizedTime >= 1f)
-            {
-                OnHitAnimationEnd?.Invoke();
-            }
+            
         }
         
         protected override void Run_Exit()
@@ -83,6 +81,11 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Update()
         {
+            currentState = anim.GetCurrentAnimatorStateInfo(0);
+            if (currentState.normalizedTime >= 1f)
+            {
+                OnAttackAnimationEnd?.Invoke();
+            }
         }
         
         protected override void Attack_Exit()
@@ -98,6 +101,11 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Update()
         {
+            currentState = anim.GetCurrentAnimatorStateInfo(0);
+            if (currentState.normalizedTime >= 1f)
+            {
+                OnHitAnimationEnd?.Invoke();
+            }
         }
         
         protected override void Hit_Exit()
