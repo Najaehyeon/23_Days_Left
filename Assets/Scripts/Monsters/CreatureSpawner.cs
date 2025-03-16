@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _23DaysLeft.Managers;
@@ -18,11 +19,13 @@ public class CreatureSpawner : MonoBehaviour
     
     private List<Creature> spawnedCreatures = new();
     private WaitForSeconds waitTime;
+    private Camera mainCamera;
     private int spawnCount = 0;
 
     private void Start()
     {
         waitTime = new WaitForSeconds(spawnDelay);
+        mainCamera = Camera.main;
         StartCoroutine(SpawnCoroutine());
     }
 
@@ -42,12 +45,12 @@ public class CreatureSpawner : MonoBehaviour
         }
     }
     
-    public void Spawn()
+    private void Spawn()
     {
         if (spawnCount >= maxCount) return;
 
-        var creature = PoolManager.Instance.Spawn<Creature>(GetSpawnCreature());
         var spawnPos = GetSpawnPos();
+        var creature = PoolManager.Instance.Spawn<Creature>(GetSpawnCreature());
         if (NavMesh.SamplePosition(spawnPos, out var hit, 5f, NavMesh.AllAreas))
         {
             spawnPos = hit.position;
@@ -109,4 +112,7 @@ public enum Creatures
     GreenGolem,
     PurpleGolem,
     RedGolem,
+    GiantGolem,
+    GreenGiantGolem,
+    RedGiantGolem,
 }

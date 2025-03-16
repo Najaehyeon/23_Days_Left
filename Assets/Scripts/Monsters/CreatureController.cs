@@ -16,23 +16,23 @@ namespace _23DaysLeft.Monsters
     public class CreatureController : MonoBehaviour, IDetectable
     {
         // components
-        private CreatureStateMachine stateMachine;
-        private CreatureData creatureData;
-        private NavMeshAgent navMeshAgent;
+        protected CreatureStateMachine stateMachine;
+        protected CreatureData creatureData;
+        protected NavMeshAgent navMeshAgent;
 
         // state
-        private WaitForSeconds idleWaitTime;
-        private Transform playerTr;
+        protected WaitForSeconds idleWaitTime;
+        protected Transform playerTr;
+        protected float lastAttackTime;
         private Vector3 lastDestination;
-        private float lastAttackTime;
         private float lastHitTime;
 
         // status
-        private float currentHp;
+        protected float currentHp;
+        protected bool isDead = true;
         private bool isSpawned;
-        private bool isDead = true;
 
-        public void Init(Creature creature)
+        public virtual void Init(Creature creature)
         {
             // 초기화
             stateMachine = creature.StateMachine;
@@ -62,7 +62,7 @@ namespace _23DaysLeft.Monsters
             PlayerDetected();
         }
 
-        private IEnumerator Idle()
+        protected virtual IEnumerator Idle()
         {
             stateMachine.StateChange(CreatureState.Idle);
             yield return idleWaitTime;
@@ -134,7 +134,7 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        private void Chasing()
+        protected virtual void Chasing()
         {
             Vector3 direction = (playerTr.position - transform.position).normalized;
             Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
@@ -155,14 +155,14 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        private bool IsPlayerInFieldOfView()
+        protected bool IsPlayerInFieldOfView()
         {
             Vector3 directionToPlayer = playerTr.position - transform.position;
             float angle = Vector3.Angle(transform.forward, directionToPlayer);
             return angle < creatureData.FieldOfView * 0.5f;
         }
 
-        private void Attack()
+        protected virtual void Attack()
         {
             lastAttackTime = 0f;
             stateMachine.StateChange(CreatureState.Attack);
@@ -172,18 +172,18 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        private bool IsTargetInAttackRange()
+        protected bool IsTargetInAttackRange()
         {
             return Vector3.Distance(playerTr.position, transform.position) <= creatureData.AttackDistance;
         }
 
-        private void OnAttackEnd()
+        protected virtual void OnAttackEnd()
         {
             if (isDead) return;
             stateMachine.StateChange(CreatureState.Run);
         }
 
-        public void OnHit(float damage)
+        public virtual void OnHit(float damage)
         {
             if (isDead) return;
             if (lastHitTime < creatureData.HitDelay) return;
@@ -198,7 +198,7 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        private void OnHitEnd()
+        protected virtual void OnHitEnd()
         {
             if (isDead) return;
             if (playerTr)
@@ -211,7 +211,7 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        private void Die()
+        protected void Die()
         {
             isDead = true;
             navMeshAgent.enabled = false;
@@ -226,7 +226,7 @@ namespace _23DaysLeft.Monsters
             PoolManager.Instance.Despawn(gameObject);
         }
 
-        public void OnPlayerDetected(Transform player)
+        public virtual void OnPlayerDetected(Transform player)
         {
             if (isDead || playerTr) return;
             playerTr = player;
@@ -236,7 +236,7 @@ namespace _23DaysLeft.Monsters
             StopAllCoroutines();
         }
 
-        public void OnPlayerFaraway()
+        public virtual void OnPlayerFaraway()
         {
             if (isDead || !playerTr) return;
             playerTr = null;

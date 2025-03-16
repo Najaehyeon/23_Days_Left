@@ -11,12 +11,12 @@ namespace _23DaysLeft.Monsters
         public Action OnHitAnimationEnd;
         public Action OnAttackAnimationEnd;
         
-        private readonly int hashWalk = Animator.StringToHash("IsWalk");
-        private readonly int hashRun = Animator.StringToHash("IsRun");
-        private readonly int hashCombat = Animator.StringToHash("IsCombat");
-        private readonly int hashAttack = Animator.StringToHash("Attack");
-        private readonly int hashHit = Animator.StringToHash("Hit");
-        private readonly int hashDie = Animator.StringToHash("Die");
+        protected readonly int hashWalk = Animator.StringToHash("IsWalk");
+        protected readonly int hashRun = Animator.StringToHash("IsRun");
+        protected readonly int hashCombat = Animator.StringToHash("IsCombat");
+        protected readonly int hashAttack = Animator.StringToHash("Attack");
+        protected readonly int hashHit = Animator.StringToHash("Hit");
+        protected readonly int hashDie = Animator.StringToHash("Die");
 
         private float enterTime;
         private AnimatorStateInfo currentState;

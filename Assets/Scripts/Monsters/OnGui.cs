@@ -48,11 +48,5 @@ public class OnGui : MonoBehaviour
         {
             creature.OnHit(20f);
         }
-        
-        // Creature 스폰 테스트
-        if (GUI.Button(new Rect(10, 190, 200, 50), "Creature Spawn", buttonStyle))
-        {
-            spawner.Spawn();
-        }
     }
 }

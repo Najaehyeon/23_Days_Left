@@ -17,6 +17,9 @@ public static class Extensions
             Creatures.GreenGolem      => "그린골렘",
             Creatures.PurpleGolem     => "퍼플골렘",
             Creatures.RedGolem        => "레드골렘",
+            Creatures.GiantGolem      => "1차 보스",
+            Creatures.GreenGiantGolem => "2차 보스",
+            Creatures.RedGiantGolem   => "3차 보스",
             _                         => throw new ArgumentOutOfRangeException(nameof(creatures), creatures, null)
         };
     }
