@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: BuildingDatabase
   m_EditorClassIdentifier: 
   objectsData:
-  - <Name>k__BackingField: House
+  - <Name>k__BackingField: "\uB098\uBB341"
     <ID>k__BackingField: 0
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 7687563690937045275, guid: afbb3d5dd603340439a4b15055099ac0, type: 3}
-  - <Name>k__BackingField: Stair
+    <Prefab>k__BackingField: {fileID: 3325735990687581655, guid: b6e8bb8678c4131408604bc110a35c7b, type: 3}
+  - <Name>k__BackingField: "\uC9D1"
     <ID>k__BackingField: 1
-    <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 7485215702837088172, guid: 449d2518025d93d40b867e5f23965ea4, type: 3}
-  - <Name>k__BackingField: Stair2
+    <Size>k__BackingField: {x: 2, y: 2}
+    <Prefab>k__BackingField: {fileID: 1735999700264770970, guid: 4d5084a68e3245f4f9cb036c5537b156, type: 3}
+  - <Name>k__BackingField: "\uACC4\uB2E81"
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 4529221434680244560, guid: 4e2c3445d70ee0341a306b0e393c7723, type: 3}
-  - <Name>k__BackingField: Stair3
+    <Prefab>k__BackingField: {fileID: 6045875302585792110, guid: 8faf2aedfe397d74e99ad84284689183, type: 3}
+  - <Name>k__BackingField: "\uACC4\uB2E82"
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 5463148143825532815, guid: 12a320ad652115c4e964171faa86d61b, type: 3}
+    <Prefab>k__BackingField: {fileID: 6713347716404936215, guid: afe35988da73e7e418018709a89d0372, type: 3}
