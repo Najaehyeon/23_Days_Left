@@ -35,7 +35,7 @@ public class DataLoadManager : MonoBehaviour
         var creatureData = Resources.LoadAll<CreatureData>("Creature");
         foreach (var data in creatureData)
         {
-            creatureDatas.Add(data.name, data);
+            creatureDatas.Add(data.Name, data);
         }
     }
 

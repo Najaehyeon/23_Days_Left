@@ -4329,6 +4329,14 @@ MonoBehaviour:
     PoolSize: 10
   - Prefab: {fileID: 5352326183732966833, guid: f55f972169b5e004c93ad4be732da195, type: 3}
     PoolSize: 10
+  - Prefab: {fileID: 810085087943447243, guid: aedf3c340bfa96147926ffe33b06e692, type: 3}
+    PoolSize: 10
+  - Prefab: {fileID: 1557094983100337748, guid: 88461dcf88224fa48bd7189b8e7c99a8, type: 3}
+    PoolSize: 10
+  - Prefab: {fileID: 6283046913051795503, guid: 0cbcb33b65960174da330669d55e1b08, type: 3}
+    PoolSize: 10
+  - Prefab: {fileID: 29120361909834083, guid: eb69bab0779805942b01583735cc8cd2, type: 3}
+    PoolSize: 10
 --- !u!4 &1472869080
 Transform:
   m_ObjectHideFlags: 0
@@ -5344,7 +5352,7 @@ Transform:
   m_GameObject: {fileID: 1622580297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.97, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10705,8 +10713,16 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6306781962658462865, guid: 7088a3bdf69b8f042a57d41ef5238b58, type: 3}
+      propertyPath: spawnList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306781962658462865, guid: 7088a3bdf69b8f042a57d41ef5238b58, type: 3}
       propertyPath: spawnList.Array.data[0]
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306781962658462865, guid: 7088a3bdf69b8f042a57d41ef5238b58, type: 3}
+      propertyPath: spawnList.Array.data[1]
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7107990545803861560, guid: 7088a3bdf69b8f042a57d41ef5238b58, type: 3}
       propertyPath: m_Name

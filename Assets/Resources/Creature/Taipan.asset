@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Taipan
   m_EditorClassIdentifier: 
   Name: "\uD0C0\uC774\uD310"
-  MaxHp: 100
-  OriginSpeed: 3
+  MaxHp: 80
+  OriginSpeed: 4
   CombatType: 1
   Defense: 3
-  AttackPower: 10
+  AttackPower: 6
   AttackDelay: 1.5
   HitDelay: 1
   CombatSpeed: 5

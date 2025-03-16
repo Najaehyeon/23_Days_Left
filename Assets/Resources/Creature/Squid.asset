@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Squid
   m_EditorClassIdentifier: 
   Name: "\uC2A4\uD034\uB4DC"
-  MaxHp: 100
+  MaxHp: 120
   OriginSpeed: 2
   CombatType: 1
-  Defense: 3
-  AttackPower: 10
+  Defense: 5
+  AttackPower: 5
   AttackDelay: 2
   HitDelay: 1
   CombatSpeed: 3

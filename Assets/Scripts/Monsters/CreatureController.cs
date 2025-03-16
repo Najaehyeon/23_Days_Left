@@ -22,7 +22,7 @@ namespace _23DaysLeft.Monsters
 
         // state
         private WaitForSeconds idleWaitTime;
-        [SerializeField] private Transform playerTr;
+        private Transform playerTr;
         private Vector3 lastDestination;
         private float lastAttackTime;
         private float lastHitTime;

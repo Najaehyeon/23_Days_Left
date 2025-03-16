@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _23DaysLeft.Managers;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class CreatureSpawner : MonoBehaviour
@@ -46,14 +47,20 @@ public class CreatureSpawner : MonoBehaviour
         if (spawnCount >= maxCount) return;
 
         var creature = PoolManager.Instance.Spawn<Creature>(GetSpawnCreature());
-        creature.Init(GetSpawnPos());
+        var spawnPos = GetSpawnPos();
+        if (NavMesh.SamplePosition(spawnPos, out var hit, 5f, NavMesh.AllAreas))
+        {
+            spawnPos = hit.position;
+        }
+        creature.Init(spawnPos);
+        creature.transform.parent = transform;
         spawnCount++;
     }
 
     private string GetSpawnCreature()
     {
         var index = Random.Range(0, spawnList.Length);
-        var key = spawnList[index].ToKey();
+        var key = spawnList[index].ToName();
         var data = Global.Instance.DataLoadManager.GetCreatureData(key);
         return data.name;
     }
@@ -94,4 +101,12 @@ public enum Creatures
     Colobus,
     Squid,
     Taipan,
+    Skeleton_Easy,
+    Skeleton_Normal,
+    Skeleton_Hard,
+    Golem,
+    PinkGolem,
+    GreenGolem,
+    PurpleGolem,
+    RedGolem,
 }
