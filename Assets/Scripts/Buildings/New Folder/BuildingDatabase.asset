@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4442054d83dc74419eb20c723d59e4f, type: 3}
+  m_Name: BuildingDatabase
+  m_EditorClassIdentifier: 
+  objectsData:
+  - <Name>k__BackingField: House
+    <ID>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7687563690937045275, guid: afbb3d5dd603340439a4b15055099ac0, type: 3}
+  - <Name>k__BackingField: Stair
+    <ID>k__BackingField: 1
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7485215702837088172, guid: 449d2518025d93d40b867e5f23965ea4, type: 3}
+  - <Name>k__BackingField: Stair2
+    <ID>k__BackingField: 2
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4529221434680244560, guid: 4e2c3445d70ee0341a306b0e393c7723, type: 3}
+  - <Name>k__BackingField: Stair3
+    <ID>k__BackingField: 3
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5463148143825532815, guid: 12a320ad652115c4e964171faa86d61b, type: 3}
