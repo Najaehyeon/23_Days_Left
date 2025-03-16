@@ -42,7 +42,7 @@ namespace _23DaysLeft.Monsters
             lastAttackTime = creatureData.AttackDelay;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
             isDead = false;
-
+            
             // 이벤트 등록
             stateMachine.OnHitAnimationEnd += OnHitEnd;
             stateMachine.OnAttackAnimationEnd += OnAttackEnd;
@@ -155,6 +155,11 @@ namespace _23DaysLeft.Monsters
             }
         }
 
+        private float GetRandomSpeed(float baseSpeed)
+        {
+            return Random.Range(baseSpeed - 0.5f, baseSpeed + 0.5f);
+        }
+
         protected bool IsPlayerInFieldOfView()
         {
             Vector3 directionToPlayer = playerTr.position - transform.position;
@@ -192,6 +197,7 @@ namespace _23DaysLeft.Monsters
             StopAllCoroutines();
             stateMachine.StateChange(CreatureState.Hit);
             currentHp = Mathf.Max(currentHp - damage, 0);
+            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
             if (currentHp <= 0)
             {
                 Die();
@@ -228,11 +234,14 @@ namespace _23DaysLeft.Monsters
 
         public virtual void OnPlayerDetected(Transform player)
         {
+            Debug.Log("Player Detected");
             if (isDead || playerTr) return;
             playerTr = player;
-            navMeshAgent.speed = creatureData.CombatSpeed;
+            navMeshAgent.speed = GetRandomSpeed(creatureData.CombatSpeed);
             stateMachine.StateChange(CreatureState.Run);
             stateMachine.OnPlayerDetected?.Invoke();
+            UIManager.Instance.ActiveCreatureHpBar(this, transform, creatureData.MaxHp);
+            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
             StopAllCoroutines();
         }
 
@@ -240,8 +249,9 @@ namespace _23DaysLeft.Monsters
         {
             if (isDead || !playerTr) return;
             playerTr = null;
-            navMeshAgent.speed = creatureData.OriginSpeed;
+            navMeshAgent.speed = GetRandomSpeed(creatureData.OriginSpeed);
             stateMachine.OnPlayerFaraway?.Invoke();
+            UIManager.Instance.InactiveCreatureHpBar(this);
             StopAllCoroutines();
             StartCoroutine(Wandering());
         }
