@@ -9,6 +9,7 @@ namespace _23DaysLeft.Monsters
         public string Name;
         public float MaxHp;
         public float OriginSpeed;
+        public GameObject Prefab;
         
         [Header("Combat Info")]
         public CombatType CombatType;

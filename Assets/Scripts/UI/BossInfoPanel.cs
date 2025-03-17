@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _23DaysLeft.UI
 {
-    public class BossInfoPanel : MonoBehaviour, UIBase
+    public class BossInfoPanel : MonoBehaviour
     {
         public TextMeshProUGUI NameText;
         public Image FillImage;

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace _23DaysLeft.UI
 {
-    public class CreatureHealthBar : MonoBehaviour, UIBase
+    public class CreatureHealthBar : MonoBehaviour
     {
         public Image fillImage;
         public Vector3 offset;

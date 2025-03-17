@@ -122,6 +122,14 @@ namespace _23DaysLeft.Managers
             poolDictionary[poolKey].Enqueue(obj);
             despawnedObjects.Add(obj);
         }
+
+        public void ReleaseAllPool()
+        {
+            poolDictionary.Clear();
+            prefabDictionary.Clear();
+            poolParentDictionary.Clear();
+            despawnedObjects.Clear();
+        }
     }
 
     [Serializable]
