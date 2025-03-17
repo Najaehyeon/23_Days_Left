@@ -27,7 +27,7 @@ namespace DaysLeft.Item
 
         [Header("Setting")]
         public bool             Stackable;
-        public SpriteRenderer   Icon;
+        public Sprite           Icon;
         public GameObject       Prefab;
     }
 

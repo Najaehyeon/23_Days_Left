@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Monsters/Boss.meta
+guid: a2f0a56814a578d40887f3b95cc245a9
+========
+guid: c1c9599a7399c7648b9e935dc58eae90
+>>>>>>>> dev:Assets/Scripts/Player.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

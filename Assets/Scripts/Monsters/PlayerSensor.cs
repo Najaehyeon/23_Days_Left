@@ -19,7 +19,7 @@ public class PlayerSensor : MonoBehaviour
     {
         // TODO: 최대 몬스터 수 정해지면 변경
         buffer = new Collider[10];
-        lastDetectTime = Time.time;
+        lastDetectTime = 0;
     }
     
     private void Update()

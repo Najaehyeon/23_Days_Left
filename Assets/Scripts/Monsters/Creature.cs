@@ -5,6 +5,7 @@ using _23DaysLeft.Monsters;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(CreatureController), typeof(CreatureStateMachine), typeof(NavMeshAgent))]
 public class Creature : MonoBehaviour
 {
     [SerializeField] private CreatureData creatureData;

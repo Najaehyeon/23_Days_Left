@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Tree : ResourceObject
 {
-    private bool isObjectAtPosition;
+    private bool isObjectAtPosition = false;
 
     BoxCollider _boxCollider;
     MeshRenderer _meshRenderer;
@@ -18,7 +18,7 @@ public class Tree : ResourceObject
 
     private void Update()
     {
-        RespawnResource();
+        //RespawnResource();
     }
 
     public override void RespawnResource()
@@ -65,6 +65,10 @@ public class Tree : ResourceObject
         if (other.CompareTag("플레이어가 설치한 오브젝트"))
         {
             isObjectAtPosition = true;
+        }
+        else
+        {
+            return;
         }
     }
 
