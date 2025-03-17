@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Resources/Creature/Colobus.asset.meta
 guid: 59672de82f924ff459c0aa05d7ad6307
+========
+guid: e620285185e0fbd489a01e5ce0d37109
+>>>>>>>> Stashed changes:Assets/Resources/Item/1_Item_Resource_Rock.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

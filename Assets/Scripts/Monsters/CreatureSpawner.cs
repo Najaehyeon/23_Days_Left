@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _23DaysLeft.Managers;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class CreatureSpawner : MonoBehaviour
@@ -17,11 +19,13 @@ public class CreatureSpawner : MonoBehaviour
     
     private List<Creature> spawnedCreatures = new();
     private WaitForSeconds waitTime;
+    private Camera mainCamera;
     private int spawnCount = 0;
 
     private void Start()
     {
         waitTime = new WaitForSeconds(spawnDelay);
+        mainCamera = Camera.main;
         StartCoroutine(SpawnCoroutine());
     }
 
@@ -32,30 +36,36 @@ public class CreatureSpawner : MonoBehaviour
 
     private IEnumerator SpawnCoroutine()
     {
+        yield return new WaitForSeconds(2f);
+        
         while (true)
         {
-            yield return waitTime;
             Spawn();
+            yield return waitTime;
         }
     }
     
-    public void Spawn()
+    private void Spawn()
     {
         if (spawnCount >= maxCount) return;
 
+        var spawnPos = GetSpawnPos();
         var creature = PoolManager.Instance.Spawn<Creature>(GetSpawnCreature());
-        creature.Init(GetSpawnPos());
+        if (NavMesh.SamplePosition(spawnPos, out var hit, 5f, NavMesh.AllAreas))
+        {
+            spawnPos = hit.position;
+        }
+        creature.Init(spawnPos);
+        creature.transform.parent = transform;
         spawnCount++;
     }
 
     private string GetSpawnCreature()
     {
-        // var index = Random.Range(0, spawnList.Length);
-        // var key = spawnList[index].ToKey();
-        // var data = Global.Instance.DataLoadManager.GetCreatureData(key);
-        // return data.name;
-        
-        return "Colobus";
+        var index = Random.Range(0, spawnList.Length);
+        var key = spawnList[index].ToName();
+        var data = Global.Instance.DataLoadManager.GetCreatureData(key);
+        return data.name;
     }
     
     private Vector3 GetSpawnPos()
@@ -91,5 +101,20 @@ public class CreatureSpawner : MonoBehaviour
 
 public enum Creatures
 {
-    Colobus = 3000,
+    Colobus,
+    Squid,
+    Taipan,
+    Skeleton_Easy,
+    Skeleton_Normal,
+    Skeleton_Hard,
+    Golem,
+    PinkGolem,
+    GreenGolem,
+    PurpleGolem,
+    RedGolem,
+    GiantGolem,
+    GreenGiantGolem,
+    RedGiantGolem,
+    TestGolem,
+    
 }

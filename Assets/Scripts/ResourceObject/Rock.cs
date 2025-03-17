@@ -6,23 +6,38 @@ public class Rock : ResourceObject
 {
     private void Update()
     {
-        RespawnTree();
+        RespawnResource();
     }
 
-    private void OnCollisionEnter(Collision collision)  // 플레이어가 캘 때
+    public override void RespawnResource()
     {
-        if (collision.gameObject.CompareTag("플레이어 무기"))
+        if (_dayNightCycle.currentTime == 0.4f)
         {
-            if (remainDigCount >= 0)
+            resourceCurHealth = resourceMaxHealth;
+            gatherCount = 2;
+        }
+    }
+
+    public override void mineResource(float damage)
+    {
+        if (resourceCurHealth > 0)
+        {
+            resourceCurHealth -= damage;
+            // 깡깡 소리 효과음 추가 해야함
+            if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
-                remainDigCount--;
-                // 깡깡 소리
+                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
-            else 
+            if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                // 틱틱 소리
+                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
+        }
+        else
+        {
+            // 틱틱 소리 효과음 추가 해야함
         }
     }
 }

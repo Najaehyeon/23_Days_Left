@@ -381,6 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceHealth: 100
   digCount: 2
   remainDigCount: 0
   dropResource: {fileID: 0}
@@ -572,18 +573,34 @@ PrefabInstance:
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
+    - target: {fileID: 2450414827700285310, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: resourceHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2673304609649996033, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
+    - target: {fileID: 2673304609649996033, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: resourceHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3458125697693352536, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
+    - target: {fileID: 3458125697693352536, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: resourceHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3643288303270241126, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
+    - target: {fileID: 3643288303270241126, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: resourceHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5876661632025422629, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -628,6 +645,10 @@ PrefabInstance:
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
+    - target: {fileID: 7660007797740767579, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: resourceHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

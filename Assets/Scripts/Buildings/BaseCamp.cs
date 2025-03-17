@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 시작할 때 주어지는 건물로, 건설할 수 없다
+/// 가장 먼저 지어야 하는 건물
 /// 일정시간마다 피로도를 회복해준다
 /// </summary>
 public class BaseCamp : MonoBehaviour, IBuilding, IRecoverable

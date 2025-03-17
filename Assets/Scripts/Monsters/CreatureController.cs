@@ -16,23 +16,23 @@ namespace _23DaysLeft.Monsters
     public class CreatureController : MonoBehaviour, IDetectable
     {
         // components
-        private CreatureStateMachine stateMachine;
-        private CreatureData creatureData;
-        private NavMeshAgent navMeshAgent;
+        protected CreatureStateMachine stateMachine;
+        protected CreatureData creatureData;
+        protected NavMeshAgent navMeshAgent;
 
         // state
-        private WaitForSeconds idleWaitTime;
-        private Transform playerTr;
+        protected WaitForSeconds idleWaitTime;
+        protected Transform playerTr;
+        protected float lastAttackTime;
         private Vector3 lastDestination;
-        private float lastAttackTime;
         private float lastHitTime;
 
         // status
-        private float currentHp;
+        protected float currentHp;
+        protected bool isDead = true;
         private bool isSpawned;
-        private bool isDead = true;
 
-        public void Init(Creature creature)
+        public virtual void Init(Creature creature)
         {
             // 초기화
             stateMachine = creature.StateMachine;
@@ -42,7 +42,7 @@ namespace _23DaysLeft.Monsters
             lastAttackTime = creatureData.AttackDelay;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
             isDead = false;
-
+            
             // 이벤트 등록
             stateMachine.OnHitAnimationEnd += OnHitEnd;
             stateMachine.OnAttackAnimationEnd += OnAttackEnd;
@@ -53,16 +53,16 @@ namespace _23DaysLeft.Monsters
 
         private void Update()
         {
-            if (lastHitTime < creatureData.HitDelay)
-            {
-                lastHitTime += Time.deltaTime;
-            }
+            if (isDead) return;
 
+            if (lastHitTime <= creatureData.HitDelay) lastHitTime += Time.deltaTime;
+            if (lastAttackTime <= creatureData.AttackDelay) lastAttackTime += Time.deltaTime;
+            
             if (!playerTr) return;
             PlayerDetected();
         }
 
-        private IEnumerator Idle()
+        protected virtual IEnumerator Idle()
         {
             stateMachine.StateChange(CreatureState.Idle);
             yield return idleWaitTime;
@@ -134,13 +134,12 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        private void Chasing()
+        protected virtual void Chasing()
         {
             Vector3 direction = (playerTr.position - transform.position).normalized;
             Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
 
-            lastAttackTime += Time.deltaTime;
-            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.1f)
+            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
             {
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
                 {
@@ -152,55 +151,60 @@ namespace _23DaysLeft.Monsters
                 if (lastAttackTime >= creatureData.AttackDelay && IsPlayerInFieldOfView())
                 {
                     Attack();
-                    lastAttackTime = 0f;
                 }
             }
         }
 
-        private bool IsPlayerInFieldOfView()
+        private float GetRandomSpeed(float baseSpeed)
+        {
+            return Random.Range(baseSpeed - 0.5f, baseSpeed + 0.5f);
+        }
+
+        protected bool IsPlayerInFieldOfView()
         {
             Vector3 directionToPlayer = playerTr.position - transform.position;
             float angle = Vector3.Angle(transform.forward, directionToPlayer);
             return angle < creatureData.FieldOfView * 0.5f;
         }
 
-        private void Attack()
+        protected virtual void Attack()
         {
+            lastAttackTime = 0f;
             stateMachine.StateChange(CreatureState.Attack);
             if (IsTargetInAttackRange())
             {
-                Debug.Log("Attack");
                 // player.OnHit(creatureData.AttackPower);
             }
         }
 
-        private bool IsTargetInAttackRange()
+        protected bool IsTargetInAttackRange()
         {
             return Vector3.Distance(playerTr.position, transform.position) <= creatureData.AttackDistance;
         }
 
-        private void OnAttackEnd()
+        protected virtual void OnAttackEnd()
         {
             if (isDead) return;
             stateMachine.StateChange(CreatureState.Run);
         }
 
-        public void OnHit(float damage)
+        public virtual void OnHit(float damage)
         {
             if (isDead) return;
-            lastHitTime = 0f;
             if (lastHitTime < creatureData.HitDelay) return;
+            lastHitTime = 0f;
 
             StopAllCoroutines();
             stateMachine.StateChange(CreatureState.Hit);
             currentHp = Mathf.Max(currentHp - damage, 0);
+            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
             if (currentHp <= 0)
             {
                 Die();
             }
         }
 
-        private void OnHitEnd()
+        protected virtual void OnHitEnd()
         {
             if (isDead) return;
             if (playerTr)
@@ -213,9 +217,10 @@ namespace _23DaysLeft.Monsters
             }
         }
 
-        private void Die()
+        protected void Die()
         {
             isDead = true;
+            navMeshAgent.enabled = false;
             stateMachine.StateChange(CreatureState.Die);
             StartCoroutine(DieCoroutine());
         }
@@ -226,23 +231,26 @@ namespace _23DaysLeft.Monsters
             // 아이템 드롭
             PoolManager.Instance.Despawn(gameObject);
         }
-        
-        public void OnPlayerDetected(Transform player)
+
+        public virtual void OnPlayerDetected(Transform player)
         {
             if (isDead || playerTr) return;
             playerTr = player;
-            navMeshAgent.speed = creatureData.CombatSpeed;
+            navMeshAgent.speed = GetRandomSpeed(creatureData.CombatSpeed);
             stateMachine.StateChange(CreatureState.Run);
             stateMachine.OnPlayerDetected?.Invoke();
+            UIManager.Instance.ActiveCreatureHpBar(this, transform, creatureData.MaxHp);
+            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
             StopAllCoroutines();
         }
 
-        public void OnPlayerFaraway()
+        public virtual void OnPlayerFaraway()
         {
             if (isDead || !playerTr) return;
             playerTr = null;
-            navMeshAgent.speed = creatureData.OriginSpeed;
+            navMeshAgent.speed = GetRandomSpeed(creatureData.OriginSpeed);
             stateMachine.OnPlayerFaraway?.Invoke();
+            UIManager.Instance.InactiveCreatureHpBar(this);
             StopAllCoroutines();
             StartCoroutine(Wandering());
         }
