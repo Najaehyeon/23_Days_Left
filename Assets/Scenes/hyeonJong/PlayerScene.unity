@@ -196,6 +196,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1385187212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6013059579764081071, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+  m_PrefabInstance: {fileID: 1954748852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1385187217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385187212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
+  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
+  weaponItemData: {fileID: 0}
+  _dayNightCycle: {fileID: 1500882133}
+--- !u!114 &1500882133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+  m_PrefabInstance: {fileID: 56087388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24b49aa3ad89104b9ad26df06a8a08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1954748852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -271,7 +305,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6013059579764081071, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1385187217}
   m_SourcePrefab: {fileID: 100100000, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
 --- !u!1001 &7093402737897548936
 PrefabInstance:
@@ -325,6 +362,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5480659044889143255, guid: 61c2feda36cf360499abd2d0fec148a2, type: 3}
+      propertyPath: ore
+      value: 
+      objectReference: {fileID: 1385187217}
     - target: {fileID: 5480659044889143255, guid: 61c2feda36cf360499abd2d0fec148a2, type: 3}
       propertyPath: tree
       value: 

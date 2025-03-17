@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = moveDir;
 
         // �̵� �ִϸ��̼��� ����
-        // _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
+        _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
 
         // �̵� ���̶�� �÷��̾ �̵� ������ �ٶ󺸵��� ȸ��
         if (currentMoveInput != Vector2.zero)
