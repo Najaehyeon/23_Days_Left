@@ -1,25 +1,23 @@
+using DaysLeft.Item;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceObject : MonoBehaviour
+public abstract class ResourceObject : MonoBehaviour
 {
-    public float digCount;
-    public float remainDigCount;
+    public float resourceMaxHealth = 100f;
+    public float resourceCurHealth;
+    public float gatherCount = 2;
     public GameObject dropResource;
-
+    public WeaponItemData weaponItemData;
     public DayNightCycle _dayNightCycle;
 
     private void Start()
     {
-        remainDigCount = digCount;
+        resourceCurHealth = resourceMaxHealth;
     }
 
-    public virtual void RespawnTree()
-    {
-        if (_dayNightCycle.currentTime == 0.4f)
-        {
-            remainDigCount = digCount;
-        }
-    }
+    public abstract void RespawnResource();
+
+    public abstract void mineResource(float damage);
 }
