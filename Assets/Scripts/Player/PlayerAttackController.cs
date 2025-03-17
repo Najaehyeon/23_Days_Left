@@ -49,8 +49,6 @@ public class PlayerAttackController : MonoBehaviour
 
     private Animator _animator;
 
-    public ResourceObject resourceObject;
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();
