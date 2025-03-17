@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public PlayerController controller;
     public PlayerInventory  inventory;
+    public PlayerAttackController attackController;
 
     private void Awake()
     {
@@ -14,5 +15,6 @@ public class Player : MonoBehaviour
         controller =  GetComponent<PlayerController>();
         Global.Instance.Player = this;
         inventory = new();
+        attackController = GetComponent<PlayerAttackController>();
     }
 }
