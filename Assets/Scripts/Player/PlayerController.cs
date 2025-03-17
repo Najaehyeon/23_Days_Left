@@ -4,78 +4,78 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Move")]
-    public float moveSpeed; // ÇÃ·¹ÀÌ¾î ÀÌµ¿ ¼Óµµ
-    Vector3 moveDir; // ½ÇÁ¦ ÀÌµ¿ ¹æÇâ º¤ÅÍ
-    Vector2 currentMoveInput; // ÀÔ·ÂµÈ ÀÌµ¿ ¹æÇâ (WASD)
+    public float moveSpeed; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
+    Vector3 moveDir; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    Vector2 currentMoveInput; // ï¿½Ô·Âµï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ (WASD)
 
     [Header("Look")]
-    public float sensitivity; // ¸¶¿ì½º °¨µµ (È¸Àü ¼Óµµ Á¶Àý)
-    float curCamXRot; // ÇöÀç Ä«¸Þ¶ó XÃà È¸Àü°ª (»óÇÏ)
-    float curCamYRot; // ÇöÀç Ä«¸Þ¶ó YÃà È¸Àü°ª (ÁÂ¿ì)
-    Vector2 mouseDelta; // ¸¶¿ì½º ÀÌµ¿ ÀÔ·Â °ª
+    public float sensitivity; // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ (È¸ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½)
+    float curCamXRot; // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ Xï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½)
+    float curCamYRot; // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ Yï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ (ï¿½Â¿ï¿½)
+    Vector2 mouseDelta; // ï¿½ï¿½ï¿½ì½º ï¿½Ìµï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½
 
     [Header("Jump")]
-    public float jumpPower; // Á¡ÇÁ Èû
+    public float jumpPower; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
-    public Transform cameraContainer; // Ä«¸Þ¶ó¸¦ ºÙÀÏ ¿ÀºêÁ§Æ®
-    public Transform playerBody; // ÇÃ·¹ÀÌ¾îÀÇ ¸öÃ¼
-    public LayerMask groundLayerMask; // ¹Ù´Ú °¨Áö¸¦ À§ÇÑ ·¹ÀÌ¾î ¸¶½ºÅ©
+    public Transform cameraContainer; // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    public Transform playerBody; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    public LayerMask groundLayerMask; // ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Å©
 
-    Rigidbody _rigidbody; // ÇÃ·¹ÀÌ¾îÀÇ ¹°¸®¿£Áø (Áß·Â, Ãæµ¹ Ã³¸®)
-    Animator _animator; // ¾Ö´Ï¸ÞÀÌ¼Ç ÄÁÆ®·Ñ·¯
+    Rigidbody _rigidbody; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ß·ï¿½, ï¿½æµ¹ Ã³ï¿½ï¿½)
+    Animator _animator; // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 
     private void Awake()
     {
-        // Rigidbody ¹× Animator ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿Í ÀúÀå
+        // Rigidbody ï¿½ï¿½ Animator ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
     {
-        // ¸¶¿ì½º Ä¿¼­¸¦ È­¸é Áß¾Ó¿¡ °íÁ¤
+        // ï¿½ï¿½ï¿½ì½º Ä¿ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ß¾Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void FixedUpdate()
     {
-        // ÀÌµ¿ Ã³¸® (¹°¸® ¿£ÁøÀÌ Àû¿ëµÊ)
+        // ï¿½Ìµï¿½ Ã³ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
         Move();
     }
 
     private void LateUpdate()
     {
-        // Ä«¸Þ¶ó È¸Àü Ã³¸® (LateUpdate´Â ÇÁ·¹ÀÓ¸¶´Ù ½ÇÇàµÊ)
+        // Ä«ï¿½Þ¶ï¿½ È¸ï¿½ï¿½ Ã³ï¿½ï¿½ (LateUpdateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
         Look();
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î ÀÌµ¿ Ã³¸®
+    /// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ìµï¿½ Ã³ï¿½ï¿½
     /// </summary>
     void Move()
     {
-        // Ä«¸Þ¶óÀÇ Àü¹æ º¤ÅÍ¸¦ ±âÁØÀ¸·Î ÀÌµ¿ ¹æÇâ °áÁ¤
+        // Ä«ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 camForward = cameraContainer.forward;
-        camForward.y = 0; // ¼öÁ÷(y) ¹æÇâÀ» Á¦°ÅÇÏ¿© Áö¸é ±âÁØÀ¸·Î ÀÌµ¿
-        camForward.Normalize(); // Å©±â¸¦ 1·Î Á¤±ÔÈ­
+        camForward.y = 0; // ï¿½ï¿½ï¿½ï¿½(y) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+        camForward.Normalize(); // Å©ï¿½â¸¦ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
 
-        // Ä«¸Þ¶óÀÇ ¿ìÃø º¤ÅÍ¸¦ ±âÁØÀ¸·Î ÁÂ¿ì ÀÌµ¿ ¹æÇâ °áÁ¤
+        // Ä«ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¿ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 camRight = cameraContainer.right;
         camRight.y = 0;
         camRight.Normalize();
 
-        // ÀÔ·ÂµÈ ÀÌµ¿ ¹æÇâÀ» ±â¹ÝÀ¸·Î ½ÇÁ¦ ÀÌµ¿ ¹æÇâÀ» °è»ê
+        // ï¿½Ô·Âµï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         moveDir = camForward * currentMoveInput.y + camRight * currentMoveInput.x;
-        moveDir *= moveSpeed; // ÀÌµ¿ ¼Óµµ Àû¿ë
-        moveDir.y = _rigidbody.velocity.y; // yÃà(Áß·Â) °ª À¯Áö
+        moveDir *= moveSpeed; // ï¿½Ìµï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+        moveDir.y = _rigidbody.velocity.y; // yï¿½ï¿½(ï¿½ß·ï¿½) ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // Rigidbody¸¦ ÀÌ¿ëÇØ ÀÌµ¿ Ã³¸®
+        // Rigidbodyï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ Ã³ï¿½ï¿½
         _rigidbody.velocity = moveDir;
 
-        // ÀÌµ¿ ¾Ö´Ï¸ÞÀÌ¼ÇÀ» Àû¿ë
-        _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
+        // ï¿½Ìµï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // _animator.SetFloat("Speed", _rigidbody.velocity.magnitude);
 
-        // ÀÌµ¿ ÁßÀÌ¶ó¸é ÇÃ·¹ÀÌ¾î°¡ ÀÌµ¿ ¹æÇâÀ» ¹Ù¶óº¸µµ·Ï È¸Àü
+        // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸µï¿½ï¿½ï¿½ È¸ï¿½ï¿½
         if (currentMoveInput != Vector2.zero)
         {
             Turn();
@@ -83,34 +83,34 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸¶¿ì½º ÀÔ·ÂÀ» ÀÌ¿ëÇÑ Ä«¸Þ¶ó È¸Àü Ã³¸®
+    /// ï¿½ï¿½ï¿½ì½º ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ È¸ï¿½ï¿½ Ã³ï¿½ï¿½
     /// </summary>
     void Look()
     {
-        // ¸¶¿ì½º ÀÌµ¿ °ªÀ» ¹Þ¾Æ Ä«¸Þ¶ó È¸Àü °ª º¯°æ
+        // ï¿½ï¿½ï¿½ì½º ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾ï¿½ Ä«ï¿½Þ¶ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         curCamXRot += mouseDelta.y * sensitivity;
         curCamYRot += mouseDelta.x * sensitivity;
 
-        // Ä«¸Þ¶ó È¸Àü Àû¿ë (XÃà È¸ÀüÀº ¹Ý´ë·Î Àû¿ëÇØ¾ß Á¤»óÀûÀÎ ¿òÁ÷ÀÓ)
+        // Ä«ï¿½Þ¶ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Xï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ý´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
         cameraContainer.localEulerAngles = new Vector3(-curCamXRot, curCamYRot, 0);
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ ÀÌµ¿ ¹æÇâÀ» ¹Ù¶óº¸µµ·Ï È¸Àü
+    /// ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸µï¿½ï¿½ï¿½ È¸ï¿½ï¿½
     /// </summary>
     void Turn()
     {
-        playerBody.forward = moveDir; // ÀÌµ¿ ¹æÇâÀ¸·Î È¸Àü
-        playerBody.localEulerAngles = new Vector3(0, playerBody.localEulerAngles.y, 0); // X, ZÃà È¸Àü ¹æÁö
+        playerBody.forward = moveDir; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
+        playerBody.localEulerAngles = new Vector3(0, playerBody.localEulerAngles.y, 0); // X, Zï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ ¹Ù´Ú¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö
+    /// ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ù´Ú¿ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
     /// </summary>
-    /// <returns>¹Ù´Ú¿¡ ÀÖÀ¸¸é true, ¾øÀ¸¸é false</returns>
+    /// <returns>ï¿½Ù´Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ false</returns>
     bool IsGrounded()
     {
-        // ¹Ù´Ú °¨Áö¸¦ À§ÇÑ 4°³ÀÇ Ray¸¦ »ý¼º (¾Õ, µÚ, ÁÂ, ¿ì)
+        // ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ Rayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½, ï¿½ï¿½, ï¿½ï¿½, ï¿½ï¿½)
         Ray[] rays = new Ray[4]
         {
             new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             new Ray(transform.position + (-transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down)
         };
 
-        // Ray¸¦ ½÷¼­ ¹Ù´ÚÀÌ °¨ÁöµÇ¸é true ¹ÝÈ¯
+        // Rayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ true ï¿½ï¿½È¯
         for (int i = 0; i < rays.Length; i++)
         {
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
@@ -131,42 +131,42 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀÌµ¿ ÀÔ·Â Ã³¸® (WASD)
+    /// ï¿½Ìµï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½ (WASD)
     /// </summary>
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            // ÀÔ·ÂÀÌ µé¾î¿À¸é ÇöÀç ÀÌµ¿ ¹æÇâÀ» ÀúÀå
+            // ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             currentMoveInput = context.ReadValue<Vector2>();
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            // Å°¿¡¼­ ¼ÕÀ» ¶¼¸é ÀÌµ¿À» ¸ØÃã
+            // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             currentMoveInput = Vector2.zero;
         }
     }
 
     /// <summary>
-    /// ¸¶¿ì½º ÀÌµ¿ ÀÔ·Â Ã³¸®
+    /// ï¿½ï¿½ï¿½ì½º ï¿½Ìµï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
     /// </summary>
     public void OnLookInput(InputAction.CallbackContext context)
     {
-        // ¸¶¿ì½º ÀÌµ¿ °ªÀ» ÀúÀå (Ä«¸Þ¶ó È¸Àü¿¡ »ç¿ë)
+        // ï¿½ï¿½ï¿½ì½º ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Ä«ï¿½Þ¶ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
         mouseDelta = context.ReadValue<Vector2>();
     }
 
     /// <summary>
-    /// Á¡ÇÁ ÀÔ·Â Ã³¸® (½ºÆäÀÌ½º¹Ù)
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½)
     /// </summary>
     public void OnJumpInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            // Á¡ÇÁ ½Ã Rigidbody¿¡ ÈûÀ» Ãß°¡
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Rigidbodyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
-            // Á¡ÇÁ ¾Ö´Ï¸ÞÀÌ¼Ç ½ÇÇà
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
             _animator.SetTrigger("DoJump");
         }
     }
