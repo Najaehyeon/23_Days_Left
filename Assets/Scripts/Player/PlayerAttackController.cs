@@ -3,15 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum EquippedWeaponType
+{
+    Hand,
+    Sword,
+    Axe,
+    Pickaxe,
+    Bow
+}
+
+public enum AttackTargetType
+{
+    None,
+    Enemy,
+    Wood,
+    Ore
+}
 public class PlayerAttackController : MonoBehaviour
 {
-    // ÀåÂøÇÏ´Â ¹«±â¿¡ µû¶ó¼­ ÇØ´ç ¹«±â¸¸ È°¼ºÈ­
+    // ì¥ì°©í•˜ëŠ” ë¬´ê¸°ì— ë”°ë¼ì„œ í•´ë‹¹ ë¬´ê¸°ë§Œ í™œì„±í™”
     public GameObject equippedSword;
     public GameObject equippedAxe;
     public GameObject equippedPickaxe;
     public GameObject equippedBow;
 
-    // ÇÃ·¹ÀÌ¾î ¸÷ °ø°İ·Â, ³ª¹« °ø°İ·Â, ±¤¼® °ø°İ·Â, (³»±¸µµ) ¼±¾ğ
+    private EquippedWeaponType equippedWeaponType = EquippedWeaponType.Pickaxe;
+    private AttackTargetType attackTargetType = AttackTargetType.Ore;
+
+
+
+    // í”Œë ˆì´ì–´ ëª¹ ê³µê²©ë ¥, ë‚˜ë¬´ ê³µê²©ë ¥, ê´‘ì„ ê³µê²©ë ¥, (ë‚´êµ¬ë„) ì„ ì–¸
     public float attackDamage;
     public float digWoodDamage;
     public float mineOreDamage;
@@ -23,6 +44,7 @@ public class PlayerAttackController : MonoBehaviour
     public int randomPunchHand;
 
     [SerializeField] ResourceObject tree;
+    [SerializeField] ResourceObject ore;
     private Animator _animator;
     private void Awake()
     {
@@ -30,7 +52,7 @@ public class PlayerAttackController : MonoBehaviour
 
     }
 
-    // ÀåÂø ¹«±â¿¡ µû¶ó¼­, ´É·ÂÄ¡ ÇÒ´ç.
+    // ì¥ì°© ë¬´ê¸°ì— ë”°ë¼ì„œ, ëŠ¥ë ¥ì¹˜ í• ë‹¹.
     private void Start()
     {
         attackDamage = 10f;
@@ -43,32 +65,85 @@ public class PlayerAttackController : MonoBehaviour
         afterLastAttackTime += Time.deltaTime;
     }
 
-    public void ApplyDamage()
-    {
-        tree.mineResource(digWoodDamage);
-    }
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
         if(context.phase == InputActionPhase.Started && afterLastAttackTime >= attackRate)
         {
             afterLastAttackTime = 0f;
-            randomPunchHand = Random.Range(0, 2);
-            
+            switch (equippedWeaponType)
+            {
+                case EquippedWeaponType.Hand:
+                    randomPunchHand = Random.Range(0, 2);
+                    if (randomPunchHand == 0)
+                    {
+                        _animator.SetTrigger("DoPunchR");
+                    }
+                    if (randomPunchHand == 1)
+                    {
+                        _animator.SetTrigger("DoPunchL");
+                    }
+                    break;
+                case EquippedWeaponType.Sword:
+                    _animator.SetTrigger("DoOneHandAttack");
+                    break;
+                
+                case EquippedWeaponType.Axe:
+                    _animator.SetTrigger("DoOneHandAttack");
+                    break;
 
-            if (randomPunchHand == 0)
-            {
-                _animator.SetTrigger("DoPunchR");
-            }
-            if (randomPunchHand == 1)
-            {
-                _animator.SetTrigger("DoPunchL");
+                case EquippedWeaponType.Pickaxe:
+                    _animator.SetTrigger("DoTwoHandAttack");
+                    break;
+
+                case EquippedWeaponType.Bow:
+                    _animator.SetTrigger("DoBowShot");
+                    break;
             }
         }
     }
-    // ÁÂÅ¬¸¯ ½Ã °ø°İ
-    // °ø°İ½Ã ¾Ö´Ï¸ŞÀÌ¼Ç ¹ßµ¿
-    // ¾Ö´Ï¸ŞÀÌ¼Ç¿¡¼­ Å¸°İ ÁöÁ¡¿¡ Hit ¸Ş¼­µå ½ÇÇà
-    // Hit ¸Å¼­µå¿¡¼­ Å©·Î½ºÇì¾î¿¡ ´ë»óÀÌ ÀÖ´Â Áö ¾ø´Â Áö¿¡ µû¶ó¼­ ´Ù¸£°Ô ½ÇÇà
-    // ´ë»óÀÌ ÀÖ°í, ¸¸¾à ±× ´ë»óÀÌ ³ª¹«(±¤¼®, ¸ó½ºÅÍ)ÀÏ °æ¿ì, ³ª¹«(±¤¼®, ¸ó½ºÅÍ) °ø°İ·Â Àü´Ş.
+    public void ApplyDamage()
+    {
+        switch (equippedWeaponType)
+        {
+            case EquippedWeaponType.Hand:
+                AttackByTarget();
+                break;
+            case EquippedWeaponType.Sword:
+                AttackByTarget();
+                break;
+            case EquippedWeaponType.Axe:
+                AttackByTarget();
+                break;
+            case EquippedWeaponType.Pickaxe:
+                AttackByTarget();
+                break;
+            case EquippedWeaponType.Bow:
+                AttackByTarget();
+                break;
+        }
+    }
+
+    void AttackByTarget()
+    {
+        switch (attackTargetType)
+        {
+            case AttackTargetType.None:
+                break;
+            case AttackTargetType.Enemy:
+                break;
+            case AttackTargetType.Wood:
+                tree.mineResource(digWoodDamage);
+                break;
+            case AttackTargetType.Ore:
+                ore.mineResource(mineOreDamage);
+                break;
+        }
+    }
+
+    // ì¢Œí´ë¦­ ì‹œ ê³µê²©
+    // ê³µê²©ì‹œ ì• ë‹ˆë©”ì´ì…˜ ë°œë™
+    // ì• ë‹ˆë©”ì´ì…˜ì—ì„œ íƒ€ê²© ì§€ì ì— Hit ë©”ì„œë“œ ì‹¤í–‰
+    // Hit ë§¤ì„œë“œì—ì„œ í¬ë¡œìŠ¤í—¤ì–´ì— ëŒ€ìƒì´ ìˆëŠ” ì§€ ì—†ëŠ” ì§€ì— ë”°ë¼ì„œ ë‹¤ë¥´ê²Œ ì‹¤í–‰
+    // ëŒ€ìƒì´ ìˆê³ , ë§Œì•½ ê·¸ ëŒ€ìƒì´ ë‚˜ë¬´(ê´‘ì„, ëª¬ìŠ¤í„°)ì¼ ê²½ìš°, ë‚˜ë¬´(ê´‘ì„, ëª¬ìŠ¤í„°) ê³µê²©ë ¥ ì „ë‹¬.
 }
