@@ -714,6 +714,7 @@ MonoBehaviour:
   placementLayerMask:
     serializedVersion: 2
     m_Bits: 33554432
+  angle: 0
 --- !u!1 &1125118940
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +763,7 @@ MonoBehaviour:
   cellIndicator: {fileID: 1320366100}
   previewObject: {fileID: 0}
   previewMaterialPrefab: {fileID: 2100000, guid: e5defc85b221e874ead3021752694267, type: 2}
+  tempInputManager: {fileID: 971340213}
 --- !u!1 &1267588844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placedGameObjects: []
+  tempInputManager: {fileID: 971340213}
 --- !u!23 &25759125154426571
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2446,7 +2449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &1697214730957435985
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,20 +1,24 @@
 using UnityEngine;
 
 /// <summary>
-/// ¹Ì¸® º¸¿©ÁÖ´Â °İÀÚ, ¿ÀºêÁ§Æ®
-/// °İÀÚÀÇ È¸Àü Ã³¸®´Â ¿©±â¼­ ÇØ¾ßµÈ´Ù
+/// ë¯¸ë¦¬ ë³´ì—¬ì£¼ëŠ” ê²©ì, ì˜¤ë¸Œì íŠ¸
+/// ê²©ìì˜ íšŒì „ ì²˜ë¦¬ëŠ” ì—¬ê¸°ì„œ í•´ì•¼ëœë‹¤
 /// </summary>
 public class PreviewSystem : MonoBehaviour
 {
-    [SerializeField] private float previewYOffset = 0.06f;  // ¿ÀºêÁ§Æ®´Â ±×¸®µåº¸´Ù ¾à°£ À§¿¡ ÀÖ´Ù
+    [SerializeField] private float previewYOffset = 0.06f;  // ì˜¤ë¸Œì íŠ¸ëŠ” ê·¸ë¦¬ë“œë³´ë‹¤ ì•½ê°„ ìœ„ì— ìˆë‹¤
 
-    [SerializeField] private GameObject cellIndicator;  // »ı¼º Àü¿¡ ¿ÀºêÁ§Æ®°¡ °ÉÄ¡°í ÀÖ´Â °İÀÚ
-    public GameObject previewObject;   // »ı¼º Àü ¹Ì¸® º¸¿©ÁÙ ¿ÀºêÁ§Æ®
+    [SerializeField] private GameObject cellIndicator;  // ìƒì„± ì „ì— ì˜¤ë¸Œì íŠ¸ê°€ ê±¸ì¹˜ê³  ìˆëŠ” ê²©ì
+    public GameObject previewObject;   // ìƒì„± ì „ ë¯¸ë¦¬ ë³´ì—¬ì¤„ ì˜¤ë¸Œì íŠ¸
 
-    [SerializeField] private Material previewMaterialPrefab;    // Åõ¸í»óÅÂ¸¦ ³ªÅ¸³»´Â material
-    private Material previewMaterialInstance;   // »ı¼ºÇÑ ¿ÀºêÁ§Æ®ÀÇ ¿ø·¡ material
+    [SerializeField] private Material previewMaterialPrefab;    // íˆ¬ëª…ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” material
+    private Material previewMaterialInstance;   // ìƒì„±í•œ ì˜¤ë¸Œì íŠ¸ì˜ ì›ë˜ material
 
     private Renderer cellIndicatorRenderer;
+
+    private float currentRotationAngle = 0f; // í˜„ì¬ íšŒì „ ìƒíƒœ ì €ì¥
+
+    public TempInputManager tempInputManager;   // íšŒì „ê°ì„ ì €ì¥
 
 
     private void Start()
@@ -26,7 +30,7 @@ public class PreviewSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// UI¹öÆ°À» Å¬¸¯ÇÒ¶§ ¹Ì¸®º¸±â¸¦ Ã³À½ Ç¥½ÃÇÑ´Ù
+    /// UIë²„íŠ¼ì„ í´ë¦­í• ë•Œ ë¯¸ë¦¬ë³´ê¸°ë¥¼ ì²˜ìŒ í‘œì‹œí•œë‹¤
     /// </summary>
     /// <param name="prefab"></param>
     /// <param name="size"></param>
@@ -35,10 +39,10 @@ public class PreviewSystem : MonoBehaviour
         previewObject = Instantiate(prefab);
         PreparePreview(previewObject);
         PrepareCursor(size);
-        /// °İÀÚ¸¦ º¸¿©ÁØ´Ù
+        /// ê²©ìë¥¼ ë³´ì—¬ì¤€ë‹¤
         cellIndicator.SetActive(true);
     }
-    // ¿ÀºêÁ§Æ®ÀÇ Å©±â¸¦ º¸¿©ÁØ´Ù
+    // ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ë¥¼ ë³´ì—¬ì¤€ë‹¤
     private void PrepareCursor(Vector2Int size)
     {
         if (size.x > 0 || size.y > 0)
@@ -47,10 +51,10 @@ public class PreviewSystem : MonoBehaviour
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
     }
-    // ¼±ÅÃÇÑ ¿ÀºêÁ§Æ®ÀÇ Å©±â¸¦ ¸®ÅÏÇÑ´Ù
+    // ì„ íƒí•œ ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ë¥¼ ë¦¬í„´í•œë‹¤
     public Vector2Int GetCurrentSize()
     {
-        if (previewObject == null) 
+        if (previewObject == null)
             return Vector2Int.zero;
 
         Renderer renderer = previewObject.GetComponentInChildren<Renderer>();
@@ -87,14 +91,14 @@ public class PreviewSystem : MonoBehaviour
             MovePreview(position);
             ApplyFeedbackToPreview(validity);
         }
-        // cursor´Â nullÀÌ ¾Æ´Ï¹Ç·Î
+        // cursorëŠ” nullì´ ì•„ë‹ˆë¯€ë¡œ
         MoveCursor(position);
         ApplyFeedbackToCursor(validity);
 
     }
 
-    // À¯È¿ÇÑ ¿µ¿ªÀÌ ¾Æ´Ï¶ó¸é preview¸¦ »¡°£»öÀ¸·Î ¹Ù²Û´Ù
-    // À¯È¿ÇÑ ¿µ¿ªÀÌ ¾Æ´Ï¶ó¸é °İÀÚ¸¦ »¡°£»öÀ¸·Î ¹Ù²Û´Ù
+    // ìœ íš¨í•œ ì˜ì—­ì´ ì•„ë‹ˆë¼ë©´ previewë¥¼ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ë°”ê¾¼ë‹¤
+    // ìœ íš¨í•œ ì˜ì—­ì´ ì•„ë‹ˆë¼ë©´ ê²©ìë¥¼ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ë°”ê¾¼ë‹¤
     private void ApplyFeedbackToPreview(bool validity)
     {
         Color c = validity ? Color.green : Color.red;
@@ -121,16 +125,61 @@ public class PreviewSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// RÅ° ´©¸£¸é yÃà ±âÁØÀ¸·Î ½Ã°è¹æÇâ È¸Àü
-    /// °İÀÚ, ÇÁ¸®ÆÕ ¸ğµÎ È¸ÀüÇÑ´Ù
+    /// Rí‚¤ ëˆ„ë¥´ë©´ yì¶• ê¸°ì¤€ìœ¼ë¡œ ì‹œê³„ë°©í–¥ íšŒì „
+    /// ê²©ì, í”„ë¦¬íŒ¹ ëª¨ë‘ íšŒì „í•œë‹¤
     /// </summary>
     /// <param name="angle"></param>
     public void RotatePreview(float angle)
     {
+        // í˜„ì¬ í”„ë¦¬ë·° í¬ê¸° ê°€ì ¸ì˜¤ê¸°
+        Vector2Int size = GetCurrentSize();
+
+        // ì¤‘ì‹¬ì ì„ ê¸°ì¤€ìœ¼ë¡œ íšŒì „í•˜ë„ë¡ ë³€ê²½
+        Vector3 pivot = previewObject.transform.position + new Vector3(size.x / 2f, 0, size.y / 2f);
+
+        // 1ï¸ íšŒì „ ì¤‘ì‹¬ìœ¼ë¡œ ì´ë™
+        previewObject.transform.position -= pivot;
+
+        // 2ï¸ íšŒì „ ìˆ˜í–‰
         previewObject.transform.Rotate(Vector3.up, angle);
-        /// °İÀÚ ´Ù½Ã Ç¥½ÃÇØ¾ßÇÔ
-        /// cellIndicator ¶ÇÇÑ angle¸¸Å­ È¸ÀüÇÑ´Ù
-        cellIndicator.transform.Rotate(Vector3.up, angle);
+
+        /// íšŒì „ê°ì„ "ëˆ„ì í•˜ì—¬" ì €ì¥(ì™œëƒí•˜ë©´ ëˆ„ë¥¼ë•Œë§ˆë‹¤ angleì—ëŠ” 90ë§Œ ë“¤ì–´ì˜¬ ìˆ˜ ìˆìœ¼ë¯€ë¡œ)
+        currentRotationAngle = (currentRotationAngle + angle) % 360;
+        tempInputManager.angle = currentRotationAngle;
+
+        // 3ï¸ ë‹¤ì‹œ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
+        previewObject.transform.position += pivot;
+
+
+        /// cellIndicatorëŠ” ì‹¤ì œë¡œ íšŒì „í•˜ì§€ ì•Šì§€ë§Œ, í¬ê¸°ë¥¼ ì¡°ì •í•´ì•¼ í•œë‹¤    
+        /// íšŒì „í•˜ë©´ íšŒì „í•œ ê²ƒì˜ ê¸°ì¤€ìœ¼ë¡œ size.x, size.yê°€ ê°±ì‹ ëœë‹¤
+        /// scaleì€ ì–‘ìˆ˜ì—¬ì•¼ í•œë‹¤
+        /// ì²˜ìŒì— size.x == 1, size.y == 2 ì˜€ë‹¤ë©´
+        /// 90ë„ íšŒì „í•œ ë’¤ì—ëŠ” size.x == 2, size.y ==1 ì´ ë˜ëŠ” ê²ƒì´ë‹¤
+        /// 
+        /// positionì„ ë¶€í˜¸ ê³ ë ¤í•´ì„œ ë°”ê¾¸ë©´ ëœë‹¤
+        /// x = 1 y = 2
+        /// x = 2 y = -1 (90ë„ íšŒì „)
+        /// x = -1 y = -2 (180ë„ íšŒì „)
+        /// x = -2 y = -1 (270ë„ íšŒì „)
+        /// xì—ëŠ” yê°€ ë“¤ì–´ê°€ë©° yëŠ” -xê°€ ë“¤ì–´ê°„ë‹¤
+
+        /// scaleì€ ì–‘ìˆ˜
+        /// sizeëŠ” ì²˜ìŒë¶€í„° ì–‘ìˆ˜ë‹ˆê¹Œ ì ˆëŒ“ê°’ í•„ìš”ì—†ë‹¤
+        int newX = size.y; 
+        int newY = size.x;
+        cellIndicator.transform.localScale = new Vector3(newX, 1, newY);
+
+        /// positionì€ ë¶€í˜¸ ë°˜ì˜
+        Vector3 newPosition = cellIndicator.transform.position;
+        newPosition.x += (Mathf.Sign(size.y) - 1) * 0.5f * newX;
+        newPosition.z += (Mathf.Sign(size.x) - 1) * 0.5f * newY;
+        cellIndicator.transform.position = newPosition;
     }
 
+    // í˜„ì¬ íšŒì „ ê°ë„ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ ì¶”ê°€
+    public int GetRotationAngle()
+    {
+        return Mathf.RoundToInt(currentRotationAngle);
+    }
 }

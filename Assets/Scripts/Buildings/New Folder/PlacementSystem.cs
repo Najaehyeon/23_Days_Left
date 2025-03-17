@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -73,7 +74,12 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int gridPosition = grid.WorldToCell(mousePos);   // 마우스가 있는 위치를 3d로 변환하여 그리드의 어느 격자 내에 있는지 알아낸다
 
         // 물체가 회전했다면 회전된 오브젝트의 중심 좌표를 계산하여 위치 보정
+        /// 하지만 회전중심은 gridPosition이므로, adjustGridPosition은 gridPosition과 같다
         Vector3Int adjustedGridPosition = AdjustPositionForRotation(gridPosition);
+
+        /// 달라지는 것은 rotation의 y값이다
+        /// 이걸 반영해서 격자를 그리고, 오브젝트를 생성해야한다
+
 
         /// 오브젝트 생성
         /// preview의 회전상태를 반영해야한다
@@ -84,33 +90,27 @@ public class PlacementSystem : MonoBehaviour
     {
         // 현재 배치 중인 오브젝트의 크기 가져오기
         Vector2Int size = preview.GetCurrentSize();
-
         // 현재 프리뷰의 회전값 가져오기 (Y축 회전)
-        int rotation = Mathf.RoundToInt(preview.transform.eulerAngles.y) % 360;
+        int rotation = preview.GetRotationAngle();
 
         Vector3Int adjustedPosition = originalPosition;
 
-        if (rotation == 90 || rotation == 270)
+        switch (rotation)
         {
-            // 가로 <-> 세로 변경
-            adjustedPosition.x -= (size.y - 1) / 2;
-            adjustedPosition.z -= (size.x - 1) / 2;
-        }
-        else
-        {
-            adjustedPosition.x -= (size.x - 1) / 2;
-            adjustedPosition.z -= (size.y - 1) / 2;
+            case 90:
+                adjustedPosition.x -= size.y - 1;
+                break;
+            case 180:
+                adjustedPosition.x -= size.x - 1;
+                adjustedPosition.z -= size.y - 1;
+                break;
+            case 270:
+                adjustedPosition.z -= size.x - 1;
+                break;
         }
 
         return adjustedPosition;
     }
-
-
-    //private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjIndex)
-    //{
-    //    GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? floorData : furnitureData;
-    //    return selectedData.CanPlaceObjAt(gridPosition, database.objectsData[selectedObjIndex].Size);
-    //}
 
     /// <summary>
     /// 선택한 건물을 Grid에 내려놓을때 호출된다
@@ -145,12 +145,6 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int adjustedGridPosition = AdjustPositionForRotation(gridPosition);
 
         // grid 내에서 커서가 이동하면 연산하지 않는다
-        //if (lastDetectedPosition != gridPosition)
-        //{
-        //    buildingState.UpdateState(gridPosition);
-
-        //    lastDetectedPosition = gridPosition;
-        //}
         if (lastDetectedPosition != adjustedGridPosition)
         {
             buildingState.UpdateState(adjustedGridPosition);
@@ -161,7 +155,7 @@ public class PlacementSystem : MonoBehaviour
         // R키를 누르면 시계방향으로 회전
         if (Input.GetKeyDown(KeyCode.R))
         {
-            preview.RotatePreview(90); // 초당 90도 회전
+            preview.RotatePreview(90); // 90도 회전
         }
     }
 }

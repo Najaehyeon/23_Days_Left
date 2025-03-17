@@ -4,18 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// °Ç¹° ¿ÀºêÁ§Æ®¸¦ ¸Ê¿¡ Ãß°¡
+/// ê±´ë¬¼ ì˜¤ë¸Œì íŠ¸ë¥¼ ë§µì— ì¶”ê°€
 /// </summary>
 public class ObjectPlacer : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> placedGameObjects = new List<GameObject>(); // »ı¼ºµÈ °ÔÀÓ¿ÀºêÁ§Æ® ÀúÀå
+    private List<GameObject> placedGameObjects = new List<GameObject>(); // ìƒì„±ëœ ê²Œì„ì˜¤ë¸Œì íŠ¸ ì €ì¥
+
+    public TempInputManager tempInputManager;  // angleì„ ê°€ì ¸ì˜¨ë‹¤
 
     public int PlaceObject(GameObject prefab, Vector3 position)
     {
+        /// tempInputManagerì—ì„œ íšŒì „ê°ì„ ê°€ì ¸ì˜¨ë‹¤
+        float angle = tempInputManager.angle; 
+
         GameObject newObject = Instantiate(prefab);
-        newObject.transform.position = position; // °İÀÚ ¿ÀºêÁ§Æ®¸¦ ±× ÁÂÇ¥·Î ÀÌµ¿
-        placedGameObjects.Add(newObject);   // »ı¼ºÇÑ °ÔÀÓ¿ÀºêÁ§Æ® ÀúÀå
+        newObject.transform.position = position; // ê²©ì ì˜¤ë¸Œì íŠ¸ë¥¼ ê·¸ ì¢Œí‘œë¡œ ì´ë™
+        newObject.transform.rotation = Quaternion.Euler(0, angle, 0); // Yì¶• ê¸°ì¤€ìœ¼ë¡œ íšŒì „
+
+        placedGameObjects.Add(newObject);   // ìƒì„±í•œ ê²Œì„ì˜¤ë¸Œì íŠ¸ ì €ì¥
         return placedGameObjects.Count - 1;
     }
 }
