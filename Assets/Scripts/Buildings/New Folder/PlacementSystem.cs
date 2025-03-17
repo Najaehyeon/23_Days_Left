@@ -1,16 +1,16 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// BuildingManager°¡ µÇ¾î¾ß ÇÒ °Í
+/// BuildingManagerê°€ ë˜ì–´ì•¼ í•  ê²ƒ
 /// </summary>
 public class PlacementSystem : MonoBehaviour
 {
-    [SerializeField] private TempInputManager inputManager;   // ¸¶¿ì½º
-    [SerializeField] private Grid grid;   // ±×¸®µå ÄÄÆ÷³ÍÆ®
+    [SerializeField] private TempInputManager inputManager;   // ë§ˆìš°ìŠ¤
+    [SerializeField] private Grid grid;   // ê·¸ë¦¬ë“œ ì»´í¬ë„ŒíŠ¸
 
     [SerializeField] private ObjectsDatabaseSO database;
 
@@ -40,6 +40,11 @@ public class PlacementSystem : MonoBehaviour
         floorData = new GridData();
         furnitureData = new GridData();
     }
+
+    /// <summary>
+    /// UIì—ì„œ ê±´ë¬¼ì„ ì„ íƒí•˜ë©´ í˜¸ì¶œë˜ëŠ” ì´ë²¤íŠ¸ í•¨ìˆ˜
+    /// </summary>
+    /// <param name="ID"></param>
     public void StartPlacement(int ID)
     {
         StopPlacement();
@@ -64,11 +69,42 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
-        Vector3 mousePos = inputManager.GetSelectedMapPos(); // ¸¶¿ì½º·Î ¼±ÅÃÇÑ À§Ä¡ °¡Á®¿Â´Ù
-        Vector3Int gridPosition = grid.WorldToCell(mousePos);   // ¸¶¿ì½º°¡ ÀÖ´Â À§Ä¡¸¦ 3d·Î º¯È¯ÇÏ¿© ±×¸®µåÀÇ ¾î´À °İÀÚ ³»¿¡ ÀÖ´ÂÁö ¾Ë¾Æ³½´Ù
+        Vector3 mousePos = inputManager.GetSelectedMapPos(); // ë§ˆìš°ìŠ¤ë¡œ ì„ íƒí•œ ìœ„ì¹˜ ê°€ì ¸ì˜¨ë‹¤
+        Vector3Int gridPosition = grid.WorldToCell(mousePos);   // ë§ˆìš°ìŠ¤ê°€ ìˆëŠ” ìœ„ì¹˜ë¥¼ 3dë¡œ ë³€í™˜í•˜ì—¬ ê·¸ë¦¬ë“œì˜ ì–´ëŠ ê²©ì ë‚´ì— ìˆëŠ”ì§€ ì•Œì•„ë‚¸ë‹¤
 
-        buildingState.OnAction(gridPosition);
+        // ë¬¼ì²´ê°€ íšŒì „í–ˆë‹¤ë©´ íšŒì „ëœ ì˜¤ë¸Œì íŠ¸ì˜ ì¤‘ì‹¬ ì¢Œí‘œë¥¼ ê³„ì‚°í•˜ì—¬ ìœ„ì¹˜ ë³´ì •
+        Vector3Int adjustedGridPosition = AdjustPositionForRotation(gridPosition);
+
+        /// ì˜¤ë¸Œì íŠ¸ ìƒì„±
+        /// previewì˜ íšŒì „ìƒíƒœë¥¼ ë°˜ì˜í•´ì•¼í•œë‹¤
+        buildingState.OnAction(adjustedGridPosition);
     }
+
+    private Vector3Int AdjustPositionForRotation(Vector3Int originalPosition)
+    {
+        // í˜„ì¬ ë°°ì¹˜ ì¤‘ì¸ ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸° ê°€ì ¸ì˜¤ê¸°
+        Vector2Int size = preview.GetCurrentSize();
+
+        // í˜„ì¬ í”„ë¦¬ë·°ì˜ íšŒì „ê°’ ê°€ì ¸ì˜¤ê¸° (Yì¶• íšŒì „)
+        int rotation = Mathf.RoundToInt(preview.transform.eulerAngles.y) % 360;
+
+        Vector3Int adjustedPosition = originalPosition;
+
+        if (rotation == 90 || rotation == 270)
+        {
+            // ê°€ë¡œ <-> ì„¸ë¡œ ë³€ê²½
+            adjustedPosition.x -= (size.y - 1) / 2;
+            adjustedPosition.z -= (size.x - 1) / 2;
+        }
+        else
+        {
+            adjustedPosition.x -= (size.x - 1) / 2;
+            adjustedPosition.z -= (size.y - 1) / 2;
+        }
+
+        return adjustedPosition;
+    }
+
 
     //private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjIndex)
     //{
@@ -76,6 +112,10 @@ public class PlacementSystem : MonoBehaviour
     //    return selectedData.CanPlaceObjAt(gridPosition, database.objectsData[selectedObjIndex].Size);
     //}
 
+    /// <summary>
+    /// ì„ íƒí•œ ê±´ë¬¼ì„ Gridì— ë‚´ë ¤ë†“ì„ë•Œ í˜¸ì¶œëœë‹¤
+    /// íšŒì „ì„ ê³ ë ¤í•œ ìœ„ì¹˜ì— ë‚´ë ¤ë†“ì•„ì•¼í•œë‹¤(í˜„ì¬ëŠ” ê·¸ë ‡ì§€ ì•Šì€ ë¬¸ì œê°€ ìˆë‹¤)
+    /// </summary>
     private void StopPlacement()
     {
         soundFeedback.PlaySound(SoundType.Click);
@@ -98,15 +138,30 @@ public class PlacementSystem : MonoBehaviour
         //if (selectedObjIndex < 0)
         if (buildingState == null)
             return;
-        Vector3 mousePos = inputManager.GetSelectedMapPos(); // ¸¶¿ì½º·Î ¼±ÅÃÇÑ À§Ä¡ °¡Á®¿Â´Ù
-        Vector3Int gridPosition = grid.WorldToCell(mousePos);   // ¸¶¿ì½º°¡ ÀÖ´Â À§Ä¡¸¦ 3d·Î º¯È¯ÇÏ¿© ±×¸®µåÀÇ ¾î´À °İÀÚ ³»¿¡ ÀÖ´ÂÁö ¾Ë¾Æ³½´Ù
+        Vector3 mousePos = inputManager.GetSelectedMapPos(); // ë§ˆìš°ìŠ¤ë¡œ ì„ íƒí•œ ìœ„ì¹˜ ê°€ì ¸ì˜¨ë‹¤
+        Vector3Int gridPosition = grid.WorldToCell(mousePos);   // ë§ˆìš°ìŠ¤ê°€ ìˆëŠ” ìœ„ì¹˜ë¥¼ 3dë¡œ ë³€í™˜í•˜ì—¬ ê·¸ë¦¬ë“œì˜ ì–´ëŠ ê²©ì ë‚´ì— ìˆëŠ”ì§€ ì•Œì•„ë‚¸ë‹¤
 
-        // grid ³»¿¡¼­ Ä¿¼­°¡ ÀÌµ¿ÇÏ¸é ¿¬»êÇÏÁö ¾Ê´Â´Ù
-        if (lastDetectedPosition != gridPosition)
+        // íšŒì „ëœ ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ ë³´ì •
+        Vector3Int adjustedGridPosition = AdjustPositionForRotation(gridPosition);
+
+        // grid ë‚´ì—ì„œ ì»¤ì„œê°€ ì´ë™í•˜ë©´ ì—°ì‚°í•˜ì§€ ì•ŠëŠ”ë‹¤
+        //if (lastDetectedPosition != gridPosition)
+        //{
+        //    buildingState.UpdateState(gridPosition);
+
+        //    lastDetectedPosition = gridPosition;
+        //}
+        if (lastDetectedPosition != adjustedGridPosition)
         {
-            buildingState.UpdateState(gridPosition);
+            buildingState.UpdateState(adjustedGridPosition);
+            lastDetectedPosition = adjustedGridPosition;
+        }
 
-            lastDetectedPosition = gridPosition;
+
+        // Rí‚¤ë¥¼ ëˆ„ë¥´ë©´ ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            preview.RotatePreview(90); // ì´ˆë‹¹ 90ë„ íšŒì „
         }
     }
 }

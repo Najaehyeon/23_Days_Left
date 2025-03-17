@@ -1,28 +1,35 @@
-using System;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class BossInfoPanel : MonoBehaviour
+namespace _23DaysLeft.UI
 {
-    public TextMeshProUGUI NameText;
-    public Image FillImage;
-
-    private float maxHealth;
-    
-    public void Init(string name, float maxHp)
+    public class BossInfoPanel : MonoBehaviour, UIBase
     {
-        NameText.text = name;
-        maxHealth = maxHp;
-    }
+        public TextMeshProUGUI NameText;
+        public Image FillImage;
 
-    public void ChangeHealth(float health)
-    {
-        FillImage.fillAmount = health / maxHealth;
-    }
+        private float maxHealth;
 
-    public void Inactive()
-    {
-        gameObject.SetActive(false);
+        public void SetInfo(string name, float maxHp)
+        {
+            NameText.text = name;
+            maxHealth = maxHp;
+        }
+
+        public void ChangeHealth(float health)
+        {
+            FillImage.fillAmount = health / maxHealth;
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+        
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

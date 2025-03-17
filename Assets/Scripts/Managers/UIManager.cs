@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using _23DaysLeft.Monsters;
+using _23DaysLeft.UI;
 using UnityEngine;
 
 namespace _23DaysLeft.Managers
@@ -21,7 +21,7 @@ namespace _23DaysLeft.Managers
         {
             var hpBar = PoolManager.Instance.Spawn<CreatureHealthBar>(creatureHpBar);
             hpBar.transform.SetParent(worldCanvas.transform);
-            hpBar.Init(target, maxHp);
+            hpBar.SetInfo(target, maxHp);
             creatureHealthBars.Add(creature, hpBar);
         }
         
@@ -45,13 +45,14 @@ namespace _23DaysLeft.Managers
                 return;
             }
             
-            creatureHealthBars[creature].Inactive();
+            creatureHealthBars[creature].Show();
             creatureHealthBars.Remove(creature);
         }
         
         public void ActiveBossInfoPanel(string name, float maxHp)
         {
-            bossInfoPanel.Init(name, maxHp);
+            bossInfoPanel.SetInfo(name, maxHp);
+            bossInfoPanel.Show();
         }
         
         public void UpdateBossInfoPanel(float currentHp)
@@ -61,7 +62,7 @@ namespace _23DaysLeft.Managers
         
         public void InactiveBossInfoPanel()
         {
-            bossInfoPanel.Inactive();
+            bossInfoPanel.Hide();
         }
     }
 }

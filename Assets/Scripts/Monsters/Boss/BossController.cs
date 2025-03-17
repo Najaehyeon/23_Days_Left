@@ -1,149 +1,151 @@
-using System;
 using System.Collections;
-using _23DaysLeft.Monsters;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossController : CreatureController
+namespace _23DaysLeft.Monsters
 {
-    private float attackMultipler = 1.0f;
-    [SerializeField] private bool isAttackCoolTime = false;
-    
-    public override void Init(Creature bossMonster)
+    public class BossController : CreatureController
     {
-        // 초기화
-        stateMachine = bossMonster.StateMachine;
-        creatureData = bossMonster.CreatureData;
-        navMeshAgent = bossMonster.NavMeshAgent;
-        currentHp = creatureData.MaxHp;
-        lastAttackTime = creatureData.AttackDelay;
-        idleWaitTime = new WaitForSeconds(creatureData.AttackDelay);
-        isDead = false;
+        private float attackMultipler = 1.0f;
+        [SerializeField] private bool isAttackCoolTime = false;
 
-        // State 초기화
-        var player = CharacterManager.Instance.Player;
-        OnPlayerDetected(player.transform);
-    }
-    
-    // 어택 쿨타임 중에는 return
-    protected override void Chasing()
-    {
-        if (isAttackCoolTime) return;
-        Vector3 direction = (playerTr.position - transform.position).normalized;
-        Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
-
-        if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
+        public override void Init(Creature bossMonster)
         {
-            if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
+            // 초기화
+            stateMachine = bossMonster.StateMachine;
+            creatureData = bossMonster.CreatureData;
+            navMeshAgent = bossMonster.NavMeshAgent;
+            currentHp = creatureData.MaxHp;
+            lastAttackTime = creatureData.AttackDelay;
+            idleWaitTime = new WaitForSeconds(creatureData.AttackDelay);
+            isDead = false;
+
+            // State 초기화
+            var player = CharacterManager.Instance.Player;
+            OnPlayerDetected(player.transform);
+        }
+
+        // 어택 쿨타임 중에는 return
+        protected override void Chasing()
+        {
+            if (isAttackCoolTime) return;
+            Vector3 direction = (playerTr.position - transform.position).normalized;
+            Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
+
+            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
             {
-                navMeshAgent.SetDestination(hit.position);
+                if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
+                {
+                    navMeshAgent.SetDestination(hit.position);
+                }
+            }
+            else
+            {
+                if (lastAttackTime >= creatureData.AttackDelay && IsPlayerInFieldOfView())
+                {
+                    Attack();
+                }
             }
         }
-        else
+
+        protected override IEnumerator Idle()
         {
-            if (lastAttackTime >= creatureData.AttackDelay && IsPlayerInFieldOfView())
+            stateMachine.StateChange(CreatureState.Idle);
+            yield return idleWaitTime;
+            isAttackCoolTime = false;
+            stateMachine.StateChange(CreatureState.Run);
+        }
+
+        public override void OnHit(float damage)
+        {
+            if (isDead) return;
+            currentHp = Mathf.Max(currentHp - damage, 0);
+            if (currentHp <= 0)
             {
-                Attack();
+                Die();
             }
         }
-    }
 
-    protected override IEnumerator Idle()
-    {
-        stateMachine.StateChange(CreatureState.Idle);
-        yield return idleWaitTime;
-        isAttackCoolTime = false;
-        stateMachine.StateChange(CreatureState.Run);
-    }
-    
-    public override void OnHit(float damage)
-    {
-        if (isDead) return;
-        currentHp = Mathf.Max(currentHp - damage, 0);
-        if (currentHp <= 0)
+        protected override void OnHitEnd() { }
+
+        // attack 패턴 중 랜덤으로 선택
+        protected override void Attack()
         {
-            Die();
+            if (isDead || isAttackCoolTime) return;
+            isAttackCoolTime = true;
+            stateMachine.StateChange(CreatureState.Attack);
         }
-    }
-    protected override void OnHitEnd() { }
 
-    // attack 패턴 중 랜덤으로 선택
-    protected override void Attack()
-    {
-        if (isDead || isAttackCoolTime) return;
-        isAttackCoolTime = true;
-        stateMachine.StateChange(CreatureState.Attack);
-    }
-
-    // attack 후 쿨타임을 가지기 위해 Idle로 전환
-    protected override void OnAttackEnd()
-    {
-        if (isDead) return;
-        StartCoroutine(Idle());
-    }
-    
-    public void AttackMultiplierChange(int pattern)
-    {
-        attackMultipler = pattern switch
+        // attack 후 쿨타임을 가지기 위해 Idle로 전환
+        protected override void OnAttackEnd()
         {
-            0 => 1.0f,
-            1 => 1.5f,
-            2 => 2.0f,
-            _ => 1.0f
-        };
-    }
-
-    public override void OnPlayerDetected(Transform player)
-    {
-        if (isDead || playerTr) return;
-        playerTr = player;
-        navMeshAgent.speed = creatureData.CombatSpeed;
-        stateMachine.StateChange(CreatureState.Run);
-        stateMachine.OnPlayerDetected?.Invoke();
-    }
-    
-    public override void OnPlayerFaraway() { }
-
-    #region AttackAnimEvent
-
-    public void AnimEvent_NormalAttack()
-    {
-        if (isDead) return;
-        if (IsTargetInAttackRange())
-        {
-            Debug.Log("NormalAttack Hit");
-            var damage = creatureData.AttackPower * attackMultipler;
-            // player.OnHit();
+            if (isDead) return;
+            StartCoroutine(Idle());
         }
-    }
-    
-    public void AnimEvent_KickAttack()
-    {
-        if (isDead) return;
-        if (IsTargetInAttackRange())
+
+        public void AttackMultiplierChange(int pattern)
         {
-            Debug.Log("KickAttack Hit");
-            var damage = creatureData.AttackPower * attackMultipler;
-            // player.OnHit();
+            attackMultipler = pattern switch
+            {
+                0 => 1.0f,
+                1 => 1.5f,
+                2 => 2.0f,
+                _ => 1.0f
+            };
         }
-    }
-    
-    public void AnimEvent_JumpAttack()
-    {
-        if (isDead) return;
-        if (Vector3.Distance(playerTr.position, transform.position) < 5.0f)
+
+        public override void OnPlayerDetected(Transform player)
         {
-            Debug.Log("JumpAttack Hit");
-            var damage = creatureData.AttackPower * attackMultipler;
-            // player.OnHit();
+            if (isDead || playerTr) return;
+            playerTr = player;
+            navMeshAgent.speed = creatureData.CombatSpeed;
+            stateMachine.StateChange(CreatureState.Run);
+            stateMachine.OnPlayerDetected?.Invoke();
         }
+
+        public override void OnPlayerFaraway() { }
+
+        #region AttackAnimEvent
+
+        public void AnimEvent_NormalAttack()
+        {
+            if (isDead) return;
+            if (IsTargetInAttackRange())
+            {
+                Debug.Log("NormalAttack Hit");
+                var damage = creatureData.AttackPower * attackMultipler;
+                // player.OnHit();
+            }
+        }
+
+        public void AnimEvent_KickAttack()
+        {
+            if (isDead) return;
+            if (IsTargetInAttackRange())
+            {
+                Debug.Log("KickAttack Hit");
+                var damage = creatureData.AttackPower * attackMultipler;
+                // player.OnHit();
+            }
+        }
+
+        public void AnimEvent_JumpAttack()
+        {
+            if (isDead) return;
+            if (Vector3.Distance(playerTr.position, transform.position) < 5.0f)
+            {
+                Debug.Log("JumpAttack Hit");
+                var damage = creatureData.AttackPower * attackMultipler;
+                // player.OnHit();
+            }
+        }
+
+        public void AnimEvent_AttackEnd()
+        {
+            Debug.Log("AnimEvent_AttackEnd");
+            OnAttackEnd();
+        }
+
+        #endregion
     }
-    
-    public void AnimEvent_AttackEnd()
-    {
-        Debug.Log("AnimEvent_AttackEnd");
-        OnAttackEnd();
-    }
-    
-    #endregion
 }

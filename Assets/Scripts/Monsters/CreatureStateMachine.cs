@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace _23DaysLeft.Monsters
@@ -77,7 +76,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Enter()
         {
-            navMeshAgent.isStopped = true;
+            navMeshAgent.enabled = false;
             anim.SetBool(hashAttack, true);
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             enterTime = 0;
@@ -85,7 +84,6 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Update()
         {
-            navMeshAgent.velocity = Vector3.zero;
             enterTime += Time.deltaTime * currentState.normalizedTime;
             if (enterTime >= 0.9f)
             {
@@ -95,20 +93,20 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Exit()
         {
+            navMeshAgent.enabled = true;
             anim.SetBool(hashAttack, false);
         }
         
         protected override void Hit_Enter()
         {
+            navMeshAgent.enabled = false;
             anim.SetTrigger(hashHit);
-            navMeshAgent.isStopped = true;
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             enterTime = 0;
         }
         
         protected override void Hit_Update()
         {
-            navMeshAgent.velocity = Vector3.zero;
             enterTime += Time.deltaTime * currentState.normalizedTime;
             if (enterTime >= 0.9f)
             {
@@ -118,6 +116,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Exit()
         {
+            navMeshAgent.enabled = true;
         }
         
         protected override void Die_Enter()
