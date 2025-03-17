@@ -45,6 +45,8 @@ public class PlayerAttackController : MonoBehaviour
 
     public int randomPunchHand;
 
+    public ResourceObject resourceObject;
+
     private Animator _animator;
 
     public ResourceObject resourceObject;
@@ -139,6 +141,7 @@ public class PlayerAttackController : MonoBehaviour
                 resourceObject.mineResource(digWoodDamage);
                 break;
             case AttackTargetType.Ore:
+                resourceObject.mineResource(mineOreDamage);
                 break;
         }
     }
