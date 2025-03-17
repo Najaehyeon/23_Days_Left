@@ -1,3 +1,4 @@
+using DaysLeft.Item;
 using UnityEngine;
 
 namespace _23DaysLeft.Monsters
@@ -28,8 +29,8 @@ namespace _23DaysLeft.Monsters
         public float FieldOfView = 120f;
         public float AttackDistance = 1f;
         
-        // [Header("Creature Drops")]
-        // public ItemData[] DropItems;
+        [Header("Creature Drops")]
+        public ResourceItemData[] DropItems;
     }
 
     public enum CombatType

@@ -1,3 +1,4 @@
+using _23DaysLeft.Managers;
 using System.Collections.Generic;
 using _23DaysLeft.Monsters;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace _23DaysLeft.Player
         {
             // TODO: 최대 몬스터 수 정해지면 변경
             buffer = new Collider[10];
-            lastDetectTime = 0;
+            lastDetectTime = detectInterval;
         }
 
         private void Update()
@@ -41,6 +42,8 @@ namespace _23DaysLeft.Player
                 if (detectable != null)
                 {
                     currentDetectables.Add(detectable);
+                    Debug.Log(detectable);
+                    Debug.Log(transform.gameObject.name);
                     detectable.OnPlayerDetected(transform);
                 }
             }

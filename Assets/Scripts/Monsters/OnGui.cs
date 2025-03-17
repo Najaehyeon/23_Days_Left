@@ -24,10 +24,14 @@ namespace _23DaysLeft.Utils
         {
             if (!isDebug) return;
 
-            GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+            GUIStyle buttonStyle = new(GUI.skin.button);
             buttonStyle.fontSize = 25;
             
-            
+            // hit
+            if (GUILayout.Button("Hit", buttonStyle))
+            {
+                creature.OnHit(20f);
+            }
         }
     }
 }

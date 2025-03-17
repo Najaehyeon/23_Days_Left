@@ -197,7 +197,7 @@ namespace _23DaysLeft.Monsters
             StopAllCoroutines();
             stateMachine.StateChange(CreatureState.Hit);
             currentHp = Mathf.Max(currentHp - damage, 0);
-            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
+            Global.Instance.UIManager.UpdateCreatureHpBar(this, currentHp);
             if (currentHp <= 0)
             {
                 Die();
@@ -227,9 +227,13 @@ namespace _23DaysLeft.Monsters
 
         private IEnumerator DieCoroutine()
         {
-            yield return new WaitForSeconds(1.5f);
-            // 아이템 드롭
-            PoolManager.Instance.Despawn(gameObject);
+            yield return new WaitForSeconds(2f);
+            Global.Instance.PoolManager.Despawn(gameObject);
+            for (int i = 0; i < creatureData.DropItems.Length; i++)
+            {
+                var dropItem = creatureData.DropItems[i];
+                Instantiate(dropItem.Prefab, transform.position, Quaternion.identity);
+            }
         }
 
         public virtual void OnPlayerDetected(Transform player)
@@ -239,8 +243,8 @@ namespace _23DaysLeft.Monsters
             navMeshAgent.speed = GetRandomSpeed(creatureData.CombatSpeed);
             stateMachine.StateChange(CreatureState.Run);
             stateMachine.OnPlayerDetected?.Invoke();
-            UIManager.Instance.ActiveCreatureHpBar(this, transform, creatureData.MaxHp);
-            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
+            Global.Instance.UIManager.ActiveCreatureHpBar(this, transform, creatureData.MaxHp);
+            Global.Instance.UIManager.UpdateCreatureHpBar(this, currentHp);
             StopAllCoroutines();
         }
 
@@ -250,7 +254,7 @@ namespace _23DaysLeft.Monsters
             playerTr = null;
             navMeshAgent.speed = GetRandomSpeed(creatureData.OriginSpeed);
             stateMachine.OnPlayerFaraway?.Invoke();
-            UIManager.Instance.InactiveCreatureHpBar(this);
+            Global.Instance.UIManager.InactiveCreatureHpBar(this);
             StopAllCoroutines();
             StartCoroutine(Wandering());
         }
