@@ -26,6 +26,8 @@ namespace _23DaysLeft.Utils
 
             GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
             buttonStyle.fontSize = 25;
+            
+            
         }
     }
 }

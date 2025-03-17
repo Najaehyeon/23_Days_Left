@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8059d25c70264d44c979e887b5983085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
+  isDebug: 1
   spawner: {fileID: 940948425}
   creature: {fileID: 0}
 --- !u!1 &20383088611483550
