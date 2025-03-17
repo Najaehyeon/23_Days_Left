@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: "\uB808\uB4DC\uACE8\uB818"
   MaxHp: 120
   OriginSpeed: 2
+  Prefab: {fileID: 2699821187514860688, guid: f49b29618e075d440a329ec8dbdd8e1b, type: 3}
   CombatType: 1
   Defense: 3
   AttackPower: 6

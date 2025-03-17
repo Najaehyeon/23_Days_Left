@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2923f2fce787b6945a64368c3dd72ab7, type: 3}
-  m_Name: RedGiantGolem
+  m_Name: GiantGolem
   m_EditorClassIdentifier: 
-  Name: "3\uCC28 \uBCF4\uC2A4"
-  MaxHp: 500
+  Name: "1\uCC28 \uBCF4\uC2A4"
+  MaxHp: 150
   OriginSpeed: -1
+  Prefab: {fileID: 1956538050164469845, guid: dc52d4549371e5b428a26946ea217d8f, type: 3}
   CombatType: 1
   Defense: 10
-  AttackPower: 20
-  AttackDelay: 2
+  AttackPower: 13
+  AttackDelay: 2.5
   HitDelay: -1
-  CombatSpeed: 5
+  CombatSpeed: 3
   MinWanderDistance: -1
   MaxWanderDistance: -1
   WanderTime: -1

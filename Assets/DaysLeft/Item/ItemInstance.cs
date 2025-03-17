@@ -15,22 +15,23 @@ namespace DaysLeft.Item
                 _itemData = dataLoad.Query(id);
         }
 
-        public int ID => _itemData.ID;
-        public string Name => _itemData.Name;
-        public string Description => _itemData.Description;
-        public ItemRarity Rarity => _itemData.Rarity;
-        public float Weight => _itemData.weight;
-        public bool Stackable => _itemData.Stackable;
-        public Sprite Icon => _itemData.Icon;
-        public GameObject Prefab => _itemData.Prefab;
+        public int ID               => _itemData.ID;
+        public string Name          => _itemData.Name;
+        public string Description   => _itemData.Description;
+        public ItemRarity Rarity    => _itemData.Rarity;
+        public float Weight         => _itemData.weight;
+        public bool Stackable       => _itemData.Stackable;
+        public Sprite Icon          => _itemData.Icon;
+        public GameObject Prefab    => _itemData.Prefab;
 
+        public int MaxQuantity = 99;
         private int _quantity = 0;
         public int Quantity
         {
             get { return _quantity; }
             set
             {
-                if (_quantity < 99)
+                if (_quantity < MaxQuantity)
                 {
                     _quantity = value;
                 }

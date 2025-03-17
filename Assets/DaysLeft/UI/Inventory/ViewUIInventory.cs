@@ -40,5 +40,10 @@ namespace DaysLeft.Menu
                     slot.Clear();
             }
         }
+
+        public void OnPressedCraftButton()
+        {
+            Controller.Show<ViewUICrafting>();
+        }
     }
 }

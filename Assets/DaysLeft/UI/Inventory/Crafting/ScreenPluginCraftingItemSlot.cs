@@ -9,6 +9,8 @@ public class ScreenPluginCraftingItemSlot : ScreenPlugin
 {
     [Header("Component")]
     [SerializeField]
+    private Image   Image;
+    [SerializeField]
     private Button  Slot;
     private int     id;
 
@@ -23,6 +25,8 @@ public class ScreenPluginCraftingItemSlot : ScreenPlugin
     public void Set(Recipe recipe)
     {
         _recipe = recipe;
+        Image.sprite = _recipe.target.Icon;
+        Slot.onClick.AddListener(() => { _controller.ShowCraftingInfo(_recipe); });
     }
 
     public override void Show(UIScreen screen)
