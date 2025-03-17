@@ -27,8 +27,10 @@ public class PlayerAttackController : MonoBehaviour
     public GameObject equippedPickaxe;
     public GameObject equippedBow;
 
-    private EquippedWeaponType equippedWeaponType = EquippedWeaponType.Pickaxe;
-    private AttackTargetType attackTargetType = AttackTargetType.Ore;
+    DetectTargetByWeapon detectTargetByWeapon;
+
+    public EquippedWeaponType equippedWeaponType = EquippedWeaponType.Hand;
+    public AttackTargetType attackTargetType;
 
 
 
@@ -43,9 +45,10 @@ public class PlayerAttackController : MonoBehaviour
 
     public int randomPunchHand;
 
-    [SerializeField] ResourceObject tree;
-    [SerializeField] ResourceObject ore;
+    public ResourceObject resourceObject;
+
     private Animator _animator;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -133,10 +136,10 @@ public class PlayerAttackController : MonoBehaviour
             case AttackTargetType.Enemy:
                 break;
             case AttackTargetType.Wood:
-                tree.mineResource(digWoodDamage);
+                resourceObject.mineResource(digWoodDamage);
                 break;
             case AttackTargetType.Ore:
-                ore.mineResource(mineOreDamage);
+                resourceObject.mineResource(mineOreDamage);
                 break;
         }
     }
