@@ -45,6 +45,8 @@ public class PlayerAttackController : MonoBehaviour
 
     public int randomPunchHand;
 
+    public ResourceObject resourceObject;
+
     private Animator _animator;
     private void Awake()
     {
@@ -133,8 +135,10 @@ public class PlayerAttackController : MonoBehaviour
             case AttackTargetType.Enemy:
                 break;
             case AttackTargetType.Wood:
+                resourceObject.mineResource(digWoodDamage);
                 break;
             case AttackTargetType.Ore:
+                resourceObject.mineResource(mineOreDamage);
                 break;
         }
     }
