@@ -2634,6 +2634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 7107990545803861560, guid: 7088a3bdf69b8f042a57d41ef5238b58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5965,14 +5969,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  sensitivity: 0
   jumpPower: 80
+  cameraContainer: {fileID: 1608725973}
+  playerBody: {fileID: 0}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  cameraContainer: {fileID: 1608725973}
-  minXLook: -85
-  maxXLook: 85
-  lookSensitivity: 0.1
 --- !u!114 &1622580300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10606,7 +10609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2515118708293599023, guid: 707968454be11d4458dce3f8ef1ef247, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8764560945349837940, guid: 707968454be11d4458dce3f8ef1ef247, type: 3}
       propertyPath: m_LocalPosition.x
