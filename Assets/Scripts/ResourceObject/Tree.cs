@@ -25,30 +25,30 @@ public class Tree : ResourceObject
     {
         if (_dayNightCycle.currentTime == 0.4f && !isObjectAtPosition)
         {
+            resourceCurHealth = resourceMaxHealth;
             _meshRenderer.enabled = true;
             _boxCollider.isTrigger = false;
+            gatherCount = 2;
         }
     }
 
-    public override void DigAndDropResource()
+    public override void mineResource(float damage)
     {
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)  // 플레이어가 캘 때
-    {
-        if (collision.gameObject.CompareTag("플레이어 무기"))
+        if (resourceCurHealth > 0)
         {
-            if (remainDigCount > 0)
+            resourceCurHealth -= damage;
+            // 나무 캐는 효과음
+            if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
-                remainDigCount--;
+                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
-            else if (remainDigCount == 0)
+            if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
+                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                gatherCount--;
                 _animator.enabled = true;       // 넘어지는 애니메이션 실행
-                _boxCollider.isTrigger = true;  // 
+                _boxCollider.isTrigger = true;  // 부딪히지 않게 하기.
                 StartCoroutine(TreeDown());
             }
         }
@@ -57,8 +57,7 @@ public class Tree : ResourceObject
     IEnumerator TreeDown()
     {
         yield return new WaitForSeconds(0.5f);
-        // 메쉬 비활성화
-        _meshRenderer.enabled = false;
+        _meshRenderer.enabled = false; // 메쉬 비활성화
     }
 
     private void OnTriggerStay(Collider other)

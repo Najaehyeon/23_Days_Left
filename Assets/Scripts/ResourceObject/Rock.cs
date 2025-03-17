@@ -9,19 +9,35 @@ public class Rock : ResourceObject
         RespawnResource();
     }
 
-    private void OnCollisionEnter(Collision collision)  // 敲饭捞绢啊 亩 锭
+    public override void RespawnResource()
     {
-        if (collision.gameObject.CompareTag("敲饭捞绢 公扁"))
+        if (_dayNightCycle.currentTime == 0.4f)
         {
-            if (remainDigCount >= 0)
+            resourceCurHealth = resourceMaxHealth;
+            gatherCount = 2;
+        }
+    }
+
+    public override void mineResource(float damage)
+    {
+        if (resourceCurHealth > 0)
+        {
+            resourceCurHealth -= damage;
+            // 兵兵 家府 瓤苞澜
+            if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
-                // 兵兵 家府
+                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
-            else 
+            if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                // 平平 家府
+                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
+        }
+        else
+        {
+            // 平平 家府 瓤苞澜
         }
     }
 }
