@@ -115,4 +115,6 @@ public enum Creatures
     GiantGolem,
     GreenGiantGolem,
     RedGiantGolem,
+    TestGolem,
+    
 }

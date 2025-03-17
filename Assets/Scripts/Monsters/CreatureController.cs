@@ -234,7 +234,6 @@ namespace _23DaysLeft.Monsters
 
         public virtual void OnPlayerDetected(Transform player)
         {
-            Debug.Log("Player Detected");
             if (isDead || playerTr) return;
             playerTr = player;
             navMeshAgent.speed = GetRandomSpeed(creatureData.CombatSpeed);
