@@ -15,12 +15,13 @@ MonoBehaviour:
   Name: "\uCF5C\uB85C\uBD80\uC2A4"
   MaxHp: 100
   OriginSpeed: 2
+  Prefab: {fileID: 7834390628042090126, guid: 2f4affb9f87a4ec4cb6553fba306784e, type: 3}
   CombatType: 0
   Defense: 3
-  AttackPower: 10
-  AttackDelay: 1
+  AttackPower: 0
+  AttackDelay: 0
   HitDelay: 1
-  CombatSpeed: 5
+  CombatSpeed: 4
   MinWanderDistance: 10
   MaxWanderDistance: 15
   WanderTime: 10

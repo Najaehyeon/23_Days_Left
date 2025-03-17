@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 5985243768577686814}
   - component: {fileID: 2551829546377953083}
   - component: {fileID: 7660007797740767579}
+  - component: {fileID: 3641105537017278722}
   m_Layer: 0
   m_Name: Tree_03
   m_TagString: Untagged
@@ -167,10 +168,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
+--- !u!95 &3641105537017278722
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529034792641771196}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a863e342bb1b4a48b5e65aa7f55350b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1641716417998803136
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +243,7 @@ GameObject:
   - component: {fileID: 999244929064166879}
   - component: {fileID: 1578164901653070175}
   - component: {fileID: 2673304609649996033}
+  - component: {fileID: 8346381777227427442}
   m_Layer: 0
   m_Name: Tree_04
   m_TagString: Untagged
@@ -324,10 +349,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
+--- !u!95 &8346381777227427442
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148734318778449692}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 449d3a9f42677db499f2c6c040a277a1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5858992381007904975
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +389,7 @@ GameObject:
   - component: {fileID: 2758440744195422439}
   - component: {fileID: 577375682187389169}
   - component: {fileID: 3458125697693352536}
+  - component: {fileID: 7753647307670448480}
   m_Layer: 0
   m_Name: Tree_02
   m_TagString: Untagged
@@ -446,10 +495,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
+--- !u!95 &7753647307670448480
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5858992381007904975}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 53bb7fb859aa2bf46a31a1bf7d48ab47, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5871499720505322794
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +535,7 @@ GameObject:
   - component: {fileID: 3140568818093944752}
   - component: {fileID: 8771790012934540128}
   - component: {fileID: 3643288303270241126}
+  - component: {fileID: 6022884902015527417}
   m_Layer: 0
   m_Name: Tree_05
   m_TagString: Untagged
@@ -568,10 +641,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
+--- !u!95 &6022884902015527417
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5871499720505322794}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ca8cf90c83e3e446bbb795243c31f2c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6674849457269016207
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,9 +925,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
 --- !u!95 &4704109958673355230
 Animator:

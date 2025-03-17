@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2923f2fce787b6945a64368c3dd72ab7, type: 3}
+  m_Name: Skeleton_Hard
+  m_EditorClassIdentifier: 
+  Name: "\uD654\uB09C \uC2A4\uCF08\uB808\uD1A4"
+  MaxHp: 150
+  OriginSpeed: 3
+  Prefab: {fileID: 6283046913051795503, guid: 0cbcb33b65960174da330669d55e1b08, type: 3}
+  CombatType: 1
+  Defense: 5
+  AttackPower: 8
+  AttackDelay: 1.5
+  HitDelay: 1.5
+  CombatSpeed: 5
+  MinWanderDistance: 10
+  MaxWanderDistance: 15
+  WanderTime: 10
+  IdleTime: 5
+  FleeDistance: 10
+  FieldOfView: 120
+  AttackDistance: 1

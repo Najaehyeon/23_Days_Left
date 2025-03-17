@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace _23DaysLeft.Monsters
@@ -11,13 +10,14 @@ namespace _23DaysLeft.Monsters
         public Action OnHitAnimationEnd;
         public Action OnAttackAnimationEnd;
         
-        private readonly int hashWalk = Animator.StringToHash("IsWalk");
-        private readonly int hashRun = Animator.StringToHash("IsRun");
-        private readonly int hashCombat = Animator.StringToHash("IsCombat");
-        private readonly int hashAttack = Animator.StringToHash("Attack");
-        private readonly int hashHit = Animator.StringToHash("Hit");
-        private readonly int hashDie = Animator.StringToHash("Die");
+        protected readonly int hashWalk = Animator.StringToHash("IsWalk");
+        protected readonly int hashRun = Animator.StringToHash("IsRun");
+        protected readonly int hashCombat = Animator.StringToHash("IsCombat");
+        protected readonly int hashAttack = Animator.StringToHash("Attack");
+        protected readonly int hashHit = Animator.StringToHash("Hit");
+        protected readonly int hashDie = Animator.StringToHash("Die");
 
+        private float enterTime;
         private AnimatorStateInfo currentState;
         
         public override void Init(Creature creature)
@@ -76,15 +76,16 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Enter()
         {
-            navMeshAgent.isStopped = true;
+            navMeshAgent.enabled = false;
             anim.SetBool(hashAttack, true);
+            currentState = anim.GetCurrentAnimatorStateInfo(0);
+            enterTime = 0;
         }
         
         protected override void Attack_Update()
         {
-            navMeshAgent.velocity = Vector3.zero;
-            currentState = anim.GetCurrentAnimatorStateInfo(0);
-            if (currentState.normalizedTime >= 1f)
+            enterTime += Time.deltaTime * currentState.normalizedTime;
+            if (enterTime >= 0.9f)
             {
                 OnAttackAnimationEnd?.Invoke();
             }
@@ -92,20 +93,22 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Exit()
         {
+            navMeshAgent.enabled = true;
             anim.SetBool(hashAttack, false);
         }
         
         protected override void Hit_Enter()
         {
+            navMeshAgent.enabled = false;
             anim.SetTrigger(hashHit);
-            navMeshAgent.isStopped = true;
+            currentState = anim.GetCurrentAnimatorStateInfo(0);
+            enterTime = 0;
         }
         
         protected override void Hit_Update()
         {
-            navMeshAgent.velocity = Vector3.zero;
-            currentState = anim.GetCurrentAnimatorStateInfo(0);
-            if (currentState.normalizedTime >= 1f)
+            enterTime += Time.deltaTime * currentState.normalizedTime;
+            if (enterTime >= 0.9f)
             {
                 OnHitAnimationEnd?.Invoke();
             }
@@ -113,12 +116,12 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Exit()
         {
+            navMeshAgent.enabled = true;
         }
         
         protected override void Die_Enter()
         {
             anim.SetTrigger(hashDie);
-            navMeshAgent.isStopped = true;
         }
         
         protected override void Die_Update()

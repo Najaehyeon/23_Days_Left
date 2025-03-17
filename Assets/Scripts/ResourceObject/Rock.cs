@@ -6,23 +6,38 @@ public class Rock : ResourceObject
 {
     private void Update()
     {
-        RespawnTree();
+        RespawnResource();
     }
 
-    private void OnCollisionEnter(Collision collision)  // ÇÃ·¹ÀÌ¾î°¡ Ä¶ ¶§
+    public override void RespawnResource()
     {
-        if (collision.gameObject.CompareTag("ÇÃ·¹ÀÌ¾î ¹«±â"))
+        if (_dayNightCycle.currentTime == 0.4f)
         {
-            if (remainDigCount >= 0)
+            resourceCurHealth = resourceMaxHealth;
+            gatherCount = 2;
+        }
+    }
+
+    public override void mineResource(float damage)
+    {
+        if (resourceCurHealth > 0)
+        {
+            resourceCurHealth -= damage;
+            // ê¹¡ê¹¡ ì†Œë¦¬ íš¨ê³¼ìŒ ì¶”ê°€ í•´ì•¼í•¨
+            if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
-                remainDigCount--;
-                // ±ø±ø ¼Ò¸®
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
-            else 
+            if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                // Æ½Æ½ ¼Ò¸®
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
+        }
+        else
+        {
+            // í‹±í‹± ì†Œë¦¬ íš¨ê³¼ìŒ ì¶”ê°€ í•´ì•¼í•¨
         }
     }
 }

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Entity.meta
+guid: f702ba77863bdb4459d28c6f035fa7b8
+========
+guid: fa1c2b74412926b44aea7aa599c88fcb
+>>>>>>>> dev:Assets/PlayerAnimator.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

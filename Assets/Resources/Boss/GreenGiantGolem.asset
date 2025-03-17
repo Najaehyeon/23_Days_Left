@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2923f2fce787b6945a64368c3dd72ab7, type: 3}
+  m_Name: GreenGiantGolem
+  m_EditorClassIdentifier: 
+  Name: "2\uCC28 \uBCF4\uC2A4"
+  MaxHp: 250
+  OriginSpeed: -1
+  Prefab: {fileID: 1956538050164469845, guid: f963d60158ec0b04eaff66548ed2329d, type: 3}
+  CombatType: 1
+  Defense: 10
+  AttackPower: 15
+  AttackDelay: 2
+  HitDelay: -1
+  CombatSpeed: 3
+  MinWanderDistance: -1
+  MaxWanderDistance: -1
+  WanderTime: -1
+  IdleTime: -1
+  FleeDistance: -1
+  FieldOfView: 120
+  AttackDistance: 2

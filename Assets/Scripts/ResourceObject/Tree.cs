@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Tree : ResourceObject
 {
-    private bool isObjectAtPosition;
+    private bool isObjectAtPosition = false;
 
     BoxCollider _boxCollider;
     MeshRenderer _meshRenderer;
@@ -18,33 +18,37 @@ public class Tree : ResourceObject
 
     private void Update()
     {
-        RespawnTree();
+        //RespawnResource();
     }
 
-    public override void RespawnTree()
+    public override void RespawnResource()
     {
         if (_dayNightCycle.currentTime == 0.4f && !isObjectAtPosition)
         {
+            resourceCurHealth = resourceMaxHealth;
             _meshRenderer.enabled = true;
             _boxCollider.isTrigger = false;
-            remainDigCount = digCount;
+            gatherCount = 2;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)  // ÇÃ·¹ÀÌ¾î°¡ Ä¶ ¶§
+    public override void mineResource(float damage)
     {
-        if (collision.gameObject.CompareTag("ÇÃ·¹ÀÌ¾î ¹«±â"))
+        if (resourceCurHealth > 0)
         {
-            if (remainDigCount > 0)
+            resourceCurHealth -= damage;
+            // ë‚˜ë¬´ ìºëŠ” íš¨ê³¼ìŒ
+            if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
-                remainDigCount--;
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
+                gatherCount--;
             }
-            else if (remainDigCount == 0)
+            if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                Instantiate(dropResource, transform.position + Vector3.up, Quaternion.identity);
-                _animator.enabled = true;       // ³Ñ¾îÁö´Â ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
-                _boxCollider.isTrigger = true;  // 
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
+                gatherCount--;
+                _animator.enabled = true;       // ë„˜ì–´ì§€ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
+                _boxCollider.isTrigger = true;  // ë¶€ë”ªíˆì§€ ì•Šê²Œ í•˜ê¸°.
                 StartCoroutine(TreeDown());
             }
         }
@@ -53,23 +57,26 @@ public class Tree : ResourceObject
     IEnumerator TreeDown()
     {
         yield return new WaitForSeconds(0.5f);
-        // ¸Ş½¬ ºñÈ°¼ºÈ­
-        _meshRenderer.enabled = false;
+        _meshRenderer.enabled = false; // ë©”ì‰¬ ë¹„í™œì„±í™”
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("ÇÃ·¹ÀÌ¾î°¡ ¼³Ä¡ÇÑ ¿ÀºêÁ§Æ®"))
-        {
-            isObjectAtPosition = true;
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.CompareTag("í”Œë ˆì´ì–´ê°€ ì„¤ì¹˜í•œ ì˜¤ë¸Œì íŠ¸"))
+    //    {
+    //        isObjectAtPosition = true;
+    //    }
+    //    else
+    //    {
+    //        return;
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("ÇÃ·¹ÀÌ¾î°¡ ¼³Ä¡ÇÑ ¿ÀºêÁ§Æ®"))
-        {
-            isObjectAtPosition = false;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("í”Œë ˆì´ì–´ê°€ ì„¤ì¹˜í•œ ì˜¤ë¸Œì íŠ¸"))
+    //    {
+    //        isObjectAtPosition = false;
+    //    }
+    //}
 }

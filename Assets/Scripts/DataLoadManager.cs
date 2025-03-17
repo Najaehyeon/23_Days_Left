@@ -8,11 +8,13 @@ public class DataLoadManager : MonoBehaviour
 {
     private List<ItemData> itemDatas;
     private Dictionary<string, CreatureData> creatureDatas;
+    private Dictionary<string, CreatureData> bossDatas;
 
     void Awake()
     {
         itemDatas = Resources.LoadAll<ItemData>("Item").ToList(); 
         LoadCreatureData();
+        LoadBossData();
     }
 
     /// <summary>
@@ -29,14 +31,34 @@ public class DataLoadManager : MonoBehaviour
     public ItemData Query(string name)
         => (from item in itemDatas where item.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase) select item).FirstOrDefault();
     
-    public void LoadCreatureData()
+    private void LoadCreatureData()
     {
         creatureDatas = new Dictionary<string, CreatureData>();
         var creatureData = Resources.LoadAll<CreatureData>("Creature");
         foreach (var data in creatureData)
         {
-            creatureDatas.Add(data.name, data);
+            creatureDatas.Add(data.Name, data);
         }
+    }
+    
+    private void LoadBossData()
+    {
+        bossDatas = new Dictionary<string, CreatureData>();
+        var bossData = Resources.LoadAll<CreatureData>("Boss");
+        foreach (var data in bossData)
+        {
+            bossDatas.Add(data.Name, data);
+        }
+    }
+    
+    public List<CreatureData> GetCreatureList()
+    {
+        return creatureDatas.Values.ToList();
+    }
+    
+    public List<CreatureData> GetBossList()
+    {
+        return bossDatas.Values.ToList();
     }
 
     public CreatureData GetCreatureData(string creatureName)
@@ -46,6 +68,17 @@ public class DataLoadManager : MonoBehaviour
         else
         {
             Debug.LogError($"CreatureData {creatureName} is not found");
+            return null;
+        }
+    }
+    
+    public CreatureData GetBossData(string bossName)
+    {
+        if (bossDatas.TryGetValue(bossName, out var data))
+            return data;
+        else
+        {
+            Debug.LogError($"BossData {bossName} is not found");
             return null;
         }
     }
