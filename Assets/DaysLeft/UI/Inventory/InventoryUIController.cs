@@ -2,7 +2,7 @@ namespace DaysLeft.Menu
 {
     using DaysLeft.Inventory;
     using DaysLeft.Item;
-    using DeayLeft.Inventory;
+    using DaysLeft.Inventory;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;

@@ -69,8 +69,9 @@ namespace DaysLeft.Inventory
         /// Add an item to inventory
         /// </summary>
         /// <param name="newItem">ItemInstance</param>
-        public void Add(ItemInstance newItem)
+        public void AddNew(int itemID)
         {
+            ItemInstance newItem = new(itemID);
             if (!newItem.HasData)
                 Debug.LogError("Try add new item that have no data.");
 
@@ -96,6 +97,28 @@ namespace DaysLeft.Inventory
             }
         }
 
+        public bool TrySubtract(int id, int consumeQuantity)
+        {
+            int remainQuantity = 0;
+            List<ItemInstance> targetItems = QueryAll(id);
+
+            foreach (var item in targetItems)
+                remainQuantity += item.Quantity;
+
+            if (remainQuantity < consumeQuantity)
+                return false;
+
+            while (targetItems[0].MaxQuantity < consumeQuantity)
+            {
+                consumeQuantity -= targetItems[0].MaxQuantity;
+                targetItems.RemoveAt(0);
+            }
+
+            targetItems[0].Quantity -= consumeQuantity;
+            OnContentsChanged?.Invoke();
+            return true;
+        }
+
         /// <summary>
         /// Get an item by index in inventory
         /// </summary>
@@ -108,7 +131,15 @@ namespace DaysLeft.Inventory
         /// Query all items by id
         /// </summary>
         /// <param name="id"> id of itemData</param>
-        public List<ItemInstance> Query(int id)
-            => (from item in _items where item.ID == id select item).ToList();
+        public List<ItemInstance> QueryAll(int id)
+        {
+            List<ItemInstance> result = new();
+
+            foreach (var item in _items)
+                if (item?.ID == id)
+                    result.Add(item);
+
+            return result;
+        }
     }
 }

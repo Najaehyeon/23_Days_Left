@@ -1,18 +1,18 @@
 using DaysLeft.Menu;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
-public class ScreenPluginCraftingItemSlot : ScreenPlugin
+public class ScreenPluginCraftingIngredientSlot : ScreenPlugin
 {
     [Header("Component")]
     [SerializeField]
-    private Image   Image;
+    private Image       Image;
     [SerializeField]
-    private Button  Slot;
-    private int     id;
+    private TMP_Text    Quantity;
 
     private Recipe _recipe;
 
@@ -26,7 +26,6 @@ public class ScreenPluginCraftingItemSlot : ScreenPlugin
     {
         _recipe = recipe;
         Image.sprite = _recipe.target.Icon;
-        Slot.onClick.AddListener(() => { _controller.ShowCraftingInfo(_recipe); });
     }
 
     public override void Show(UIScreen screen)
