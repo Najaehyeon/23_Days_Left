@@ -760,6 +760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewYOffset: 0.06
   cellIndicator: {fileID: 1320366100}
+  previewObject: {fileID: 0}
   previewMaterialPrefab: {fileID: 2100000, guid: e5defc85b221e874ead3021752694267, type: 2}
 --- !u!1 &1267588844
 GameObject:
@@ -2445,7 +2446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1001 &1697214730957435985
 PrefabInstance:
   m_ObjectHideFlags: 0
