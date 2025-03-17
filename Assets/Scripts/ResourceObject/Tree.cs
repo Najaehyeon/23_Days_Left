@@ -40,12 +40,12 @@ public class Tree : ResourceObject
             // 나무 캐는 효과음
             if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
                 gatherCount--;
             }
             if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
                 gatherCount--;
                 _animator.enabled = true;       // 넘어지는 애니메이션 실행
                 _boxCollider.isTrigger = true;  // 부딪히지 않게 하기.

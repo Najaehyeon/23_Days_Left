@@ -16,6 +16,7 @@ public class DetectTargetByWeapon : MonoBehaviour
         if (other.CompareTag("Tree"))
         {
             attackController.attackTargetType = AttackTargetType.Wood;
+            attackController.resourceObject = other.GetComponent<Tree>();
         }
         else if (other.CompareTag("Rock"))
         {

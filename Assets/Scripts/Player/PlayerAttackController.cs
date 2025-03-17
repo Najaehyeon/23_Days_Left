@@ -46,6 +46,9 @@ public class PlayerAttackController : MonoBehaviour
     public int randomPunchHand;
 
     private Animator _animator;
+
+    public ResourceObject resourceObject;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -133,6 +136,7 @@ public class PlayerAttackController : MonoBehaviour
             case AttackTargetType.Enemy:
                 break;
             case AttackTargetType.Wood:
+                resourceObject.mineResource(digWoodDamage);
                 break;
             case AttackTargetType.Ore:
                 break;
