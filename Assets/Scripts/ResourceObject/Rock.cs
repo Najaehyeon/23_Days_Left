@@ -23,7 +23,7 @@ public class Rock : ResourceObject
         if (resourceCurHealth > 0)
         {
             resourceCurHealth -= damage;
-            // 兵兵 家府 瓤苞澜
+            // 兵兵 家府 瓤苞澜 眠啊 秦具窃
             if (resourceCurHealth <= 50 && gatherCount == 2)
             {
                 Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
@@ -37,7 +37,7 @@ public class Rock : ResourceObject
         }
         else
         {
-            // 平平 家府 瓤苞澜
+            // 平平 家府 瓤苞澜 眠啊 秦具窃
         }
     }
 }

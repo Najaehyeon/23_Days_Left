@@ -7,7 +7,7 @@ public abstract class ResourceObject : MonoBehaviour
 {
     public float resourceMaxHealth = 100f;
     public float resourceCurHealth;
-    public float gatherCount = 2;
+    public float gatherCount = 2; // 채집할 수 있는 남은 자원
     public GameObject dropResource;
     public WeaponItemData weaponItemData;
     public DayNightCycle _dayNightCycle;
