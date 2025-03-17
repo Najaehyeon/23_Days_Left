@@ -1,11 +1,15 @@
 using UnityEngine;
 
+/// <summary>
+/// 미리 보여주는 격자, 오브젝트
+/// 격자의 회전 처리는 여기서 해야된다
+/// </summary>
 public class PreviewSystem : MonoBehaviour
 {
     [SerializeField] private float previewYOffset = 0.06f;  // 오브젝트는 그리드보다 약간 위에 있다
 
-    [SerializeField] private GameObject cellIndicator;
-    private GameObject previewObject;   // 생성 전 미리 보여줄 오브젝트
+    [SerializeField] private GameObject cellIndicator;  // 생성 전에 오브젝트가 걸치고 있는 격자
+    public GameObject previewObject;   // 생성 전 미리 보여줄 오브젝트
 
     [SerializeField] private Material previewMaterialPrefab;    // 투명상태를 나타내는 material
     private Material previewMaterialInstance;   // 생성한 오브젝트의 원래 material
@@ -21,11 +25,17 @@ public class PreviewSystem : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// UI버튼을 클릭할때 미리보기를 처음 표시한다
+    /// </summary>
+    /// <param name="prefab"></param>
+    /// <param name="size"></param>
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
         PreparePreview(previewObject);
         PrepareCursor(size);
+        /// 격자를 보여준다
         cellIndicator.SetActive(true);
     }
     // 오브젝트의 크기를 보여준다
@@ -36,6 +46,20 @@ public class PreviewSystem : MonoBehaviour
             cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
+    }
+    // 선택한 오브젝트의 크기를 리턴한다
+    public Vector2Int GetCurrentSize()
+    {
+        if (previewObject == null) 
+            return Vector2Int.zero;
+
+        Renderer renderer = previewObject.GetComponentInChildren<Renderer>();
+        if (renderer != null)
+        {
+            Vector3 size = renderer.bounds.size;
+            return new Vector2Int(Mathf.CeilToInt(size.x), Mathf.CeilToInt(size.z));
+        }
+        return Vector2Int.zero;
     }
     private void PreparePreview(GameObject previewObject)
     {
@@ -94,6 +118,19 @@ public class PreviewSystem : MonoBehaviour
             position.x,
             position.y + previewYOffset,
             position.z);
+    }
+
+    /// <summary>
+    /// R키 누르면 y축 기준으로 시계방향 회전
+    /// 격자, 프리팹 모두 회전한다
+    /// </summary>
+    /// <param name="angle"></param>
+    public void RotatePreview(float angle)
+    {
+        previewObject.transform.Rotate(Vector3.up, angle);
+        /// 격자 다시 표시해야함
+        /// cellIndicator 또한 angle만큼 회전한다
+        cellIndicator.transform.Rotate(Vector3.up, angle);
     }
 
 }

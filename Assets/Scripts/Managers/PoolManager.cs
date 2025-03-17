@@ -84,6 +84,11 @@ namespace _23DaysLeft.Managers
         public T Spawn<T>(string poolKey, Vector3 position = default, Quaternion rotation = default) where T : Component
         {
             GameObject obj = Spawn(poolKey, position, rotation);
+            if (!obj)
+            {
+                Debug.LogWarning($"PoolManager: {poolKey}<{typeof(T)}> is not exist.");
+                return null;
+            }
             if (obj.TryGetComponent(out T component)) return component;
             
             Debug.LogWarning($"PoolManager: {poolKey}<{typeof(T)}> is not exist.");

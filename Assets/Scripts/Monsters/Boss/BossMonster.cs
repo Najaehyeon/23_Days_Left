@@ -1,6 +1,8 @@
-using _23DaysLeft.Monsters;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(BossController), typeof(BossStateMachine), typeof(NavMeshAgent))]
-public class BossMonster : Creature { }
+namespace _23DaysLeft.Monsters
+{
+    [RequireComponent(typeof(BossController), typeof(BossStateMachine), typeof(NavMeshAgent))]
+    public class BossMonster : Creature { }
+}

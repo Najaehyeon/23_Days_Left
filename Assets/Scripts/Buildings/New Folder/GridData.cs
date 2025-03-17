@@ -22,6 +22,12 @@ public class GridData
         }
     }
 
+    /// <summary>
+    /// 격자의 회전상태 반영해야한다
+    /// </summary>
+    /// <param name="gridPosition"></param>
+    /// <param name="objectSize"></param>
+    /// <returns></returns>
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> returnVal = new List<Vector3Int>();
@@ -37,6 +43,12 @@ public class GridData
         }
         return returnVal;
     }
+    /// <summary>
+    /// 격자의 회전상태도 반영해라
+    /// </summary>
+    /// <param name="gridPosition"></param>
+    /// <param name="objectSize"></param>
+    /// <returns></returns>
     public bool CanPlaceObjAt(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
