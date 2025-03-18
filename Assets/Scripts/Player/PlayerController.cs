@@ -1,8 +1,13 @@
+using DaysLeft.Menu;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Other Controller")]
+    [SerializeField]
+    private InventoryUIController InventoryUIController;
+
     [Header("Move")]
     public float moveSpeed; // �÷��̾� �̵� �ӵ�
     Vector3 moveDir; // ���� �̵� ���� ����
@@ -168,6 +173,17 @@ public class PlayerController : MonoBehaviour
 
             // ���� �ִϸ��̼� ����
             _animator.SetTrigger("DoJump");
+        }
+    }
+
+    public void OnInventoryInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (InventoryUIController.Toggle())
+                Cursor.lockState = CursorLockMode.None;
+            else
+                Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }
