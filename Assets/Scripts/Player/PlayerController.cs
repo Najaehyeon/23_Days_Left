@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     [Header("Status")]
     public float health;
     private bool isDead;
+    public float hunger;
+    public float hungerSpeed;
     
     public bool IsDead => isDead;
 
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
         inventory = CharacterManager.Instance.Player.inventory;
         isDead = false;
         health = 100;
+        hunger = 100;
     }
 
     private void FixedUpdate()
@@ -65,6 +68,11 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+    }
+
+    private void Update()
+    {
+        Hungry();
     }
 
     private void LateUpdate()
@@ -223,6 +231,24 @@ public class PlayerController : MonoBehaviour
             _animator.SetTrigger("DoDie");
             isDead = true;
             OnPlayerDead?.Invoke();
+        }
+    }
+
+    public void Eat(float amount)
+    {
+        hunger = Mathf.Min(hunger + amount, 100);
+    }
+
+    void Hungry()
+    {
+        if (hunger > 0)
+        {
+            hunger -= hungerSpeed * Time.deltaTime;
+            health += Time.deltaTime * 0.5f;
+        }
+        else if (hunger <= 0)
+        { 
+            health -= Time.deltaTime;
         }
     }
 }

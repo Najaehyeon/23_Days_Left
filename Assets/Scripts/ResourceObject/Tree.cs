@@ -18,12 +18,12 @@ public class Tree : ResourceObject
 
     private void Update()
     {
-        //RespawnResource();
+        RespawnResource();
     }
 
     public override void RespawnResource()
     {
-        if (_dayNightCycle.currentTime == 0.4f && !isObjectAtPosition)
+        if (_dayNightCycle.currentTime >= 0.4f && _dayNightCycle.currentTime < 0.41f && !isObjectAtPosition)
         {
             resourceCurHealth = resourceMaxHealth;
             _meshRenderer.enabled = true;
@@ -49,15 +49,17 @@ public class Tree : ResourceObject
                 gatherCount--;
                 _animator.enabled = true;       // 넘어지는 애니메이션 실행
                 _boxCollider.isTrigger = true;  // 부딪히지 않게 하기.
-                StartCoroutine(TreeDown());
+                StartCoroutine(TreeDisapear());
             }
         }
     }
 
-    IEnumerator TreeDown()
+    IEnumerator TreeDisapear()
     {
         yield return new WaitForSeconds(0.5f);
         _meshRenderer.enabled = false; // 메쉬 비활성화
+        yield return new WaitForSeconds(0.5f);
+        _animator.enabled = false;
     }
 
     //private void OnTriggerStay(Collider other)
