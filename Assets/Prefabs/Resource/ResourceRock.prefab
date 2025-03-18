@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2629127508879716135}
   - component: {fileID: 2027149048455903753}
   - component: {fileID: -924165465240090794}
+  - component: {fileID: -3075007739557424664}
   m_Layer: 0
   m_Name: ResourceRock
   m_TagString: Untagged
@@ -134,3 +135,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-3075007739557424664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011734363461338382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508bd2e8d47c16740b6cbf3ac409d953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemData: {fileID: 11400000, guid: e620285185e0fbd489a01e5ce0d37109, type: 2}
