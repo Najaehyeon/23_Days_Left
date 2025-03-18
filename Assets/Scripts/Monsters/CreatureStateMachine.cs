@@ -76,7 +76,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Enter()
         {
-            navMeshAgent.enabled = false;
+            navMeshAgent.velocity = Vector3.zero;
             anim.SetBool(hashAttack, true);
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             enterTime = 0;
@@ -84,7 +84,6 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Update()
         {
-            Debug.Log(enterTime);
             enterTime += Time.deltaTime * currentState.normalizedTime;
             if (enterTime >= 1f)
             {
@@ -94,14 +93,12 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Exit()
         {
-            navMeshAgent.enabled = true;
             anim.SetBool(hashAttack, false);
         }
         
         protected override void Hit_Enter()
         {
             navMeshAgent.velocity = Vector3.zero;
-            navMeshAgent.enabled = false;
             anim.SetBool(hashHit, true);
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             enterTime = 0;
@@ -109,8 +106,9 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Update()
         {
+            navMeshAgent.velocity = Vector3.zero;
             enterTime += Time.deltaTime * currentState.normalizedTime;
-            if (enterTime >= 1f)
+            if (enterTime >= 0.9f)
             {
                 OnHitAnimationEnd?.Invoke();
             }
@@ -118,12 +116,12 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Exit()
         {
-            navMeshAgent.enabled = true;
             anim.SetBool(hashHit, false);
         }
         
         protected override void Die_Enter()
         {
+            navMeshAgent.enabled = false;
             anim.SetTrigger(hashDie);
         }
         

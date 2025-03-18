@@ -151,6 +151,7 @@ namespace _23DaysLeft.Monsters
             }
             else
             {
+                if (lastHitTime < creatureData.HitDelay) return;
                 if (lastAttackTime >= creatureData.AttackDelay && IsPlayerInFieldOfView())
                 {
                     Attack();
@@ -224,7 +225,6 @@ namespace _23DaysLeft.Monsters
         protected void Die()
         {
             isDead = true;
-            navMeshAgent.enabled = false;
             stateMachine.StateChange(CreatureState.Die);
             StartCoroutine(DieCoroutine());
         }
