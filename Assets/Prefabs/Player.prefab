@@ -1493,9 +1493,9 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  health: 0
-  hunger: 0
-  hungerSpeed: 0.2
+  MaxHealth: 100
+  MaxHunger: 100
+  hungerSpeed: 0.5
 --- !u!114 &5480659044889143255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3855,7 +3855,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.5
   m_Height: 0.15
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -5210,7 +5210,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.5
   m_Height: 0.15
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
