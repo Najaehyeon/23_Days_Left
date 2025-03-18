@@ -14,7 +14,6 @@ namespace _23DaysLeft.Monsters
         
         [Header("Combat Info")]
         public CombatType CombatType;
-        public float Defense;
         public float AttackPower;
         public float AttackDelay = 1.5f;
         public float HitDelay = 1.5f;
