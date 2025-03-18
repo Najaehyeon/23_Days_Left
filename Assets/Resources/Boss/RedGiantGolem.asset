@@ -16,8 +16,8 @@ MonoBehaviour:
   MaxHp: 500
   OriginSpeed: -1
   Prefab: {fileID: 1956538050164469845, guid: 427aea04998850a479c4b15a4b93c778, type: 3}
+  DeadSound: 5
   CombatType: 1
-  Defense: 10
   AttackPower: 20
   AttackDelay: 2
   HitDelay: -1
@@ -29,3 +29,4 @@ MonoBehaviour:
   FleeDistance: -1
   FieldOfView: 120
   AttackDistance: 2
+  DropItems: []
