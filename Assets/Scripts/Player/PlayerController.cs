@@ -1,4 +1,5 @@
 using DaysLeft.Inventory;
+using DaysLeft.Item;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,7 +27,8 @@ public class PlayerController : MonoBehaviour
     Animator _animator; // �ִϸ��̼� ��Ʈ�ѷ�
 
     PlayerInventory inventory;
-    DataLoadManager dataLoadManager;
+    public int itemId = -1;
+    public GameObject gatheringObject;
 
     private void Awake()
     {
@@ -40,7 +42,6 @@ public class PlayerController : MonoBehaviour
         // ���콺 Ŀ���� ȭ�� �߾ӿ� ����
         Cursor.lockState = CursorLockMode.Locked;
         inventory = CharacterManager.Instance.Player.inventory;
-        dataLoadManager = Global.Instance.DataLoadManager;
     }
 
     private void FixedUpdate()
@@ -181,7 +182,22 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
+            gatheringObject.SetActive(true);
             _animator.SetTrigger("DoInteract");
+            Invoke("gatheringLock", 0.5f);
+        }
+    }
+
+    void gatheringLock()
+    {
+        if (itemId == -1)
+        {
+            gatheringObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            gatheringObject.SetActive(false);
         }
     }
 }
