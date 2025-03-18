@@ -75,7 +75,7 @@ public class PlayerAttackController : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && afterLastAttackTime >= attackRate)
+        if(context.phase == InputActionPhase.Started && afterLastAttackTime >= attackRate && !playerController.IsDead)
         {
             afterLastAttackTime = 0f;
             playerController.isAttack = true;
