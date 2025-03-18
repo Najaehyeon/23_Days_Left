@@ -16,6 +16,7 @@ MonoBehaviour:
   MaxHp: 100
   OriginSpeed: 2
   Prefab: {fileID: 7834390628042090126, guid: 2f4affb9f87a4ec4cb6553fba306784e, type: 3}
+  DeadSound: 2
   CombatType: 0
   AttackPower: 0
   AttackDelay: 0

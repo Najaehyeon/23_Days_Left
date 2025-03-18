@@ -1,5 +1,3 @@
-using _23DaysLeft.Managers;
-using _23DaysLeft.Monsters;
 using System;
 
 namespace _23DaysLeft.Utils

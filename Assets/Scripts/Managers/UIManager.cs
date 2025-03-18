@@ -10,6 +10,7 @@ namespace _23DaysLeft.Managers
     {
         private MainSceneUIList uiList;
         public Action<float> OnChangeLoadingProgress;
+        public Action<int> OnChangeDay;
         
         private Dictionary<CreatureController, CreatureHealthBar> creatureHealthBars = new();
         private const string creatureHpBar = "CreatureHealthBar";
@@ -18,6 +19,7 @@ namespace _23DaysLeft.Managers
         {
             uiList = ui;
             uiList.PlayerConditionPanel.Init();
+            OnChangeDay += uiList.DayPanel.SetDate;
         }
         
         public void ActiveCreatureHpBar(CreatureController creature, Transform target, float maxHp)

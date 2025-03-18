@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _23DaysLeft.Managers;
+using _23DaysLeft.Utils;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -107,7 +108,7 @@ namespace _23DaysLeft.Monsters
             var maxWanderDistance = creatureData.MaxWanderDistance;
 
             var randomPoint = Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance);
-            NavMesh.SamplePosition(transform.position + randomPoint, out var hit, 5f, NavMesh.AllAreas);
+            NavMesh.SamplePosition(transform.position + randomPoint, out var hit, 10f, NavMesh.AllAreas);
             return hit.position;
         }
 
@@ -205,6 +206,7 @@ namespace _23DaysLeft.Monsters
             stateMachine.StateChange(CreatureState.Hit);
             currentHp = Mathf.Max(currentHp - damage, 0);
             Global.Instance.UIManager.UpdateCreatureHpBar(this, currentHp);
+            Global.Instance.AudioManager.PlaySFX(Utils.SoundType.MonsterHit.GetClipName());
             if (currentHp <= 0)
             {
                 Global.Instance.UIManager.InactiveCreatureHpBar(this);
@@ -230,6 +232,7 @@ namespace _23DaysLeft.Monsters
             isDead = true;
             stateMachine.StateChange(CreatureState.Die);
             creatureSpawner.CreatureDied();
+            Global.Instance.AudioManager.PlaySFX(creatureData.DeadSound.GetClipName());
             StartCoroutine(DieCoroutine());
         }
 

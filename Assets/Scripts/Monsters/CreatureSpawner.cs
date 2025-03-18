@@ -52,9 +52,17 @@ namespace _23DaysLeft.Monsters
 
             var spawnPos = GetSpawnPos();
             var creature = Global.Instance.PoolManager.Spawn<Creature>(GetSpawnCreature());
-            if (NavMesh.SamplePosition(spawnPos, out var hit, 5f, NavMesh.AllAreas))
+
+            var count = 0;
+            while (count < 30)
             {
-                spawnPos = hit.position;
+                if (NavMesh.SamplePosition(spawnPos, out var hit, spawnY, NavMesh.AllAreas))
+                {
+                    spawnPos = hit.position;
+                    break;
+                }
+                spawnPos = GetSpawnPos();
+                count++;
             }
 
             creature.Init(spawnPos);
@@ -83,10 +91,10 @@ namespace _23DaysLeft.Monsters
             spawnCount--;
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, radius);
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     Gizmos.color = Color.red;
+        //     Gizmos.DrawWireSphere(transform.position, radius);
+        // }
     }
 }
