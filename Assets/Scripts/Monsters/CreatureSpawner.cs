@@ -26,7 +26,7 @@ namespace _23DaysLeft.Monsters
         private Camera mainCamera;
         private bool isSceneInit;
         private int spawnCount = 0;
-
+        
         private void Start()
         {
             MainSceneBase.Instance.OnMainSceneInitComplete += () => isSceneInit = true;

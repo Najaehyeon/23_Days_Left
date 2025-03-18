@@ -110,7 +110,7 @@ namespace _23DaysLeft.Monsters
         protected override void Hit_Update()
         {
             enterTime += Time.deltaTime * currentState.normalizedTime;
-            if (enterTime >= 1f)
+            if (enterTime >= 0.9f)
             {
                 OnHitAnimationEnd?.Invoke();
             }
@@ -124,6 +124,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Die_Enter()
         {
+            navMeshAgent.enabled = false;
             anim.SetTrigger(hashDie);
         }
         
