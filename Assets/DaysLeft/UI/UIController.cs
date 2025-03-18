@@ -79,6 +79,16 @@ namespace DaysLeft.Menu
             }
         }
 
+        public void ShowMain()
+        {
+            if (_screens != null && _screens.Length > 0)
+            {
+               // First screen is displayed by default
+                _screens[0].Show();
+                _activeScreen = _screens[0];
+            }
+        }
+
         /// <summary>
         /// Show a sreen will automaticall disable the current active screen and call animations.
         /// </summary>
