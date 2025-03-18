@@ -16,16 +16,19 @@ namespace _23DaysLeft.Player
 
         private Collider[] buffer;
         private float lastDetectTime;
+        private bool isDead;
 
         private void Start()
         {
             // TODO: 최대 몬스터 수 정해지면 변경
             buffer = new Collider[10];
             lastDetectTime = detectInterval;
+            CharacterManager.Instance._player.controller.OnPlayerDead += PlayerDead;
         }
 
         private void Update()
         {
+            if (isDead) return;
             if (Time.time - lastDetectTime < detectInterval) return;
             lastDetectTime = Time.time;
 
@@ -53,6 +56,13 @@ namespace _23DaysLeft.Player
                     detectable.OnPlayerFaraway();
                 }
             }
+        }
+        
+        private void PlayerDead()
+        {
+            isDead = true;
+            currentDetectables.Clear();
+            prevDetectables.Clear();
         }
 
         // private void OnDrawGizmos()

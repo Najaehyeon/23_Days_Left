@@ -43,7 +43,7 @@ namespace _23DaysLeft.Monsters
             lastAttackTime = creatureData.AttackDelay;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
             isDead = false;
-            
+
             // 이벤트 등록
             stateMachine.OnHitAnimationEnd += OnHitEnd;
             stateMachine.OnAttackAnimationEnd += OnAttackEnd;
@@ -58,7 +58,7 @@ namespace _23DaysLeft.Monsters
 
             if (lastHitTime <= creatureData.HitDelay) lastHitTime += Time.deltaTime;
             if (lastAttackTime <= creatureData.AttackDelay) lastAttackTime += Time.deltaTime;
-            
+
             if (!playerTr) return;
             PlayerDetected();
         }
@@ -177,8 +177,8 @@ namespace _23DaysLeft.Monsters
             stateMachine.StateChange(CreatureState.Attack);
             if (IsTargetInAttackRange())
             {
-                if (playerTr.TryGetComponent(out PlayerController controller))
-                    controller.GetHit(creatureData.AttackPower);
+                var controller = CharacterManager.Instance._player.controller;
+                controller.GetHit(creatureData.AttackPower);
             }
         }
 
