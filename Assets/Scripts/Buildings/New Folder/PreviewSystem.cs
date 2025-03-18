@@ -1,20 +1,33 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¹Ì¸® º¸¿©ÁÖ´Â °İÀÚ, ¿ÀºêÁ§Æ®
-/// °İÀÚÀÇ È¸Àü Ã³¸®´Â ¿©±â¼­ ÇØ¾ßµÈ´Ù
+/// ë¯¸ë¦¬ ë³´ì—¬ì£¼ëŠ” ì˜¤ë¸Œì íŠ¸
+/// ì˜¤ë¸Œì íŠ¸ì˜ íšŒì „ ì²˜ë¦¬ë§Œ ì—¬ê¸°ì„œ í•œë‹¤
+/// ê²©ìì˜ íšŒì „ ì²˜ë¦¬ëŠ” ì—¬ê¸°ì„œ í•˜ì§€ ì•ŠëŠ”ë‹¤
 /// </summary>
 public class PreviewSystem : MonoBehaviour
 {
-    [SerializeField] private float previewYOffset = 0.06f;  // ¿ÀºêÁ§Æ®´Â ±×¸®µåº¸´Ù ¾à°£ À§¿¡ ÀÖ´Ù
+    [SerializeField] private float previewYOffset = 0.06f;  // ì˜¤ë¸Œì íŠ¸ëŠ” ê·¸ë¦¬ë“œë³´ë‹¤ ì•½ê°„ ìœ„ì— ìˆë‹¤
 
-    [SerializeField] private GameObject cellIndicator;  // »ı¼º Àü¿¡ ¿ÀºêÁ§Æ®°¡ °ÉÄ¡°í ÀÖ´Â °İÀÚ
-    public GameObject previewObject;   // »ı¼º Àü ¹Ì¸® º¸¿©ÁÙ ¿ÀºêÁ§Æ®
+    [SerializeField] private GameObject cellIndicator;  /// ìƒì„± ì „ì— ì˜¤ë¸Œì íŠ¸ê°€ ê±¸ì¹˜ê³  ìˆëŠ” ê²©ì
+    public GameObject previewObject;   // ìƒì„± ì „ ë¯¸ë¦¬ ë³´ì—¬ì¤„ ì˜¤ë¸Œì íŠ¸
 
-    [SerializeField] private Material previewMaterialPrefab;    // Åõ¸í»óÅÂ¸¦ ³ªÅ¸³»´Â material
-    private Material previewMaterialInstance;   // »ı¼ºÇÑ ¿ÀºêÁ§Æ®ÀÇ ¿ø·¡ material
+    [SerializeField] private Material previewMaterialPrefab;    // íˆ¬ëª…ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” material
+    private Material previewMaterialInstance;   // ìƒì„±í•œ ì˜¤ë¸Œì íŠ¸ì˜ ì›ë˜ material
 
     private Renderer cellIndicatorRenderer;
+
+    private float currentRotationAngle = 0f; // í˜„ì¬ íšŒì „ ìƒíƒœ ì €ì¥
+
+    public TempInputManager tempInputManager;   // íšŒì „ê°ì„ ì €ì¥
+
+    /// <summary>
+    /// ê²©ìì˜ íšŒì „(ì²˜ëŸ¼ ë³´ì´ê²Œ í•˜ëŠ”) ì—°ì‚°ì„ ìœ„í•´ Placementì— ë„˜ê²¨ì£¼ì–´ì•¼ í•  ê²ƒë“¤
+    /// </summary>
+    public Vector2Int currentSize;
+    public float rotationAngle;
+    public Vector3 currentPosition;
 
 
     private void Start()
@@ -25,8 +38,9 @@ public class PreviewSystem : MonoBehaviour
 
     }
 
+
     /// <summary>
-    /// UI¹öÆ°À» Å¬¸¯ÇÒ¶§ ¹Ì¸®º¸±â¸¦ Ã³À½ Ç¥½ÃÇÑ´Ù
+    /// UIë²„íŠ¼ì„ í´ë¦­í• ë•Œ ë¯¸ë¦¬ë³´ê¸°ë¥¼ ì²˜ìŒ í‘œì‹œí•œë‹¤
     /// </summary>
     /// <param name="prefab"></param>
     /// <param name="size"></param>
@@ -35,10 +49,14 @@ public class PreviewSystem : MonoBehaviour
         previewObject = Instantiate(prefab);
         PreparePreview(previewObject);
         PrepareCursor(size);
-        /// °İÀÚ¸¦ º¸¿©ÁØ´Ù
+        /// ê²©ìë¥¼ ë³´ì—¬ì¤€ë‹¤
         cellIndicator.SetActive(true);
     }
-    // ¿ÀºêÁ§Æ®ÀÇ Å©±â¸¦ º¸¿©ÁØ´Ù
+    /// <summary>
+    /// ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ë¥¼ ë³´ì—¬ì¤€ë‹¤
+    /// ì—¬ê¸°ì—ì„œ ì»¤ì„œê°€ ë‚˜ì˜¨ë‹¤(ê¸°ë³¸ í¬ê¸°)
+    /// </summary>
+    /// <param name="size"></param>
     private void PrepareCursor(Vector2Int size)
     {
         if (size.x > 0 || size.y > 0)
@@ -47,10 +65,64 @@ public class PreviewSystem : MonoBehaviour
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
     }
-    // ¼±ÅÃÇÑ ¿ÀºêÁ§Æ®ÀÇ Å©±â¸¦ ¸®ÅÏÇÑ´Ù
+
+
+    /// <summary>
+    /// ê²©ìì˜ í¬ê¸°ë¥¼ ì¡°ì • (íšŒì „ ê³ ë ¤)
+    /// </summary>
+    /// <param name="size"></param>
+    /// <param name="rotationAngle"></param>
+    /// 
+    // PrepareCursorì—ì„œ previewObjectì˜ ì‹¤ì œ íšŒì „ê° ë°˜ì˜
+    private void PrepareCursor(Vector2Int size, float angle)
+    {
+        // ì¤‘ì‹¬ì ì„ ê¸°ì¤€ìœ¼ë¡œ íšŒì „í•˜ë„ë¡ ë³€ê²½
+        Vector3 pivot = previewObject.transform.position + new Vector3(size.x / 2f, 0, size.y / 2f);
+
+        // 1ï¸ íšŒì „ ì¤‘ì‹¬ìœ¼ë¡œ ì´ë™
+        cellIndicator.transform.position -= pivot;
+
+        // 2ï¸ íšŒì „ ìˆ˜í–‰
+        cellIndicator.transform.Rotate(Vector3.up, angle);
+
+        // 3ï¸ ë‹¤ì‹œ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
+        cellIndicator.transform.position += pivot;
+    }
+
+    //private void PrepareCursor(Vector2Int size, float rotationAngle)
+    //{
+    //    Vector2Int rotatedSize = size;
+
+    //    // 90ë„ ë‹¨ìœ„ë¡œë§Œ íšŒì „í•œë‹¤ê³  ê°€ì •
+    //    int angle = Mathf.RoundToInt(rotationAngle) % 360;
+
+    //    rotatedSize = new Vector2Int(size.y, size.x);
+    //    switch (angle)
+    //    {
+    //        case 90:    /// x = 2, z = -1
+    //        case -270:
+    //            cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, -rotatedSize.y);
+    //            break;
+    //        case 180:   /// x = -1, z = -2
+    //        case -180:
+    //            cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, -rotatedSize.y);
+    //            break;
+    //        case 270:   /// x = -2, z = 1
+    //        case -90:
+    //            cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, rotatedSize.y);
+    //            break;
+    //        case 0:     /// x = 1, z = 2
+    //        case 360:
+    //        default:
+    //            cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, rotatedSize.y);
+    //            break;
+    //    }
+    //}
+
+    // ì„ íƒí•œ ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ë¥¼ ë¦¬í„´í•œë‹¤
     public Vector2Int GetCurrentSize()
     {
-        if (previewObject == null) 
+        if (previewObject == null)
             return Vector2Int.zero;
 
         Renderer renderer = previewObject.GetComponentInChildren<Renderer>();
@@ -87,14 +159,14 @@ public class PreviewSystem : MonoBehaviour
             MovePreview(position);
             ApplyFeedbackToPreview(validity);
         }
-        // cursor´Â nullÀÌ ¾Æ´Ï¹Ç·Î
+        // cursorëŠ” nullì´ ì•„ë‹ˆë¯€ë¡œ
         MoveCursor(position);
         ApplyFeedbackToCursor(validity);
 
     }
 
-    // À¯È¿ÇÑ ¿µ¿ªÀÌ ¾Æ´Ï¶ó¸é preview¸¦ »¡°£»öÀ¸·Î ¹Ù²Û´Ù
-    // À¯È¿ÇÑ ¿µ¿ªÀÌ ¾Æ´Ï¶ó¸é °İÀÚ¸¦ »¡°£»öÀ¸·Î ¹Ù²Û´Ù
+    // ìœ íš¨í•œ ì˜ì—­ì´ ì•„ë‹ˆë¼ë©´ previewë¥¼ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ë°”ê¾¼ë‹¤
+    // ìœ íš¨í•œ ì˜ì—­ì´ ì•„ë‹ˆë¼ë©´ ê²©ìë¥¼ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ë°”ê¾¼ë‹¤
     private void ApplyFeedbackToPreview(bool validity)
     {
         Color c = validity ? Color.green : Color.red;
@@ -121,16 +193,33 @@ public class PreviewSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// RÅ° ´©¸£¸é yÃà ±âÁØÀ¸·Î ½Ã°è¹æÇâ È¸Àü
-    /// °İÀÚ, ÇÁ¸®ÆÕ ¸ğµÎ È¸ÀüÇÑ´Ù
+    /// Rí‚¤ ëˆ„ë¥´ë©´ yì¶• ê¸°ì¤€ìœ¼ë¡œ ì‹œê³„ë°©í–¥ íšŒì „
+    /// ê²©ì, í”„ë¦¬íŒ¹ ëª¨ë‘ íšŒì „í•œë‹¤
     /// </summary>
     /// <param name="angle"></param>
     public void RotatePreview(float angle)
     {
+        // í˜„ì¬ í”„ë¦¬ë·° í¬ê¸° ê°€ì ¸ì˜¤ê¸°
+        Vector2Int size = GetCurrentSize();
+        // ì¤‘ì‹¬ì ì„ ê¸°ì¤€ìœ¼ë¡œ íšŒì „í•˜ë„ë¡ ë³€ê²½
+        Vector3 pivot = previewObject.transform.position + new Vector3(size.x / 2f, 0, size.y / 2f);
+        // 1ï¸ íšŒì „ ì¤‘ì‹¬ìœ¼ë¡œ ì´ë™
+        previewObject.transform.position -= pivot;
+        // 2ï¸ íšŒì „ ìˆ˜í–‰
         previewObject.transform.Rotate(Vector3.up, angle);
-        /// °İÀÚ ´Ù½Ã Ç¥½ÃÇØ¾ßÇÔ
-        /// cellIndicator ¶ÇÇÑ angle¸¸Å­ È¸ÀüÇÑ´Ù
-        cellIndicator.transform.Rotate(Vector3.up, angle);
+        // 3ï¸ ë‹¤ì‹œ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
+        previewObject.transform.position += pivot;
+        // ê²©ì í¬ê¸° ì—…ë°ì´íŠ¸ (íšŒì „ ë°˜ì˜)
+        PrepareCursor(size, angle);
+        /// íšŒì „ê°ì„ "ëˆ„ì í•˜ì—¬" ì €ì¥(ì™œëƒí•˜ë©´ ëˆ„ë¥¼ë•Œë§ˆë‹¤ angleì—ëŠ” 90ë§Œ ë“¤ì–´ì˜¬ ìˆ˜ ìˆìœ¼ë¯€ë¡œ)
+        currentRotationAngle = (currentRotationAngle + angle) % 360;
+        tempInputManager.angle = currentRotationAngle;
     }
 
+
+    // í˜„ì¬ íšŒì „ ê°ë„ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ ì¶”ê°€
+    public int GetRotationAngle()
+    {
+        return Mathf.RoundToInt(currentRotationAngle);
+    }
 }
