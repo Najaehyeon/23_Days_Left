@@ -7,7 +7,7 @@ public class DayNightCycle : MonoBehaviour
     [Range(0f, 1f)]
     public float currentTime;
     public float fullDayLength = 120; // 하루 길이 (초 단위)
-    public float startTime = 0.5f;
+    public float startTime = 0.4f;
     private float timeRate;
     public Vector3 noon;
 
