@@ -4,36 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ±×¸®µå¿¡ ¿ÀºêÁ§Æ®¸¦ ³õÀ»¶§ ÀÚ¸® »óÅÂ¸¦ ÀúÀå
+/// ê·¸ë¦¬ë“œì— ì˜¤ë¸Œì íŠ¸ë¥¼ ë†“ì„ë•Œ ìë¦¬ ìƒíƒœë¥¼ ì €ì¥
 /// </summary>
 public class GridData
 {
-    Dictionary<Vector3Int, PlacementData> placedObjects = new Dictionary<Vector3Int, PlacementData>(); // c# 9.0¿¡¼­´Â new();¸¸ ÀÔ·ÂÇØµµ µÈ´Ù
+    Dictionary<Vector3Int, PlacementData> placedObjects = new Dictionary<Vector3Int, PlacementData>(); // c# 9.0ì—ì„œëŠ” new();ë§Œ ì…ë ¥í•´ë„ ëœë‹¤
     public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, int placedObjIdx)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
         PlacementData data = new PlacementData(positionToOccupy, ID, placedObjIdx);
         foreach (var pos in positionToOccupy)
         {
-            // ´©°¡ ÀÌ¹Ì Á¡À¯ÇÑ ÀÚ¸®¶ó¸é
+            // ëˆ„ê°€ ì´ë¯¸ ì ìœ í•œ ìë¦¬ë¼ë©´
             if (placedObjects.ContainsKey(pos))
                 throw new Exception($"Dictionary already contains this cell position {pos}");
             placedObjects[pos] = data;
         }
     }
 
-    /// <summary>
-    /// °İÀÚÀÇ È¸Àü»óÅÂ ¹İ¿µÇØ¾ßÇÑ´Ù
-    /// </summary>
-    /// <param name="gridPosition"></param>
-    /// <param name="objectSize"></param>
-    /// <returns></returns>
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> returnVal = new List<Vector3Int>();
-        // objectÀÇ ¿ŞÂÊ ¾Æ·¡ ±âÁØ
-        /// È¸ÀüÀ» ¹İ¿µÇÏ°í ½Í´Ù¸é È¸Àü°ªÀ» ±â¹İÀ¸·Î ·çÇÁ¸¦ ¸î °³ ¸¸µé¾î¾ß ÇÑ´Ù
-        /// Áö±İÀº ¹«È¸Àü
+        // objectì˜ ì™¼ìª½ ì•„ë˜ ê¸°ì¤€
+        /// íšŒì „ì„ ë°˜ì˜í•˜ê³  ì‹¶ë‹¤ë©´ íšŒì „ê°’ì„ ê¸°ë°˜ìœ¼ë¡œ ë£¨í”„ë¥¼ ëª‡ ê°œ ë§Œë“¤ì–´ì•¼ í•œë‹¤(?)
+        /// ì§€ê¸ˆì€ ë¬´íšŒì „
         for (int x = 0; x < objectSize.x; x++)
         {
             for (int y = 0; y < objectSize.y; y++)
@@ -43,12 +37,52 @@ public class GridData
         }
         return returnVal;
     }
+
     /// <summary>
-    /// °İÀÚÀÇ È¸Àü»óÅÂµµ ¹İ¿µÇØ¶ó
+    /// íšŒì „ëœ ì˜¤ë¸Œì íŠ¸ê°€ ì°¨ì§€í•˜ëŠ” ì˜ì—­ì„ ê³„ì‚°
     /// </summary>
     /// <param name="gridPosition"></param>
     /// <param name="objectSize"></param>
+    /// <param name="rotationAngle"></param>
     /// <returns></returns>
+    private List<Vector3Int> CalculateRotatedPositions(Vector3Int gridPosition, Vector2Int objectSize, float rotationAngle)
+    {
+        List<Vector3Int> returnVal = new List<Vector3Int>();
+
+        // ì¤‘ì‹¬ì ì„ ê¸°ì¤€ìœ¼ë¡œ íšŒì „í•˜ë„ë¡ í•˜ê¸° ìœ„í•œ pivot ê³„ì‚°
+        Vector3 pivot = new Vector3(gridPosition.x + objectSize.x / 2f, 0, gridPosition.z + objectSize.y / 2f);
+
+        // íšŒì „ëœ ìœ„ì¹˜ë¥¼ ê³„ì‚°
+        for (int x = 0; x < objectSize.x; x++)
+        {
+            for (int y = 0; y < objectSize.y; y++)
+            {
+                // ì›ë˜ì˜ ì¢Œí‘œ ê³„ì‚°
+                Vector3Int position = gridPosition + new Vector3Int(x, 0, y);
+
+                // íšŒì „ëœ ì¢Œí‘œë¡œ ë³€í™˜
+                Vector3 rotatedPosition = RotatePosition(position, pivot, rotationAngle);
+                returnVal.Add(new Vector3Int(Mathf.RoundToInt(rotatedPosition.x), 0, Mathf.RoundToInt(rotatedPosition.z)));
+            }
+        }
+
+        return returnVal;
+    }
+    /// <summary>
+    /// íšŒì „ëœ ì¢Œí‘œ ê³„ì‚°
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="pivot"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
+    private Vector3 RotatePosition(Vector3 position, Vector3 pivot, float angle)
+    {
+        Vector3 dir = position - pivot;  // ì¤‘ì‹¬ì„ ê¸°ì¤€ìœ¼ë¡œ ë°©í–¥ ê³„ì‚°
+        Quaternion rotation = Quaternion.Euler(0, angle, 0);  // Yì¶• ê¸°ì¤€ íšŒì „
+        Vector3 rotatedDir = rotation * dir;  // íšŒì „ ì ìš©
+        return pivot + rotatedDir;  // íšŒì „ëœ ìœ„ì¹˜
+    }
+
     public bool CanPlaceObjAt(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
@@ -56,14 +90,14 @@ public class GridData
         {
             if (placedObjects.ContainsKey(pos))
             {
-                /// ¿©±â¼­ »ö±ò ¹Ù²Ü°Å´Ù?
+                /// ì—¬ê¸°ì„œ ìƒ‰ê¹” ë°”ê¿€ê±°ë‹¤?
                 return false;
             }
         }
         return true;
     }
-    // ¾²´Â °÷ÀÌ ¾øÀ¸¸é Áö¿ï ¿¹Á¤
-    // »èÁ¦ÇÏ´Â °÷¿¡¼­ ¾²´øµ¥, »èÁ¦´Â µû·Î ±¸ÇöÇÏÁö ¾ÊÀ» °èÈ¹
+    // ì“°ëŠ” ê³³ì´ ì—†ìœ¼ë©´ ì§€ìš¸ ì˜ˆì •
+    // ì‚­ì œí•˜ëŠ” ê³³ì—ì„œ ì“°ë˜ë°, ì‚­ì œëŠ” ë”°ë¡œ êµ¬í˜„í•˜ì§€ ì•Šì„ ê³„íš
     internal int GetRepresentationIndex(Vector3Int gridPosition)
     {
         if (placedObjects.ContainsKey(gridPosition) == false)

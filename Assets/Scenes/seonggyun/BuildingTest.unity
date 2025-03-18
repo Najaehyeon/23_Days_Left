@@ -658,13 +658,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930269736}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37700844, y: 0, z: 0, w: 0.9262098}
-  m_LocalPosition: {x: 0, y: 5.7, z: -2.3}
+  m_LocalRotation: {x: 0.5103781, y: -0, z: -0, w: 0.8599501}
+  m_LocalPosition: {x: 0, y: 6.63, z: -5.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 44.297, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.378, y: 0, z: 0}
 --- !u!1 &971340211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7563540cc287ecd418920b2a77621866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 971340213}
+  tempInputManager: {fileID: 971340213}
   grid: {fileID: 448585305}
   database: {fileID: 11400000, guid: 817037b30f2b8c74ba19b94274b53f2b, type: 2}
   gridVisualization: {fileID: 79293820}
@@ -2967,9 +2967,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
 --- !u!65 &2551829546735853477
 BoxCollider:
@@ -3078,9 +3080,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
 --- !u!224 &2733480396839127751
 RectTransform:
@@ -3787,9 +3791,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
 --- !u!1001 &3593147390467144422
 PrefabInstance:
@@ -3966,9 +3972,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
 --- !u!114 &3957769292118871971
 MonoBehaviour:
@@ -6609,9 +6617,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26c4a4831a6be94d9390fb11d45841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 0}
 --- !u!65 &7801384145110003218
 BoxCollider:

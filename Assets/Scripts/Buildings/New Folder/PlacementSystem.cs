@@ -6,11 +6,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// BuildingManager가 되어야 할 것
+/// 매 프레임마다 preview 오브젝트와 grid 격자를 표시한다
 /// </summary>
 public class PlacementSystem : MonoBehaviour
 {
-    [SerializeField] private TempInputManager inputManager;   // 마우스
+    [SerializeField] private TempInputManager tempInputManager;   // 마우스
     [SerializeField] private Grid grid;   // 그리드 컴포넌트
 
     [SerializeField] private ObjectsDatabaseSO database;
@@ -23,17 +23,23 @@ public class PlacementSystem : MonoBehaviour
 
     private GridData floorData, furnitureData;
 
-
+    /// <summary>
+    /// 미리 보여주는 preview 오브젝트
+    /// </summary>
     [SerializeField] private PreviewSystem preview;
+
+
 
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
 
     [SerializeField] ObjectPlacer objectPlacer;
 
-    IBuildingState buildingState;
+    /// <summary>
+    /// PlacementState에 접근가능한 IBuildingState 인터페이스
+    /// </summary>
+    IBuildingState buildingState;   
 
     [SerializeField] private SoundFeedBack soundFeedback;
-
 
     private void Start()
     {
@@ -59,57 +65,23 @@ public class PlacementSystem : MonoBehaviour
                                            objectPlacer,
                                            soundFeedback);
 
-        inputManager.OnClicked += PlaceStructure;
-        inputManager.OnExit += StopPlacement;
+        tempInputManager.OnClicked += PlaceStructure;
+        tempInputManager.OnExit += StopPlacement;
 
     }
 
     private void PlaceStructure()
     {
-        if (inputManager.IsPointerOverUi())
+        if (tempInputManager.IsPointerOverUi())
         {
             return;
         }
-        Vector3 mousePos = inputManager.GetSelectedMapPos(); // 마우스로 선택한 위치 가져온다
+        Vector3 mousePos = tempInputManager.GetSelectedMapPos(); // 마우스로 선택한 위치 가져온다
         Vector3Int gridPosition = grid.WorldToCell(mousePos);   // 마우스가 있는 위치를 3d로 변환하여 그리드의 어느 격자 내에 있는지 알아낸다
-
-        // 물체가 회전했다면 회전된 오브젝트의 중심 좌표를 계산하여 위치 보정
-        /// 하지만 회전중심은 gridPosition이므로, adjustGridPosition은 gridPosition과 같다
-        Vector3Int adjustedGridPosition = AdjustPositionForRotation(gridPosition);
-
-        /// 달라지는 것은 rotation의 y값이다
-        /// 이걸 반영해서 격자를 그리고, 오브젝트를 생성해야한다
-
 
         /// 오브젝트 생성
         /// preview의 회전상태를 반영해야한다
-        buildingState.OnAction(adjustedGridPosition);
-    }
-
-    private Vector3Int AdjustPositionForRotation(Vector3Int originalPosition)
-    {
-        // 현재 배치 중인 오브젝트의 크기 가져오기
-        Vector2Int size = preview.GetCurrentSize();
-        // 현재 프리뷰의 회전값 가져오기 (Y축 회전)
-        int rotation = preview.GetRotationAngle();
-
-        Vector3Int adjustedPosition = originalPosition;
-
-        switch (rotation)
-        {
-            case 90:
-                adjustedPosition.x -= size.y - 1;
-                break;
-            case 180:
-                adjustedPosition.x -= size.x - 1;
-                adjustedPosition.z -= size.y - 1;
-                break;
-            case 270:
-                adjustedPosition.z -= size.x - 1;
-                break;
-        }
-
-        return adjustedPosition;
+        buildingState.OnAction(gridPosition);
     }
 
     /// <summary>
@@ -127,8 +99,8 @@ public class PlacementSystem : MonoBehaviour
         //preview.StopShowingPreview();
         buildingState.EndState();
 
-        inputManager.OnClicked -= PlaceStructure;
-        inputManager.OnExit -= StopPlacement;
+        tempInputManager.OnClicked -= PlaceStructure;
+        tempInputManager.OnExit -= StopPlacement;
         lastDetectedPosition = Vector3Int.zero;
         buildingState = null;
     }
@@ -138,20 +110,15 @@ public class PlacementSystem : MonoBehaviour
         //if (selectedObjIndex < 0)
         if (buildingState == null)
             return;
-        Vector3 mousePos = inputManager.GetSelectedMapPos(); // 마우스로 선택한 위치 가져온다
+        Vector3 mousePos = tempInputManager.GetSelectedMapPos(); // 마우스로 선택한 위치 가져온다
         Vector3Int gridPosition = grid.WorldToCell(mousePos);   // 마우스가 있는 위치를 3d로 변환하여 그리드의 어느 격자 내에 있는지 알아낸다
 
-        // 회전된 오브젝트의 위치 보정
-        Vector3Int adjustedGridPosition = AdjustPositionForRotation(gridPosition);
-
         // grid 내에서 커서가 이동하면 연산하지 않는다
-        if (lastDetectedPosition != adjustedGridPosition)
+        if (lastDetectedPosition != gridPosition)
         {
-            buildingState.UpdateState(adjustedGridPosition);
-            lastDetectedPosition = adjustedGridPosition;
+            buildingState.UpdateState(gridPosition);
+            lastDetectedPosition = gridPosition;
         }
-
-
         // R키를 누르면 시계방향으로 회전
         if (Input.GetKeyDown(KeyCode.R))
         {

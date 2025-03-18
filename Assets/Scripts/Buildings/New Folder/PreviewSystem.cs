@@ -1,14 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 미리 보여주는 격자, 오브젝트
-/// 격자의 회전 처리는 여기서 해야된다
+/// 미리 보여주는 오브젝트
+/// 오브젝트의 회전 처리만 여기서 한다
+/// 격자의 회전 처리는 여기서 하지 않는다
 /// </summary>
 public class PreviewSystem : MonoBehaviour
 {
     [SerializeField] private float previewYOffset = 0.06f;  // 오브젝트는 그리드보다 약간 위에 있다
 
-    [SerializeField] private GameObject cellIndicator;  // 생성 전에 오브젝트가 걸치고 있는 격자
+    [SerializeField] private GameObject cellIndicator;  /// 생성 전에 오브젝트가 걸치고 있는 격자
     public GameObject previewObject;   // 생성 전 미리 보여줄 오브젝트
 
     [SerializeField] private Material previewMaterialPrefab;    // 투명상태를 나타내는 material
@@ -20,6 +22,13 @@ public class PreviewSystem : MonoBehaviour
 
     public TempInputManager tempInputManager;   // 회전각을 저장
 
+    /// <summary>
+    /// 격자의 회전(처럼 보이게 하는) 연산을 위해 Placement에 넘겨주어야 할 것들
+    /// </summary>
+    public Vector2Int currentSize;
+    public float rotationAngle;
+    public Vector3 currentPosition;
+
 
     private void Start()
     {
@@ -28,6 +37,7 @@ public class PreviewSystem : MonoBehaviour
         cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();
 
     }
+
 
     /// <summary>
     /// UI버튼을 클릭할때 미리보기를 처음 표시한다
@@ -42,7 +52,11 @@ public class PreviewSystem : MonoBehaviour
         /// 격자를 보여준다
         cellIndicator.SetActive(true);
     }
-    // 오브젝트의 크기를 보여준다
+    /// <summary>
+    /// 오브젝트의 크기를 보여준다
+    /// 여기에서 커서가 나온다(기본 크기)
+    /// </summary>
+    /// <param name="size"></param>
     private void PrepareCursor(Vector2Int size)
     {
         if (size.x > 0 || size.y > 0)
@@ -51,6 +65,57 @@ public class PreviewSystem : MonoBehaviour
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
     }
+    /// <summary>
+    /// 격자의 크기를 조정 (회전 고려)
+    /// </summary>
+    /// <param name="size"></param>
+    /// <param name="rotationAngle"></param>
+    private void PrepareCursor(Vector2Int size, float rotationAngle)
+    {
+        Vector2Int rotatedSize = size;
+
+        // 90도 단위로만 회전한다고 가정
+        int angle = Mathf.RoundToInt(rotationAngle) % 360;
+
+        rotatedSize = new Vector2Int(size.y, size.x);
+        switch (angle)
+        {
+            case 90:    /// x = 2, z = -1
+            case -270:
+                cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, -rotatedSize.y);
+                break;
+            case 180:   /// x = -1, z = -2
+            case -180:
+                cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, -rotatedSize.y);
+                break;
+            case 270:   /// x = -2, z = 1
+            case -90:
+                cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, rotatedSize.y);
+                break;
+            case 0:     /// x = 1, z = 2
+            case 360:
+            default:
+                cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, rotatedSize.y);
+                break;
+        }
+        // cellIndicator 위치는 고정
+        //cellIndicator.transform.localPosition = Vector3.zero;
+    }
+    /// <summary>
+    /// 실제로 커서의 크기를 적용하는 메서드
+    /// </summary>
+    /// <param name="size"></param>
+    private void ApplyCursorTransform(Vector2Int size)
+    {
+        // cellIndicator 크기 변경
+        cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
+
+
+
+
+    }
+
+
     // 선택한 오브젝트의 크기를 리턴한다
     public Vector2Int GetCurrentSize()
     {
@@ -150,32 +215,10 @@ public class PreviewSystem : MonoBehaviour
         // 3️ 다시 원래 위치로 이동
         previewObject.transform.position += pivot;
 
-
-        /// cellIndicator는 실제로 회전하지 않지만, 크기를 조정해야 한다    
-        /// 회전하면 회전한 것의 기준으로 size.x, size.y가 갱신된다
-        /// scale은 양수여야 한다
-        /// 처음에 size.x == 1, size.y == 2 였다면
-        /// 90도 회전한 뒤에는 size.x == 2, size.y ==1 이 되는 것이다
-        /// 
-        /// position을 부호 고려해서 바꾸면 된다
-        /// x = 1 y = 2
-        /// x = 2 y = -1 (90도 회전)
-        /// x = -1 y = -2 (180도 회전)
-        /// x = -2 y = -1 (270도 회전)
-        /// x에는 y가 들어가며 y는 -x가 들어간다
-
-        /// scale은 양수
-        /// size는 처음부터 양수니까 절댓값 필요없다
-        int newX = size.y; 
-        int newY = size.x;
-        cellIndicator.transform.localScale = new Vector3(newX, 1, newY);
-
-        /// position은 부호 반영
-        Vector3 newPosition = cellIndicator.transform.position;
-        newPosition.x += (Mathf.Sign(size.y) - 1) * 0.5f * newX;
-        newPosition.z += (Mathf.Sign(size.x) - 1) * 0.5f * newY;
-        cellIndicator.transform.position = newPosition;
+        // 격자 크기 업데이트 (회전 반영)
+        PrepareCursor(size, currentRotationAngle);
     }
+
 
     // 현재 회전 각도를 가져오는 메서드 추가
     public int GetRotationAngle()
