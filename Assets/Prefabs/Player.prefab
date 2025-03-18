@@ -1495,7 +1495,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   health: 0
   hunger: 0
-  hungerSpeed: 5
+  hungerSpeed: 0.2
 --- !u!114 &5480659044889143255
 MonoBehaviour:
   m_ObjectHideFlags: 0

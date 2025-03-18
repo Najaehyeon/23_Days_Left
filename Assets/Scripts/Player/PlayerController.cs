@@ -243,6 +243,7 @@ public class PlayerController : MonoBehaviour
         if (hunger > 0)
         {
             hunger -= hungerSpeed * Time.deltaTime;
+            health += Time.deltaTime * 0.5f;
         }
         else if (hunger <= 0)
         { 
