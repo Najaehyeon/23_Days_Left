@@ -5,6 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    Rigidbody _rigidbody; // �÷��̾��� �������� (�߷�, �浹 ó��)
+    Animator _animator; // �ִϸ��̼� ��Ʈ�ѷ�
+
+    PlayerInventory inventory;
+    public int itemId = -1;
+    public GameObject gatheringObject;
+
     [Header("Other Controller")]
     [SerializeField]
     private InventoryUIController InventoryUIController;
@@ -19,20 +26,16 @@ public class PlayerController : MonoBehaviour
     float curCamXRot; // ���� ī�޶� X�� ȸ���� (����)
     float curCamYRot; // ���� ī�޶� Y�� ȸ���� (�¿�)
     Vector2 mouseDelta; // ���콺 �̵� �Է� ��
+    public Transform cameraContainer; // ī�޶� ���� ������Ʈ
+    public Transform playerBody; // �÷��̾��� ��ü
 
     [Header("Jump")]
     public float jumpPower; // ���� ��
-
-    public Transform cameraContainer; // ī�޶� ���� ������Ʈ
-    public Transform playerBody; // �÷��̾��� ��ü
     public LayerMask groundLayerMask; // �ٴ� ������ ���� ���̾� ����ũ
 
-    Rigidbody _rigidbody; // �÷��̾��� �������� (�߷�, �浹 ó��)
-    Animator _animator; // �ִϸ��̼� ��Ʈ�ѷ�
-
-    PlayerInventory inventory;
-    public int itemId = -1;
-    public GameObject gatheringObject;
+    [Header("Status")]
+    public float health;
+    private bool isDead;
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
         // ���콺 Ŀ���� ȭ�� �߾ӿ� ����
         Cursor.lockState = CursorLockMode.Locked;
         inventory = CharacterManager.Instance.Player.inventory;
+        isDead = false;
     }
 
     private void FixedUpdate()
@@ -146,7 +150,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed && isDead == false)
         {
             // �Է��� ������ ���� �̵� ������ ����
             currentMoveInput = context.ReadValue<Vector2>();
@@ -172,7 +176,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
+        if (context.phase == InputActionPhase.Started && IsGrounded() && !isDead)
         {
             // ���� �� Rigidbody�� ���� �߰�
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
@@ -183,7 +187,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && !isDead)
         {
             gatheringObject.SetActive(true);
             _animator.SetTrigger("DoInteract");
@@ -201,6 +205,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             gatheringObject.SetActive(false);
+        }
+    }
+
+    public void GetHit(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            _animator.SetTrigger("DoDie");
+            isDead = true;
         }
     }
 }
