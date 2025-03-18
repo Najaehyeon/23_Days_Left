@@ -132,6 +132,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: startTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: currentTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
       propertyPath: sunColor.ctime0
       value: 0
       objectReference: {fileID: 0}
@@ -987,6 +995,10 @@ PrefabInstance:
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 1500882133}
+    - target: {fileID: 3641105537017278722, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3643288303270241126, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
@@ -1423,6 +1435,10 @@ PrefabInstance:
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 1500882133}
+    - target: {fileID: 5985243768577686814, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6007429051715742749, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
@@ -1616,6 +1632,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1500882133}
     - target: {fileID: 7132366747629870117, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7167425997453147185, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 1500882133}
