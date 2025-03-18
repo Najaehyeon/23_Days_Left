@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,22 @@ namespace _23DaysLeft.UI
 
         private void ChangeHealth(float value)
         {
-            healthFill.fillAmount = value;
+            StopAllCoroutines();
+            StartCoroutine(ChangeHealthCoroutine(value));
+        }
+        
+        private IEnumerator ChangeHealthCoroutine(float value)
+        {
+            const float duration = 0.5f;
+            float time = 0f;
+            float current = healthFill.fillAmount;
+
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                healthFill.fillAmount = Mathf.Lerp(current, value, time / duration);
+                yield return null;
+            }
         }
 
         private void ChangeHunger(float value)
