@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed; // �÷��̾� �̵� �ӵ�
     Vector3 moveDir; // ���� �̵� ���� ����
     Vector2 currentMoveInput; // �Էµ� �̵� ���� (WASD)
+    public bool isAttack = false;
+    public bool isGathering = false;
 
     [Header("Look")]
     public float sensitivity; // ���콺 ���� (ȸ�� �ӵ� ����)
@@ -50,17 +52,19 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         inventory = CharacterManager.Instance.Player.inventory;
         isDead = false;
+        health = 100;
     }
 
     private void FixedUpdate()
     {
-        // �̵� ó�� (���� ������ �����)
-        Move();
+        if (!isDead && !isAttack && !isGathering)
+        {
+            Move();
+        }
     }
 
     private void LateUpdate()
     {
-        // ī�޶� ȸ�� ó�� (LateUpdate�� �����Ӹ��� �����)
         Look();
     }
 
@@ -150,7 +154,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && isDead == false)
+        if (context.phase == InputActionPhase.Performed)
         {
             // �Է��� ������ ���� �̵� ������ ����
             currentMoveInput = context.ReadValue<Vector2>();
@@ -176,7 +180,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && IsGrounded() && !isDead)
+        if (context.phase == InputActionPhase.Started && IsGrounded() && !isDead && !isAttack && !isGathering)
         {
             // ���� �� Rigidbody�� ���� �߰�
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
@@ -187,25 +191,19 @@ public class PlayerController : MonoBehaviour
     }
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && !isDead)
+        if (context.phase == InputActionPhase.Started && !isDead && !isAttack && !isGathering)
         {
+            isGathering = true;
             gatheringObject.SetActive(true);
             _animator.SetTrigger("DoInteract");
-            Invoke("gatheringLock", 0.5f);
+            Invoke("gatheringLock", 1.8f);
         }
     }
 
     void gatheringLock()
     {
-        if (itemId == -1)
-        {
-            gatheringObject.SetActive(false);
-            return;
-        }
-        else
-        {
-            gatheringObject.SetActive(false);
-        }
+        gatheringObject.SetActive(false);
+        isGathering = false;
     }
 
     public void GetHit(float damage)
@@ -218,3 +216,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+ 
