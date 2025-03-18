@@ -23,21 +23,21 @@ public class Rock : ResourceObject
         if (resourceCurHealth > 0)
         {
             resourceCurHealth -= damage;
-            // ±ø±ø ¼Ò¸® È¿°úÀ½ Ãß°¡ ÇØ¾ßÇÔ
+            // ê¹¡ê¹¡ ì†Œë¦¬ íš¨ê³¼ìŒ ì¶”ê°€ í•´ì•¼í•¨
             if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
                 gatherCount--;
             }
             if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
                 gatherCount--;
             }
         }
         else
         {
-            // Æ½Æ½ ¼Ò¸® È¿°úÀ½ Ãß°¡ ÇØ¾ßÇÔ
+            // í‹±í‹± ì†Œë¦¬ íš¨ê³¼ìŒ ì¶”ê°€ í•´ì•¼í•¨
         }
     }
 }

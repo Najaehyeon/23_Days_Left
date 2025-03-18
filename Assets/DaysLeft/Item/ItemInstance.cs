@@ -2,7 +2,7 @@ namespace DaysLeft.Item
 {
     using UnityEngine;
 
-    public class ItemInstance
+    public class ItemInstance : MonoBehaviour
     {
         protected ItemData _itemData;
         public ItemInstance(int id)
@@ -13,6 +13,13 @@ namespace DaysLeft.Item
                 Debug.LogError("DataLoadManager is not there in Global");
             else
                 _itemData = dataLoad.Query(id);
+        }
+        public ItemInstance(ItemData data)
+        {
+            if (data == null)
+                Debug.LogError("Wrong data");
+            else
+                _itemData = data;
         }
 
         public int ID               => _itemData.ID;

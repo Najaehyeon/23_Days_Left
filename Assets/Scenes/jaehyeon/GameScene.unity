@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 82334903}
   - component: {fileID: 82334902}
   - component: {fileID: 82334901}
+  - component: {fileID: 82334904}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -215,6 +216,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &82334904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82334900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c13f7633012e014fb6d8b83621e4f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixelate: 8
 --- !u!108 &152783380 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 1736485733472973078, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
@@ -381,11 +395,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceHealth: 100
-  digCount: 2
-  remainDigCount: 0
+  resourceMaxHealth: 100
+  resourceCurHealth: 0
+  gatherCount: 2
   dropResource: {fileID: 0}
+  weaponItemData: {fileID: 0}
   _dayNightCycle: {fileID: 273079133}
+--- !u!1001 &1992181875
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738431910, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676840300738598790, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
+      propertyPath: m_Name
+      value: PP_Pickaxe_Used_04_Iron
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
 --- !u!1001 &2143069298794181978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -573,34 +645,18 @@ PrefabInstance:
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
-    - target: {fileID: 2450414827700285310, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: resourceHealth
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 2673304609649996033, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
-    - target: {fileID: 2673304609649996033, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: resourceHealth
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3458125697693352536, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
-    - target: {fileID: 3458125697693352536, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: resourceHealth
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3643288303270241126, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
-    - target: {fileID: 3643288303270241126, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: resourceHealth
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5876661632025422629, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -645,10 +701,6 @@ PrefabInstance:
       propertyPath: _dayNightCycle
       value: 
       objectReference: {fileID: 273079133}
-    - target: {fileID: 7660007797740767579, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: resourceHealth
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -665,3 +717,4 @@ SceneRoots:
   - {fileID: 7697286635037379863}
   - {fileID: 783640876}
   - {fileID: 2445211013789836085}
+  - {fileID: 1992181875}

@@ -37,18 +37,18 @@ public class Tree : ResourceObject
         if (resourceCurHealth > 0)
         {
             resourceCurHealth -= damage;
-            // ³ª¹« Ä³´Â È¿°úÀ½
+            // ë‚˜ë¬´ ìºëŠ” íš¨ê³¼ìŒ
             if (resourceCurHealth <= 50 && gatherCount == 2)
             {
-                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
                 gatherCount--;
             }
             if (resourceCurHealth <= 0 && gatherCount == 1)
             {
-                Instantiate(dropResource, transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
+                Instantiate(dropResource, transform.position + Vector3.up * 5f + Vector3.forward, Quaternion.identity);
                 gatherCount--;
-                _animator.enabled = true;       // ³Ñ¾îÁö´Â ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
-                _boxCollider.isTrigger = true;  // ºÎµúÈ÷Áö ¾Ê°Ô ÇÏ±â.
+                _animator.enabled = true;       // ë„˜ì–´ì§€ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
+                _boxCollider.isTrigger = true;  // ë¶€ë”ªíˆì§€ ì•Šê²Œ í•˜ê¸°.
                 StartCoroutine(TreeDown());
             }
         }
@@ -57,26 +57,26 @@ public class Tree : ResourceObject
     IEnumerator TreeDown()
     {
         yield return new WaitForSeconds(0.5f);
-        _meshRenderer.enabled = false; // ¸Ş½¬ ºñÈ°¼ºÈ­
+        _meshRenderer.enabled = false; // ë©”ì‰¬ ë¹„í™œì„±í™”
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("ÇÃ·¹ÀÌ¾î°¡ ¼³Ä¡ÇÑ ¿ÀºêÁ§Æ®"))
-        {
-            isObjectAtPosition = true;
-        }
-        else
-        {
-            return;
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.CompareTag("í”Œë ˆì´ì–´ê°€ ì„¤ì¹˜í•œ ì˜¤ë¸Œì íŠ¸"))
+    //    {
+    //        isObjectAtPosition = true;
+    //    }
+    //    else
+    //    {
+    //        return;
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("ÇÃ·¹ÀÌ¾î°¡ ¼³Ä¡ÇÑ ¿ÀºêÁ§Æ®"))
-        {
-            isObjectAtPosition = false;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("í”Œë ˆì´ì–´ê°€ ì„¤ì¹˜í•œ ì˜¤ë¸Œì íŠ¸"))
+    //    {
+    //        isObjectAtPosition = false;
+    //    }
+    //}
 }

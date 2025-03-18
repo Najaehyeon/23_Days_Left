@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Architecture
+  - Rock
+  - Tree
   - Enemy
+  - Resource
   layers:
   - Default
   - TransparentFX
