@@ -1,6 +1,3 @@
-using DaysLeft.Item;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 
 /// <summary>
-/// ³ª¹« À§¿¡´Â °Ç¹°À» ÁöÀ» ¼ö ÀÖ´Ù´Â ¼³Á¤
+/// ë‚˜ë¬´ ìœ„ì—ëŠ” ê±´ë¬¼ì„ ì§€ì„ ìˆ˜ ìˆë‹¤ëŠ” ì„¤ì •
 /// </summary>
 public class PlacementState : IBuildingState
 {
@@ -13,10 +13,13 @@ public class PlacementState : IBuildingState
     Grid grid;
     PreviewSystem previewSystem;
     ObjectsDatabaseSO database;
-    GridData tree;  // ³ª¹« À§¿¡´Â ºôµùÀ» ÁöÀ» ¼ö ÀÖ´Ù
+    GridData tree;  // ë‚˜ë¬´ ìœ„ì—ëŠ” ë¹Œë”©ì„ ì§€ì„ ìˆ˜ ìˆë‹¤
     GridData buildingData;
     ObjectPlacer objectPlacer;
     SoundFeedBack soundFeedback;
+
+    public TempInputManager tempInputManager;  // angleì„ ì €ì¥í•˜ê±°ë‚˜ ê°€ì ¸ì˜¨ë‹¤
+
 
     public PlacementState(int iD,
                           Grid grid,
@@ -40,29 +43,29 @@ public class PlacementState : IBuildingState
         selectedObjIndex = database.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjIndex > -1)
         {
-            // ¿ÀºêÁ§Æ® ¼±ÅÃÇß´Ù¸é ±×¸®µå, ¹Ì¸®º¸±â ¿ÀºêÁ§Æ® º¸¿©ÁØ´Ù
+            // ì˜¤ë¸Œì íŠ¸ ì„ íƒí–ˆë‹¤ë©´ ê·¸ë¦¬ë“œ, ë¯¸ë¦¬ë³´ê¸° ì˜¤ë¸Œì íŠ¸ ë³´ì—¬ì¤€ë‹¤
             previewSystem.StartShowingPlacementPreview(database.objectsData[selectedObjIndex].Prefab,
                                                  database.objectsData[selectedObjIndex].Size);
         }
         else
             throw new System.Exception($"No object with ID {iD}");
     }
-    // Ãß°¡ÇÒ ¶§ ¹ß»ı
+    // ì¶”ê°€í•  ë•Œ ë°œìƒ
     public void EndState()
     {
         previewSystem.StopShowingPreview();
     }
     /// <summary>
-    /// ¸¶¿ì½º ´©¸¦ ¶§ ¹ß»ı, ¸Ê¿¡ °³Ã¼¸¦ ¹èÄ¡
-    /// ¿ÀºêÁ§Æ®¸¦ ³»·Á³õ´Â À§Ä¡¸¦ mousePosition¿¡¼­, previewÀÇ positionÀ¸·Î  ¼öÁ¤
-    /// ¶ÇÇÑ, previewÀÇ È¸Àü»óÅÂ¸¦ ¹İ¿µÇÏ¿©¾ßÇÑ´Ù
+    /// ë§ˆìš°ìŠ¤ ëˆ„ë¥¼ ë•Œ ë°œìƒ, ë§µì— ê°œì²´ë¥¼ ë°°ì¹˜
+    /// ì˜¤ë¸Œì íŠ¸ë¥¼ ë‚´ë ¤ë†“ëŠ” ìœ„ì¹˜ë¥¼ mousePositionì—ì„œ, previewì˜ positionìœ¼ë¡œ  ìˆ˜ì •
+    /// ë˜í•œ, previewì˜ íšŒì „ìƒíƒœë¥¼ ë°˜ì˜í•˜ì—¬ì•¼í•œë‹¤
     /// </summary>
     /// <param name="gridPosition"></param>
     public void OnAction(Vector3Int gridPosition)
     {
         // PlaceStructure
 
-        /// ¿µ¿ª°Ë»çÇÒ¶§µµ °İÀÚÀÇ È¸ÀüÀ» ¹İ¿µÇØ¾ßÇÑ´Ù
+        /// ì˜ì—­ê²€ì‚¬í• ë•Œë„ ê²©ìì˜ íšŒì „ì„ ë°˜ì˜í•´ì•¼í•œë‹¤
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjIndex);
         if (placementValidity == false)
         {
@@ -70,11 +73,11 @@ public class PlacementState : IBuildingState
             return;
         }
         soundFeedback.PlaySound(SoundType.Place);
-        /// ¿ÀºêÁ§Æ® »ı¼º(¿ÀºêÁ§Æ® Á¤º¸´Â previewSystem.previewObject°¡ °¡Áö°í ÀÖ´Ù)
+        /// ì˜¤ë¸Œì íŠ¸ ìƒì„±(ì˜¤ë¸Œì íŠ¸ ì •ë³´ëŠ” previewSystem.previewObjectê°€ ê°€ì§€ê³  ìˆë‹¤)
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjIndex].Prefab, grid.CellToWorld(gridPosition));
 
-        // ÀÌ °´Ã¼ÀÇ ÀÎµ¦½º¸¦ µ¥ÀÌÅÍ¿¡ Ãß°¡
-        GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? tree : buildingData;   // ³ª¹«¿Í °Ç¹°À» ±¸ºĞÇÑ´Ù
+        // ì´ ê°ì²´ì˜ ì¸ë±ìŠ¤ë¥¼ ë°ì´í„°ì— ì¶”ê°€
+        GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? tree : buildingData;   // ë‚˜ë¬´ì™€ ê±´ë¬¼ì„ êµ¬ë¶„í•œë‹¤
         selectedData.AddObjectAt(gridPosition,
             database.objectsData[selectedObjIndex].Size,
             database.objectsData[selectedObjIndex].ID,
@@ -84,7 +87,7 @@ public class PlacementState : IBuildingState
     }
 
     /// <summary>
-    /// °İÀÚ °Ë»çÇÒ¶§ È¸ÀüÀ¸·Î °İÀÚÀÇ À§Ä¡°¡ ¸¶¿ì½º À§Ä¡¿Í ´Ş¶óÁø °ÍÀ» ¹İ¿µÇØ¾ßÇÑ´Ù
+    /// ê²©ì ê²€ì‚¬í• ë•Œ íšŒì „ìœ¼ë¡œ ê²©ìì˜ ìœ„ì¹˜ê°€ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì™€ ë‹¬ë¼ì§„ ê²ƒì„ ë°˜ì˜í•´ì•¼í•œë‹¤
     /// </summary>
     /// <param name="gridPosition"></param>
     /// <param name="selectedObjIndex"></param>
@@ -96,7 +99,7 @@ public class PlacementState : IBuildingState
     }
 
     /// <summary>
-    /// ¿ÀºêÁ§Æ®°¡ Á¡À¯ÇÏ°í ÀÖ´Â ±×¸®µåÀÇ ¿µ¿ªÀ» Ç¥½ÃÇÑ´Ù
+    /// ì˜¤ë¸Œì íŠ¸ê°€ ì ìœ í•˜ê³  ìˆëŠ” ê·¸ë¦¬ë“œì˜ ì˜ì—­ì„ í‘œì‹œí•œë‹¤
     /// </summary>
     /// <param name="gridPosition"></param>
     public void UpdateState(Vector3Int gridPosition)
@@ -105,6 +108,4 @@ public class PlacementState : IBuildingState
 
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
     }
-
-
 }

@@ -75,7 +75,7 @@ public class PlayerAttackController : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && afterLastAttackTime >= attackRate)
+        if(context.phase == InputActionPhase.Started && afterLastAttackTime >= attackRate && !playerController.IsDead)
         {
             afterLastAttackTime = 0f;
             playerController.isAttack = true;
@@ -153,5 +153,51 @@ public class PlayerAttackController : MonoBehaviour
                 resourceObject.mineResource(mineOreDamage);
                 break;
         }
+    }
+
+    public void Equip(WeaponInstance instance)
+    {
+        if (instance == null)
+            Debug.LogError("Null weapon assignd to player");
+
+        equippedWeaponType = instance.WeaponType;
+
+        switch (equippedWeaponType)
+        {
+            case EquippedWeaponType.Hand:
+                equippedBow.SetActive(false);
+                equippedAxe.SetActive(false);
+                equippedSword.SetActive(false);
+                equippedPickaxe.SetActive(false);
+                break;
+            case EquippedWeaponType.Sword:
+                equippedBow.SetActive(false);
+                equippedAxe.SetActive(false);
+                equippedSword.SetActive(true);
+                equippedPickaxe.SetActive(false);
+                break;
+            case EquippedWeaponType.Axe:
+                equippedBow.SetActive(false);
+                equippedAxe.SetActive(true);
+                equippedSword.SetActive(false);
+                equippedPickaxe.SetActive(false);
+                break;
+            case EquippedWeaponType.Pickaxe:
+                equippedBow.SetActive(false);
+                equippedAxe.SetActive(false);
+                equippedSword.SetActive(false);
+                equippedPickaxe.SetActive(true);
+                break;
+            case EquippedWeaponType.Bow:
+                equippedBow.SetActive(true);
+                equippedAxe.SetActive(false);
+                equippedSword.SetActive(false);
+                equippedPickaxe.SetActive(false);
+                break;
+        }
+
+        attackDamage = instance.AttackDamage;
+        mineOreDamage = instance.MineOreDamage;
+        digWoodDamage = instance.DigWoodDamage;
     }
 }
