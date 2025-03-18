@@ -65,56 +65,59 @@ public class PreviewSystem : MonoBehaviour
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
     }
+
+
     /// <summary>
     /// 격자의 크기를 조정 (회전 고려)
     /// </summary>
     /// <param name="size"></param>
     /// <param name="rotationAngle"></param>
-    private void PrepareCursor(Vector2Int size, float rotationAngle)
+    /// 
+    // PrepareCursor에서 previewObject의 실제 회전각 반영
+    private void PrepareCursor(Vector2Int size, float angle)
     {
-        Vector2Int rotatedSize = size;
+        // 중심점을 기준으로 회전하도록 변경
+        Vector3 pivot = previewObject.transform.position + new Vector3(size.x / 2f, 0, size.y / 2f);
 
-        // 90도 단위로만 회전한다고 가정
-        int angle = Mathf.RoundToInt(rotationAngle) % 360;
+        // 1️ 회전 중심으로 이동
+        cellIndicator.transform.position -= pivot;
 
-        rotatedSize = new Vector2Int(size.y, size.x);
-        switch (angle)
-        {
-            case 90:    /// x = 2, z = -1
-            case -270:
-                cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, -rotatedSize.y);
-                break;
-            case 180:   /// x = -1, z = -2
-            case -180:
-                cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, -rotatedSize.y);
-                break;
-            case 270:   /// x = -2, z = 1
-            case -90:
-                cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, rotatedSize.y);
-                break;
-            case 0:     /// x = 1, z = 2
-            case 360:
-            default:
-                cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, rotatedSize.y);
-                break;
-        }
-        // cellIndicator 위치는 고정
-        //cellIndicator.transform.localPosition = Vector3.zero;
-    }
-    /// <summary>
-    /// 실제로 커서의 크기를 적용하는 메서드
-    /// </summary>
-    /// <param name="size"></param>
-    private void ApplyCursorTransform(Vector2Int size)
-    {
-        // cellIndicator 크기 변경
-        cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
+        // 2️ 회전 수행
+        cellIndicator.transform.Rotate(Vector3.up, angle);
 
-
-
-
+        // 3️ 다시 원래 위치로 이동
+        cellIndicator.transform.position += pivot;
     }
 
+    //private void PrepareCursor(Vector2Int size, float rotationAngle)
+    //{
+    //    Vector2Int rotatedSize = size;
+
+    //    // 90도 단위로만 회전한다고 가정
+    //    int angle = Mathf.RoundToInt(rotationAngle) % 360;
+
+    //    rotatedSize = new Vector2Int(size.y, size.x);
+    //    switch (angle)
+    //    {
+    //        case 90:    /// x = 2, z = -1
+    //        case -270:
+    //            cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, -rotatedSize.y);
+    //            break;
+    //        case 180:   /// x = -1, z = -2
+    //        case -180:
+    //            cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, -rotatedSize.y);
+    //            break;
+    //        case 270:   /// x = -2, z = 1
+    //        case -90:
+    //            cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, rotatedSize.y);
+    //            break;
+    //        case 0:     /// x = 1, z = 2
+    //        case 360:
+    //        default:
+    //            cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, rotatedSize.y);
+    //            break;
+    //    }
+    //}
 
     // 선택한 오브젝트의 크기를 리턴한다
     public Vector2Int GetCurrentSize()
@@ -198,25 +201,19 @@ public class PreviewSystem : MonoBehaviour
     {
         // 현재 프리뷰 크기 가져오기
         Vector2Int size = GetCurrentSize();
-
         // 중심점을 기준으로 회전하도록 변경
         Vector3 pivot = previewObject.transform.position + new Vector3(size.x / 2f, 0, size.y / 2f);
-
         // 1️ 회전 중심으로 이동
         previewObject.transform.position -= pivot;
-
         // 2️ 회전 수행
         previewObject.transform.Rotate(Vector3.up, angle);
-
+        // 3️ 다시 원래 위치로 이동
+        previewObject.transform.position += pivot;
+        // 격자 크기 업데이트 (회전 반영)
+        PrepareCursor(size, angle);
         /// 회전각을 "누적하여" 저장(왜냐하면 누를때마다 angle에는 90만 들어올 수 있으므로)
         currentRotationAngle = (currentRotationAngle + angle) % 360;
         tempInputManager.angle = currentRotationAngle;
-
-        // 3️ 다시 원래 위치로 이동
-        previewObject.transform.position += pivot;
-
-        // 격자 크기 업데이트 (회전 반영)
-        PrepareCursor(size, currentRotationAngle);
     }
 
 

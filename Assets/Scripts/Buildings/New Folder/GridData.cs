@@ -104,9 +104,6 @@ public class GridData
             return -1;
         return placedObjects[gridPosition].PlacedObjectIndex;
     }
-
-
-
 }
 
 public class PlacementData
