@@ -33,6 +33,7 @@ public class DayNightCycle : MonoBehaviour
         timeRate = 1.0f / fullDayLength;
         elapsedTime = fullDayLength * startTime; // 시작 시간 반영
         currentTime = startTime;
+        Global.Instance.UIManager.OnChangeDay(dayCount);
     }
 
     private void Update()
@@ -44,6 +45,7 @@ public class DayNightCycle : MonoBehaviour
         if (elapsedTime >= fullDayLength * dayCount + (fullDayLength * startTime))
         {
             dayCount++;
+            Global.Instance.UIManager.OnChangeDay(dayCount);
         }
 
         UpdateLighting(sun, sunColor, sunIntensity);

@@ -11,6 +11,7 @@ namespace _23DaysLeft.UI
         [Header("UI")]
         [SerializeField] private BossInfoPanel bossInfoPanel;
         [SerializeField] private PlayerConditionPanel playerConditionPanel;
+        [SerializeField] private DatePanel datePanel;
 
         [Header("Prefabs")]
         [SerializeField] private GameObject[] uiPrefabs;
@@ -19,6 +20,7 @@ namespace _23DaysLeft.UI
         public Transform WorldCanvas => worldCanvas;
         public BossInfoPanel BossInfoPanel => bossInfoPanel;
         public PlayerConditionPanel PlayerConditionPanel => playerConditionPanel;
+        public DatePanel DayPanel => datePanel;
         public GameObject[] UIPrefabs => uiPrefabs;
     }
 }
