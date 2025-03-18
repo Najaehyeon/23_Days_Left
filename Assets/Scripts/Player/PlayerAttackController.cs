@@ -1,3 +1,4 @@
+using _23DaysLeft.Monsters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class PlayerAttackController : MonoBehaviour
     [Header("Target")]
     public AttackTargetType attackTargetType;
     public ResourceObject resourceObject;
+    public CreatureController creatureController;
 
     [Header("Stat")]
     public float attackDamage;
@@ -133,6 +135,7 @@ public class PlayerAttackController : MonoBehaviour
             case AttackTargetType.None:
                 break;
             case AttackTargetType.Enemy:
+                creatureController.OnHit(attackDamage);
                 break;
             case AttackTargetType.Wood:
                 resourceObject.mineResource(digWoodDamage);
