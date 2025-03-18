@@ -1,6 +1,8 @@
+using _23DaysLeft.Monsters;
+using _23DaysLeft.Utils;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -25,7 +27,7 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
 
-    public int dayCount = 1; // 현재 일수
+    public int dayCount = 1;   // 현재 일수
     private float elapsedTime; // 경과한 시간
 
     private void Start()
@@ -45,6 +47,7 @@ public class DayNightCycle : MonoBehaviour
         if (elapsedTime >= fullDayLength * dayCount + (fullDayLength * startTime))
         {
             dayCount++;
+            StartCoroutine(BossSpawn());
             Global.Instance.UIManager.OnChangeDay(dayCount);
         }
 
@@ -71,5 +74,57 @@ public class DayNightCycle : MonoBehaviour
         {
             go.SetActive(true);
         }
+    }
+
+    private IEnumerator BossSpawn()
+    {
+        CreatureData bossData = null;
+        switch (dayCount)
+        {
+            case 8:
+                bossData = Global.Instance.DataLoadManager.GetBossData(Creatures.GiantGolem.ToName());
+                break;
+            case 16:
+                bossData = Global.Instance.DataLoadManager.GetBossData(Creatures.GreenGiantGolem.ToName());
+                break;
+            case 24:
+                bossData = Global.Instance.DataLoadManager.GetBossData(Creatures.RedGiantGolem.ToName());
+                break;
+            default:
+                yield break;
+        }
+        
+        if (!bossData)
+        {
+            Debug.LogError("Boss Data is null");
+            yield break;
+        }
+        
+        while (currentTime < 0.8f)
+        {
+            yield return null;
+        }
+        
+        var boss = Global.Instance.PoolManager.Spawn<Creature>(bossData.name);
+        var spawnPos = GetBossSpawnPos();
+        boss.Init(spawnPos);
+    }
+
+    private Vector3 GetBossSpawnPos()
+    {
+        var playerPos = Global.Instance.Player.transform;
+        var spawnPos = playerPos.position + Random.onUnitSphere * 10f;
+        var count = 0;
+        while (count < 30)
+        {
+            if (NavMesh.SamplePosition(spawnPos, out var hit, 10f, NavMesh.AllAreas))
+            {
+                spawnPos = hit.position;
+                break;
+            }
+            count++;
+        }
+        
+        return spawnPos;
     }
 }
