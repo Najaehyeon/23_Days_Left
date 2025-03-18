@@ -1,3 +1,4 @@
+using _23DaysLeft.Monsters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class DetectTargetByWeapon : MonoBehaviour
         else if (other.CompareTag("Enemy"))
         {
             attackController.attackTargetType = AttackTargetType.Enemy;
+            attackController.creatureController = other.GetComponent<CreatureController>();
         }
         else
         {

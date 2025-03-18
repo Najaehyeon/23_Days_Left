@@ -17,10 +17,9 @@ MonoBehaviour:
   OriginSpeed: 2
   Prefab: {fileID: 6663036545537708639, guid: f7bd5c34239803445a553f8a9888a186, type: 3}
   CombatType: 1
-  Defense: 5
   AttackPower: 5
   AttackDelay: 2
-  HitDelay: 1
+  HitDelay: 0.8
   CombatSpeed: 3
   MinWanderDistance: 10
   MaxWanderDistance: 15
@@ -29,3 +28,4 @@ MonoBehaviour:
   FleeDistance: 10
   FieldOfView: 120
   AttackDistance: 1
+  DropItems: []

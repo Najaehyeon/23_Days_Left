@@ -1,3 +1,4 @@
+using _23DaysLeft.Monsters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,92 +20,101 @@ public enum AttackTargetType
     Wood,
     Ore
 }
+
 public class PlayerAttackController : MonoBehaviour
 {
-    // 장착하는 무기에 따라서 해당 무기만 활성화
+    PlayerController playerController;
+
+    [Header("EquippedWeapon")]
+    public EquippedWeaponType equippedWeaponType = EquippedWeaponType.Hand;
     public GameObject equippedSword;
     public GameObject equippedAxe;
     public GameObject equippedPickaxe;
     public GameObject equippedBow;
 
-    DetectTargetByWeapon detectTargetByWeapon;
-
-    public EquippedWeaponType equippedWeaponType = EquippedWeaponType.Hand;
+    [Header("Target")]
     public AttackTargetType attackTargetType;
+    public ResourceObject resourceObject;
+    public CreatureController creatureController;
 
-
-
-    // 플레이어 몹 공격력, 나무 공격력, 광석 공격력, (내구도) 선언
+    [Header("Stat")]
     public float attackDamage;
     public float digWoodDamage;
     public float mineOreDamage;
     public float durability;
 
-    public float attackRate;
-    public float afterLastAttackTime;
-
-    public int randomPunchHand;
-
-    public ResourceObject resourceObject;
-
+    [Header("Attack System")]
     private Animator _animator;
+    public float attackRate;
+    private float afterLastAttackTime;
+    private int randomPunchHand;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-
     }
 
-    // 장착 무기에 따라서, 능력치 할당.
     private void Start()
     {
+        playerController = CharacterManager.Instance.Player.controller;
+
         attackDamage = 10f;
         digWoodDamage = 10f;
         mineOreDamage = 5f;
         durability = 0f;
     }
+
     private void Update()
     {
         afterLastAttackTime += Time.deltaTime;
+        if (afterLastAttackTime > 1)
+        {
+            playerController.isAttack = false;
+        }
     }
-
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
         if(context.phase == InputActionPhase.Started && afterLastAttackTime >= attackRate)
         {
             afterLastAttackTime = 0f;
+            playerController.isAttack = true;
             switch (equippedWeaponType)
             {
+                // 각 공격 애니메이션에서 이벤트로 ApplyDamage() 메서드 실행
                 case EquippedWeaponType.Hand:
-                    randomPunchHand = Random.Range(0, 2);
-                    if (randomPunchHand == 0)
-                    {
-                        _animator.SetTrigger("DoPunchR");
-                    }
-                    if (randomPunchHand == 1)
-                    {
-                        _animator.SetTrigger("DoPunchL");
-                    }
+                    RandomHandPunchAnimation();
                     break;
                 case EquippedWeaponType.Sword:
-                    _animator.SetTrigger("DoOneHandAttack");
+                    _animator.SetTrigger("DoOneHandAttack"); 
                     break;
-                
                 case EquippedWeaponType.Axe:
                     _animator.SetTrigger("DoOneHandAttack");
                     break;
-
                 case EquippedWeaponType.Pickaxe:
                     _animator.SetTrigger("DoTwoHandAttack");
                     break;
-
                 case EquippedWeaponType.Bow:
                     _animator.SetTrigger("DoBowShot");
                     break;
             }
         }
     }
+
+    void RandomHandPunchAnimation()
+    {
+        randomPunchHand = Random.Range(0, 2);
+        if (randomPunchHand == 0)
+        {
+            _animator.SetTrigger("DoPunchR");
+        }
+        if (randomPunchHand == 1)
+        {
+            _animator.SetTrigger("DoPunchL");
+        }
+    }
+
+    // 각 공격 애니메이션에서 이벤트로 실행되는 메서드
     public void ApplyDamage()
     {
         switch (equippedWeaponType)
@@ -134,6 +144,7 @@ public class PlayerAttackController : MonoBehaviour
             case AttackTargetType.None:
                 break;
             case AttackTargetType.Enemy:
+                creatureController.OnHit(attackDamage);
                 break;
             case AttackTargetType.Wood:
                 resourceObject.mineResource(digWoodDamage);
@@ -143,10 +154,4 @@ public class PlayerAttackController : MonoBehaviour
                 break;
         }
     }
-
-    // 좌클릭 시 공격
-    // 공격시 애니메이션 발동
-    // 애니메이션에서 타격 지점에 Hit 메서드 실행
-    // Hit 매서드에서 크로스헤어에 대상이 있는 지 없는 지에 따라서 다르게 실행
-    // 대상이 있고, 만약 그 대상이 나무(광석, 몬스터)일 경우, 나무(광석, 몬스터) 공격력 전달.
 }

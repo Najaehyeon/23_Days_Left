@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _23DaysLeft.Managers
 {
-    public class UIManager : Singleton<UIManager>
+    public class UIManager : MonoBehaviour
     {
         private MainSceneUIList uiList;
         public Action<float> OnChangeLoadingProgress;
@@ -21,7 +21,7 @@ namespace _23DaysLeft.Managers
         
         public void ActiveCreatureHpBar(CreatureController creature, Transform target, float maxHp)
         {
-            var hpBar = PoolManager.Instance.Spawn<CreatureHealthBar>(creatureHpBar);
+            var hpBar = Global.Instance.PoolManager.Spawn<CreatureHealthBar>(creatureHpBar);
             hpBar.transform.SetParent(uiList.WorldCanvas.transform);
             hpBar.SetInfo(target, maxHp);
             creatureHealthBars.Add(creature, hpBar);
@@ -33,10 +33,6 @@ namespace _23DaysLeft.Managers
             {
                 creatureHealthBars[creature].ChangeHealth(currenHp);
             }
-            else
-            {
-                Debug.LogWarning("UIManager: Not exist creature health bar.");
-            }
         }
         
         public void InactiveCreatureHpBar(CreatureController creature)
@@ -47,7 +43,7 @@ namespace _23DaysLeft.Managers
                 return;
             }
             
-            creatureHealthBars[creature].Show();
+            creatureHealthBars[creature].Hide();
             creatureHealthBars.Remove(creature);
         }
         

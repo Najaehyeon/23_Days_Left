@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/jaeun/TitleTest.unity
+    guid: 237b59cea7a5eb141b1c292b68c0006d
+  - enabled: 1
+    path: Assets/Scenes/jaeun/LoadingScene.unity
+    guid: c441d75987986f54eb2b8431fc23935a
+  - enabled: 1
+    path: Assets/Scenes/jaeun/MonsterTest.unity
+    guid: 6d41894a48b38d34491af6b451dfa849
   m_configObjects: {}

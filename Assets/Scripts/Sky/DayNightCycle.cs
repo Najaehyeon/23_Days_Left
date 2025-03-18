@@ -6,7 +6,7 @@ public class DayNightCycle : MonoBehaviour
 {
     [Range(0f, 1f)]
     public float currentTime;
-    public float fullDayLength = 120; // ÇÏ·ç ±æÀÌ (ÃÊ ´ÜÀ§)
+    public float fullDayLength = 120; // í•˜ë£¨ ê¸¸ì´ (ì´ˆ ë‹¨ìœ„)
     public float startTime = 0.4f;
     private float timeRate;
     public Vector3 noon;
@@ -25,13 +25,13 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
 
-    public int dayCount = 1; // ÇöÀç ÀÏ¼ö
-    private float elapsedTime; // °æ°úÇÑ ½Ã°£
+    public int dayCount = 1; // í˜„ìž¬ ì¼ìˆ˜
+    private float elapsedTime; // ê²½ê³¼í•œ ì‹œê°„
 
     private void Start()
     {
         timeRate = 1.0f / fullDayLength;
-        elapsedTime = fullDayLength * startTime; // ½ÃÀÛ ½Ã°£ ¹Ý¿µ
+        elapsedTime = fullDayLength * startTime; // ì‹œìž‘ ì‹œê°„ ë°˜ì˜
         currentTime = startTime;
     }
 
@@ -40,7 +40,7 @@ public class DayNightCycle : MonoBehaviour
         elapsedTime += Time.deltaTime;
         currentTime = (elapsedTime % fullDayLength) / fullDayLength;
 
-        // ÇÏ·ç°¡ Áö³ª¸é ÀÏ¼ö Áõ°¡
+        // í•˜ë£¨ê°€ ì§€ë‚˜ë©´ ì¼ìˆ˜ ì¦ê°€
         if (elapsedTime >= fullDayLength * dayCount + (fullDayLength * startTime))
         {
             dayCount++;

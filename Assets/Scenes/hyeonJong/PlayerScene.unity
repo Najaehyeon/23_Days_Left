@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 56087389}
-  m_IndirectSpecularColor: {r: 0.43093297, g: 0.6100379, b: 0.6807165, a: 1}
+  m_IndirectSpecularColor: {r: 0.43093297, g: 0.59906924, b: 0.6964747, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,29 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &54883783 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2171700475532249048, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &54883788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54883783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
 --- !u!1001 &56087388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,6 +131,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: startTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: currentTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunColor.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunColor.ctime1
+      value: 32768
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunColor.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunColor.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunColor.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunColor.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunColor.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunIntensity.m_Curve.Array.data[1].time
+      value: 0.49902344
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunIntensity.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
+      propertyPath: sunIntensity.m_Curve.Array.data[1].value
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3686536662192865365, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -208,466 +233,54 @@ Light:
   m_CorrespondingSourceObject: {fileID: 1736485733472973078, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
   m_PrefabInstance: {fileID: 56087388}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &144270176 stripped
+--- !u!1 &816539345
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6982439123870970703, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &144270181
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 816539347}
+  - component: {fileID: 816539346}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &816539346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144270176}
+  m_GameObject: {fileID: 816539345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9279731a6a6ea0744b5c54ad480245b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &160972243 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 511317577496371639, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &160972248
-MonoBehaviour:
+  bgmSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  bgmClips: []
+  sfxClips: []
+--- !u!4 &816539347
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160972243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &213457831 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8546600073094208190, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &213457836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213457831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &263066812 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5836522399350189185, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &263066817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263066812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &389002414 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7959672074937963322, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &389002419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389002414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &502235218 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6341062298290683018, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &502235223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502235218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &502509027 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6542150561153485437, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &502509032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502509027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &684089335 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4559873086815340638, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &684089340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684089335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &712487645 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8954269093926498853, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &712487650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712487645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &776628224 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3231588424702007449, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &776628229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776628224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1060172136 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9045079144697522698, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1060172141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060172136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1067010205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7368286020441087576, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1067010210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067010205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1068290008 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8891008377336156483, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1068290013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068290008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1159191951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2882064386441654272, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1159191956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159191951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1267616329 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8308878008426432807, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1267616334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267616329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1371439745 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 174928088000727061, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1371439750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371439745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1385187212 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6013059579764081071, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1385187217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385187212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1416515360 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7323535810030719276, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1416515365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416515360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1437781190 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 736641614457325659, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1437781195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437781190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1480454601 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8681642055448570815, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1480454606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480454601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
+  m_GameObject: {fileID: 816539345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748462174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1500882133 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
@@ -679,98 +292,149 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24b49aa3ad89104b9ad26df06a8a08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1608504347 stripped
+--- !u!1 &1522782573
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2942559144620556345, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1608504352
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1522782575}
+  - component: {fileID: 1522782574}
+  m_Layer: 0
+  m_Name: DataLoad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1522782574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1608504347}
+  m_GameObject: {fileID: 1522782573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
+  m_Script: {fileID: 11500000, guid: 42d18cc2b0d75a04994570972cc3a7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1612247431 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1648810313211915105, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
+--- !u!4 &1522782575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1612247436
+  m_GameObject: {fileID: 1522782573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748462174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1748462172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1748462174}
+  - component: {fileID: 1748462173}
+  m_Layer: 0
+  m_Name: Global
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1748462173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612247431}
+  m_GameObject: {fileID: 1748462172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
+  m_Script: {fileID: 11500000, guid: c8118394f484a0f4793eea9ba8c6f85a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1796608440 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 166055085089050162, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
+  AudioManager: {fileID: 816539346}
+  DataLoadManager: {fileID: 1522782574}
+  RecipeManager: {fileID: 1851598305}
+  PoolManager: {fileID: 0}
+  UIManager: {fileID: 0}
+  SceneLoader: {fileID: 0}
+  Player: {fileID: 0}
+--- !u!4 &1748462174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1796608445
+  m_GameObject: {fileID: 1748462172}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 816539347}
+  - {fileID: 1522782575}
+  - {fileID: 1851598306}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1851598304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1851598306}
+  - component: {fileID: 1851598305}
+  m_Layer: 0
+  m_Name: Recipe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1851598305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796608440}
+  m_GameObject: {fileID: 1851598304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1737eba22a297f547b9cb94eb4e37d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1831979961 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7180626242048985456, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1831979966
-MonoBehaviour:
+  _recipeList: []
+--- !u!4 &1851598306
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831979961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
+  m_GameObject: {fileID: 1851598304}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748462174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1954748852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,166 +443,930 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 63540333211743318, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
+    - target: {fileID: 81100009831589228, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 83813454140381307, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 105647228584349725, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 111621138230190162, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 138690257374191892, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 159897658743166912, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 160146267336472016, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 172515228830009392, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 190725489105962547, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 211600863399490380, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 220760234847736664, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 257141921603988023, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 290814404579512726, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 318886193736287234, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 338591216132612041, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 360222740532273085, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 384021444191409572, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 409221856951984952, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 438864494950663219, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.36
       objectReference: {fileID: 0}
-    - target: {fileID: 166055085089050162, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 174928088000727061, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 213554723961555015, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 411312895157243557, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 511317577496371639, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 514040487097555934, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 714873945810221299, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 736641614457325659, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 1084831622796837818, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1283315456500138965, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1480478099120333238, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1529034792641771196, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Tree
-      objectReference: {fileID: 0}
+    - target: {fileID: 475181385390935201, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 475279089188749618, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 535543034690384440, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 545207375578137731, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 621640832044420190, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 622365736576206949, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 632153286934399151, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 689750173297338472, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 739953427025760843, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 747205806524498422, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 797853746440857918, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 825138738246518805, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 869214997726155235, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 884518540938674849, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 935266983860787444, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 960532329867424325, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1006247037038001388, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1033791045070825695, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1063271729096516946, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1074185009768854157, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1144959613219191791, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1152099250884667218, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1171069809924521833, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1192015620554779253, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1221351890293467441, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1245365678866993384, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1292760872770171493, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1335741415684322208, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1342588237017880962, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1343665350639657844, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1356741984150254072, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1401280623305840696, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1419356896595405408, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1420919652906012863, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1422383822170141009, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1457458803499421516, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1516512134432597621, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1528758994258422550, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1571009965922793004, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1601645315842575111, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1612827891950949193, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
     - target: {fileID: 1641716417998803136, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: m_Name
       value: Environment
       objectReference: {fileID: 0}
-    - target: {fileID: 1648810313211915105, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
+    - target: {fileID: 1643596692139720567, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1692877357294146708, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1700210663348614844, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1746603547864290838, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1755465869868040561, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1773922735451668421, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1789071145709817268, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1795712939159952045, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1819284897395376233, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1837585765497121873, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 1941145888529294839, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2003848894398739400, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2015192599246687933, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2061859487196905786, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2071632381457004346, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2110117703324089039, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2156477886128195157, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2171269266892068066, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2188666242120448927, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2225941955264499877, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2236919796928920523, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2246140272215670184, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2294385576994237360, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.65
       objectReference: {fileID: 0}
-    - target: {fileID: 1714631320612887433, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1881169887532433859, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2148734318778449692, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 2171700475532249048, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
+    - target: {fileID: 2297710940847145645, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2318304575848736338, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2319796870046352093, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2341218280786599003, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2358414156164185218, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2359750089755001409, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2371816679543526048, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2419443586057071772, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2446734051053852133, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
     - target: {fileID: 2450414827700285310, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: dropResource
+      propertyPath: _dayNightCycle
       value: 
-      objectReference: {fileID: 5621043138120810526, guid: a20c089585efc52428eb4a54756ca4fe, type: 3}
-    - target: {fileID: 2563347599968087667, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2635260735385419384, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2493362337909874655, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2498288349946369793, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2516614414624296403, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2540815620572132132, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2573265666434411005, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2603726203429887464, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2617355864344912695, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2619216273950673147, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2627080872405080646, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2628503978994938422, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2661980079277848340, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2670491333118469014, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
     - target: {fileID: 2673304609649996033, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: dropResource
+      propertyPath: _dayNightCycle
       value: 
-      objectReference: {fileID: 5621043138120810526, guid: a20c089585efc52428eb4a54756ca4fe, type: 3}
-    - target: {fileID: 2819112953764598614, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2704631073322894745, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2747615556362663763, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2810081017031239431, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2812945788266830482, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2849492176789099212, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2877073326715102565, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2894700455631686352, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.21
       objectReference: {fileID: 0}
-    - target: {fileID: 2882064386441654272, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
+    - target: {fileID: 2923611250226843325, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 2999854183261379110, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3010030973100706562, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3021450971191189446, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3024898129045763513, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3054513890991220627, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3099254706865280976, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.66
       objectReference: {fileID: 0}
-    - target: {fileID: 2942559144620556345, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 3231588424702007449, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 3400003088986461656, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 3106781960543441870, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3148846855830290473, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3161716817113788509, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3162711822040578823, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3180706681859268023, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3183623500625750791, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3192087684696277801, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3195090405112531705, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3205016024702932511, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3274063999732406795, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3319776565733898735, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3428474364172287099, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
     - target: {fileID: 3458125697693352536, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: dropResource
+      propertyPath: _dayNightCycle
       value: 
-      objectReference: {fileID: 5621043138120810526, guid: a20c089585efc52428eb4a54756ca4fe, type: 3}
-    - target: {fileID: 3591412145113089916, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3463302055900261639, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3555991219438935845, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3569222177247061863, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3586759686405742574, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3641105537017278722, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3643288303270241126, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: dropResource
+      propertyPath: _dayNightCycle
       value: 
-      objectReference: {fileID: 5621043138120810526, guid: a20c089585efc52428eb4a54756ca4fe, type: 3}
-    - target: {fileID: 3949708567772963194, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3650789275686477296, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3701153531408441662, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3737685410467584327, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3810501282152530029, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3839714069778071867, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3875686753113770807, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3875783185863838824, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3893754178553953949, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3910530418242345028, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3912905897016898669, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3934619912581273330, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3940887709033597012, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3982514341534094082, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3985563075858355339, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 3993134985573070087, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4029344512126907357, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4052754291887796848, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4063509694559719515, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4096379540226852590, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4122848764493135075, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4142173513183701596, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4157134556038797335, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4191863607746891595, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4234972997592730032, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4259801520960573383, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4309989571611091675, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4336345517060165909, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4337860874916902470, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4394824057248355650, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4406388356062360249, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4416876874249482847, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4422267084888550990, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4451531515731967483, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4535700608712687101, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4536845255681149885, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4610152676058256971, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4618456782285116957, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4630459050198108139, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4643485118667446597, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4667046735846367454, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4668895183406882204, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4674648706221207144, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4683206327887133202, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4690858352584371473, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4698969353755551718, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4785731351076520092, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4796861844016078031, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4805193785824021255, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4827751810394541737, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4873449613661380163, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27
       objectReference: {fileID: 0}
-    - target: {fileID: 4559873086815340638, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 5024451267401028997, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5416354764435774119, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5670638927264299258, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5802925933309693213, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5836522399350189185, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 5858992381007904975, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 5871499720505322794, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Tree
-      objectReference: {fileID: 0}
+    - target: {fileID: 4886173537433712448, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4893072746431298239, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4895086242657168327, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4913213049031854605, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4938746935866270692, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4943075530700389631, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4958404554611621081, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4987712778195684595, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 4994805195392817129, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5043704130148388216, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5047668427274657519, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5048909003337806234, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5063733369478406735, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5073566257574765120, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5133043597512994332, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5162658947760168880, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5185123951923064367, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5229780178141831078, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5251790976862745301, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5253349311914027618, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5260851397776937287, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5279889961867048402, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5282888830801494042, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5387373996276810054, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5392794608003548834, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5406829876960310922, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5465672891910164379, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5486699620466293821, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5493439250524123902, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5559183219490405096, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5601934000882667775, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5603942854525313811, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5669328489742287595, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5695812670832456749, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5702034233261014020, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5761916203484102762, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5796615021641574799, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5798714718866007135, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5822634793856575474, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5831641407090806600, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5848262884033574492, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
     - target: {fileID: 5876661632025422629, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -979,272 +1407,515 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5993919164786405905, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013059579764081071, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 6021888665002107641, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6341062298290683018, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 6392231932413790816, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6542150561153485437, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 6715797772601548700, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6982439123870970703, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7101311991342528920, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180626242048985456, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7323535810030719276, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368286020441087576, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7660007797740767579, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: dropResource
+    - target: {fileID: 5903154178874386399, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
       value: 
-      objectReference: {fileID: 5621043138120810526, guid: a20c089585efc52428eb4a54756ca4fe, type: 3}
-    - target: {fileID: 7959672074937963322, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8203424892325780572, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8308878008426432807, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8502890330562747116, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5910219647874231483, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5932327066626529864, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5934591719619262553, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5936755447442469232, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5951574983209567421, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5963598547779032106, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 5985243768577686814, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8512049206501776587, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
+    - target: {fileID: 6007429051715742749, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6025271572036660902, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6064098436579208203, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6074777288234610002, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6081746723401051442, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6086932233349224715, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6128041571544602813, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6150434550176772372, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6166069483160418396, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6171624441805529207, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6213865580891185551, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6215983818639235361, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6272760963997141115, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6281136813488565354, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6295899648214357819, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6296826804001448785, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6308335819302435987, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6350247953914515964, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6379611512255784871, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6436556836050705012, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6438184270057086864, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6438834371925185668, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6448727357454848086, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6449736093280472184, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6480879696724400787, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6493535552604550622, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6522266958511138736, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6549111989092303866, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6612137844672158712, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6659391101108965140, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6708737828337097155, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6722762686662542401, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6748562940784019678, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6774272687602456194, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6792884466173305557, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6797339640848844529, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6802442515506599320, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.63
       objectReference: {fileID: 0}
-    - target: {fileID: 8546600073094208190, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
+    - target: {fileID: 6818412074607393740, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6818744053626130428, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6855329876080199810, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6864905291584730135, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6950791241459357616, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6966248762208615728, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6981912682948509448, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 6985543931564931248, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7005717836091711302, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7104370651160018281, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7122135033921656437, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7132366747629870117, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7167425997453147185, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7167724766598891887, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7168130165009928304, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7173416162088343437, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7188291579288453568, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7212604339047785428, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7281123378441802093, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7318743075279559268, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7345890416025585479, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7358915679433870681, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7381281016525071990, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7439421025554370263, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7462756135817467347, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7479820269419473073, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7508577867573904519, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7560583289011806095, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7573554478915768008, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7632650414489651737, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7660007797740767579, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7661410603915364829, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7672431701994837932, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7723797780766920420, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7749949040327949364, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7798022012767180370, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7823358707816783789, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7847998419079874012, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7853520608148145820, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7861746148762501961, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7912574732469294708, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7934661512809752251, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7949086135693997530, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 7982905748761044593, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8018450944349542038, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8055818422334254188, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8064858930097558860, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8083957357609944780, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8089877948974282431, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8118313527027488002, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8160215940174879559, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8165047661895391174, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8188838572024697562, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8205101551643533862, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8222456734051469790, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8280483159088623441, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8290554647360638610, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8310722437631690166, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8460463103986407299, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8500134779917821076, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8526427458853414548, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8542581706315061695, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8545039683071468568, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8546321423345061476, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8555595760259414427, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8579107661015180071, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8591803821237166924, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8593526443377007442, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8600927322784860733, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8624947246289327584, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.03
       objectReference: {fileID: 0}
-    - target: {fileID: 8681642055448570815, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8891008377336156483, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8915677507078072260, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8925550271735977139, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8954269093926498853, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 8955274049159143390, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 9045079144697522698, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_TagString
-      value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 9102969169874360994, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 8655446079272938516, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8780923104771811231, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8785133702563657173, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8826879972596242615, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8850755810058955553, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8891140310033799515, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 8944719120548388495, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 9108470413202452859, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 9184889267302190179, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 9204688073065413518, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
+    - target: {fileID: 9212912669019491320, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
+      propertyPath: _dayNightCycle
+      value: 
+      objectReference: {fileID: 1500882133}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6013059579764081071, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1385187217}
-    - targetCorrespondingSourceObject: {fileID: 2882064386441654272, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1159191956}
-    - targetCorrespondingSourceObject: {fileID: 1648810313211915105, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1612247436}
-    - targetCorrespondingSourceObject: {fileID: 6341062298290683018, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 502235223}
-    - targetCorrespondingSourceObject: {fileID: 3591412145113089916, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1997525214}
-    - targetCorrespondingSourceObject: {fileID: 174928088000727061, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1371439750}
-    - targetCorrespondingSourceObject: {fileID: 3231588424702007449, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 776628229}
-    - targetCorrespondingSourceObject: {fileID: 7959672074937963322, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 389002419}
-    - targetCorrespondingSourceObject: {fileID: 7323535810030719276, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1416515365}
-    - targetCorrespondingSourceObject: {fileID: 5836522399350189185, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 263066817}
-    - targetCorrespondingSourceObject: {fileID: 8308878008426432807, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1267616334}
-    - targetCorrespondingSourceObject: {fileID: 6982439123870970703, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 144270181}
-    - targetCorrespondingSourceObject: {fileID: 166055085089050162, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1796608445}
-    - targetCorrespondingSourceObject: {fileID: 8546600073094208190, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 213457836}
-    - targetCorrespondingSourceObject: {fileID: 736641614457325659, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1437781195}
-    - targetCorrespondingSourceObject: {fileID: 7180626242048985456, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1831979966}
-    - targetCorrespondingSourceObject: {fileID: 8203424892325780572, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2006059872}
-    - targetCorrespondingSourceObject: {fileID: 8891008377336156483, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1068290013}
-    - targetCorrespondingSourceObject: {fileID: 9045079144697522698, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1060172141}
-    - targetCorrespondingSourceObject: {fileID: 4559873086815340638, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 684089340}
-    - targetCorrespondingSourceObject: {fileID: 511317577496371639, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 160972248}
-    - targetCorrespondingSourceObject: {fileID: 6542150561153485437, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 502509032}
-    - targetCorrespondingSourceObject: {fileID: 8954269093926498853, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 712487650}
-    - targetCorrespondingSourceObject: {fileID: 2942559144620556345, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1608504352}
-    - targetCorrespondingSourceObject: {fileID: 5993919164786405905, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1998351479}
-    - targetCorrespondingSourceObject: {fileID: 8681642055448570815, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1480454606}
-    - targetCorrespondingSourceObject: {fileID: 7368286020441087576, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1067010210}
-    - targetCorrespondingSourceObject: {fileID: 2171700475532249048, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 54883788}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
---- !u!1 &1997525209 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3591412145113089916, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1997525214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997525209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &1998351474 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993919164786405905, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1998351479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998351474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
---- !u!1 &2006059867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8203424892325780572, guid: cc6e8503b764aff43b4c3d192f53849f, type: 3}
-  m_PrefabInstance: {fileID: 1954748852}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2006059872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006059867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d23d7650f711741b1189ef74a63cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceMaxHealth: 100
-  resourceCurHealth: 0
-  gatherCount: 2
-  dropResource: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
-  weaponItemData: {fileID: 0}
-  _dayNightCycle: {fileID: 1500882133}
 --- !u!1001 &7093402737897548936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1263,7 +1934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103776073853484275, guid: 61c2feda36cf360499abd2d0fec148a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.73
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 2103776073853484275, guid: 61c2feda36cf360499abd2d0fec148a2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1297,6 +1968,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2675695308785652307, guid: 61c2feda36cf360499abd2d0fec148a2, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982723339225259229, guid: 61c2feda36cf360499abd2d0fec148a2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1309,3 +1988,4 @@ SceneRoots:
   - {fileID: 56087388}
   - {fileID: 1954748852}
   - {fileID: 7093402737897548936}
+  - {fileID: 1748462174}

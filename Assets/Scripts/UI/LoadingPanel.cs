@@ -19,13 +19,13 @@ namespace _23DaysLeft.UI
         private void OnEnable()
         {
             StartCoroutine(VignetteCoroutine());
-            UIManager.Instance.OnChangeLoadingProgress += SetLoadingProgress;
+            Global.Instance.UIManager.OnChangeLoadingProgress += SetLoadingProgress;
         }
 
         private void OnDestroy()
         {
             StopAllCoroutines();
-            UIManager.Instance.OnChangeLoadingProgress -= SetLoadingProgress;
+            Global.Instance.UIManager.OnChangeLoadingProgress -= SetLoadingProgress;
         }
 
         private IEnumerator VignetteCoroutine()

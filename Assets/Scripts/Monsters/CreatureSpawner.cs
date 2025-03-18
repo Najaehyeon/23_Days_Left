@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _23DaysLeft.Managers;
 using _23DaysLeft.Utils;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -23,10 +24,12 @@ namespace _23DaysLeft.Monsters
         private List<Creature> spawnedCreatures = new();
         private WaitForSeconds waitTime;
         private Camera mainCamera;
+        private bool isSceneInit;
         private int spawnCount = 0;
-
+        
         private void Start()
         {
+            MainSceneBase.Instance.OnMainSceneInitComplete += () => isSceneInit = true;
             waitTime = new WaitForSeconds(spawnDelay);
             mainCamera = Camera.main;
             StartCoroutine(SpawnCoroutine());
@@ -39,8 +42,7 @@ namespace _23DaysLeft.Monsters
 
         private IEnumerator SpawnCoroutine()
         {
-            yield return new WaitForSeconds(2f);
-
+            while (!isSceneInit) yield return null;
             while (true)
             {
                 Spawn();
@@ -53,7 +55,7 @@ namespace _23DaysLeft.Monsters
             if (spawnCount >= maxCount) return;
 
             var spawnPos = GetSpawnPos();
-            var creature = PoolManager.Instance.Spawn<Creature>(GetSpawnCreature());
+            var creature = Global.Instance.PoolManager.Spawn<Creature>(GetSpawnCreature());
             if (NavMesh.SamplePosition(spawnPos, out var hit, 5f, NavMesh.AllAreas))
             {
                 spawnPos = hit.position;
@@ -92,7 +94,7 @@ namespace _23DaysLeft.Monsters
             {
                 var creature = spawnedCreatures[i];
                 spawnedCreatures.RemoveAt(i);
-                PoolManager.Instance.Despawn(creature.gameObject);
+                Global.Instance.PoolManager.Despawn(creature.gameObject);
             }
         }
 

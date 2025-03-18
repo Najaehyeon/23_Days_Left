@@ -1,3 +1,4 @@
+using DaysLeft.Item;
 using UnityEngine;
 
 namespace _23DaysLeft.Monsters
@@ -13,7 +14,6 @@ namespace _23DaysLeft.Monsters
         
         [Header("Combat Info")]
         public CombatType CombatType;
-        public float Defense;
         public float AttackPower;
         public float AttackDelay = 1.5f;
         public float HitDelay = 1.5f;
@@ -28,8 +28,8 @@ namespace _23DaysLeft.Monsters
         public float FieldOfView = 120f;
         public float AttackDistance = 1f;
         
-        // [Header("Creature Drops")]
-        // public ItemData[] DropItems;
+        [Header("Creature Drops")]
+        public ResourceItemData[] DropItems;
     }
 
     public enum CombatType

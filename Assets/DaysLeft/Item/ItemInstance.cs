@@ -2,9 +2,12 @@ namespace DaysLeft.Item
 {
     using UnityEngine;
 
-    public class ItemInstance
+    public class ItemInstance : MonoBehaviour
     {
-        protected ItemData _itemData;
+        protected ItemData  _itemData;
+        protected int       _maxQuantity = 99;
+        protected int       _quantity = 0;
+
         public ItemInstance(int id)
         {
             DataLoadManager dataLoad = Global.Instance.DataLoadManager;
@@ -13,6 +16,22 @@ namespace DaysLeft.Item
                 Debug.LogError("DataLoadManager is not there in Global");
             else
                 _itemData = dataLoad.Query(id);
+        }
+        public ItemInstance(ItemData data)
+        {
+            if (data == null)
+                Debug.LogError("Wrong data");
+            else
+                _itemData = data;
+        }
+        public ItemInstance(ItemInstance data)
+        {
+            if (data == null)
+                Debug.LogError("Wrong data");
+
+            _itemData = data._itemData;
+            _maxQuantity = data._maxQuantity;
+            _quantity = data._quantity;
         }
 
         public int ID               => _itemData.ID;
@@ -23,9 +42,8 @@ namespace DaysLeft.Item
         public bool Stackable       => _itemData.Stackable;
         public Sprite Icon          => _itemData.Icon;
         public GameObject Prefab    => _itemData.Prefab;
-
-        public int MaxQuantity = 99;
-        private int _quantity = 0;
+        public bool HasData         => _itemData != null;
+        public int MaxQuantity      => _maxQuantity;
         public int Quantity
         {
             get { return _quantity; }
@@ -37,7 +55,5 @@ namespace DaysLeft.Item
                 }
             }
         }
-        public bool HasData
-            => _itemData != null;
     }
 }

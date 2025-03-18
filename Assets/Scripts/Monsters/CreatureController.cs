@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _23DaysLeft.Managers;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -42,7 +43,7 @@ namespace _23DaysLeft.Monsters
             lastAttackTime = creatureData.AttackDelay;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
             isDead = false;
-            
+
             // 이벤트 등록
             stateMachine.OnHitAnimationEnd += OnHitEnd;
             stateMachine.OnAttackAnimationEnd += OnAttackEnd;
@@ -57,7 +58,7 @@ namespace _23DaysLeft.Monsters
 
             if (lastHitTime <= creatureData.HitDelay) lastHitTime += Time.deltaTime;
             if (lastAttackTime <= creatureData.AttackDelay) lastAttackTime += Time.deltaTime;
-            
+
             if (!playerTr) return;
             PlayerDetected();
         }
@@ -128,6 +129,7 @@ namespace _23DaysLeft.Monsters
             Vector3 fleeDir = (transform.position - playerTr.position).normalized;
             Vector3 fleeTarget = transform.position + fleeDir * creatureData.FleeDistance;
 
+            if (!navMeshAgent.enabled) return;
             if (NavMesh.SamplePosition(fleeTarget, out var hit, 2f, NavMesh.AllAreas))
             {
                 navMeshAgent.SetDestination(hit.position);
@@ -141,6 +143,7 @@ namespace _23DaysLeft.Monsters
 
             if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
             {
+                if (!navMeshAgent.enabled) return;
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
                 {
                     navMeshAgent.SetDestination(hit.position);
@@ -148,6 +151,7 @@ namespace _23DaysLeft.Monsters
             }
             else
             {
+                if (lastHitTime < creatureData.HitDelay) return;
                 if (lastAttackTime >= creatureData.AttackDelay && IsPlayerInFieldOfView())
                 {
                     Attack();
@@ -173,7 +177,8 @@ namespace _23DaysLeft.Monsters
             stateMachine.StateChange(CreatureState.Attack);
             if (IsTargetInAttackRange())
             {
-                // player.OnHit(creatureData.AttackPower);
+                var controller = CharacterManager.Instance._player.controller;
+                controller.GetHit(creatureData.AttackPower);
             }
         }
 
@@ -197,9 +202,10 @@ namespace _23DaysLeft.Monsters
             StopAllCoroutines();
             stateMachine.StateChange(CreatureState.Hit);
             currentHp = Mathf.Max(currentHp - damage, 0);
-            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
+            Global.Instance.UIManager.UpdateCreatureHpBar(this, currentHp);
             if (currentHp <= 0)
             {
+                Global.Instance.UIManager.InactiveCreatureHpBar(this);
                 Die();
             }
         }
@@ -220,16 +226,19 @@ namespace _23DaysLeft.Monsters
         protected void Die()
         {
             isDead = true;
-            navMeshAgent.enabled = false;
             stateMachine.StateChange(CreatureState.Die);
             StartCoroutine(DieCoroutine());
         }
 
         private IEnumerator DieCoroutine()
         {
-            yield return new WaitForSeconds(1.5f);
-            // 아이템 드롭
-            PoolManager.Instance.Despawn(gameObject);
+            yield return new WaitForSeconds(5f);
+            Global.Instance.PoolManager.Despawn(gameObject);
+            for (int i = 0; i < creatureData.DropItems.Length; i++)
+            {
+                var dropItem = creatureData.DropItems[i];
+                Instantiate(dropItem.Prefab, transform.position, Quaternion.identity);
+            }
         }
 
         public virtual void OnPlayerDetected(Transform player)
@@ -239,8 +248,8 @@ namespace _23DaysLeft.Monsters
             navMeshAgent.speed = GetRandomSpeed(creatureData.CombatSpeed);
             stateMachine.StateChange(CreatureState.Run);
             stateMachine.OnPlayerDetected?.Invoke();
-            UIManager.Instance.ActiveCreatureHpBar(this, transform, creatureData.MaxHp);
-            UIManager.Instance.UpdateCreatureHpBar(this, currentHp);
+            Global.Instance.UIManager.ActiveCreatureHpBar(this, transform, creatureData.MaxHp);
+            Global.Instance.UIManager.UpdateCreatureHpBar(this, currentHp);
             StopAllCoroutines();
         }
 
@@ -250,7 +259,7 @@ namespace _23DaysLeft.Monsters
             playerTr = null;
             navMeshAgent.speed = GetRandomSpeed(creatureData.OriginSpeed);
             stateMachine.OnPlayerFaraway?.Invoke();
-            UIManager.Instance.InactiveCreatureHpBar(this);
+            Global.Instance.UIManager.InactiveCreatureHpBar(this);
             StopAllCoroutines();
             StartCoroutine(Wandering());
         }
