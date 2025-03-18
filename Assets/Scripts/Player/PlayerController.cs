@@ -1,10 +1,14 @@
+using DaysLeft.Menu;
 using DaysLeft.Inventory;
-using DaysLeft.Item;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Other Controller")]
+    [SerializeField]
+    private InventoryUIController InventoryUIController;
+
     [Header("Move")]
     public float moveSpeed; // �÷��̾� �̵� �ӵ�
     Vector3 moveDir; // ���� �̵� ���� ����
@@ -177,7 +181,6 @@ public class PlayerController : MonoBehaviour
             _animator.SetTrigger("DoJump");
         }
     }
-
     public void OnInteractInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)

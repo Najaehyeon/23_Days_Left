@@ -1,6 +1,7 @@
 namespace DaysLeft.Menu
 {
     using DaysLeft.Inventory;
+    using DaysLeft.Item;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -33,9 +34,9 @@ namespace DaysLeft.Menu
                 if (Plugins[i] is not ScreenPluginItemSlot slot)
                     continue;
 
-                slot.data = _inventory.Get(i);
-                if (slot.data != null)
-                    slot.Set();
+                ItemInstance data = _inventory.Get(i);
+                if (data != null)
+                    slot.Set(data);
                 else
                     slot.Clear();
             }
