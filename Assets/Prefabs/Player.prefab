@@ -1480,16 +1480,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f50c24ebc74dae4f918925bc6db0fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemId: -1
+  gatheringObject: {fileID: 2045070930249695980}
+  InventoryUIController: {fileID: 0}
   moveSpeed: 5
+  isAttack: 0
+  isGathering: 0
   sensitivity: 0.05
-  jumpPower: 80
   cameraContainer: {fileID: 1491788901047776944}
   playerBody: {fileID: 6133186000604639182}
+  jumpPower: 80
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  itemId: -1
-  gatheringObject: {fileID: 2045070930249695980}
+  health: 0
 --- !u!114 &5480659044889143255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6735,7 +6739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8203073568141072114, guid: 6cd1ac9652a50da4485a86492f47c63d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8835212951578315848, guid: 6cd1ac9652a50da4485a86492f47c63d, type: 3}
       propertyPath: m_LocalPosition.x
