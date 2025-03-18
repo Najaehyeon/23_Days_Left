@@ -8,9 +8,8 @@ namespace _23DaysLeft.Utils
     public class OnGui : MonoBehaviour
     {
         public bool isDebug = true;
-        private List<GameObject> spawnObjects = new();
-        [SerializeField] private CreatureSpawner spawner;
         [SerializeField] private CreatureController creature;
+        public List<CreatureController> creatures = new List<CreatureController>();
 
         private void Update()
         {
@@ -30,7 +29,10 @@ namespace _23DaysLeft.Utils
             // hit
             if (GUILayout.Button("Hit", buttonStyle))
             {
-                creature.OnHit(20f);
+                for (int i = 0; i < creatures.Count; i++)
+                {
+                    creatures[i].OnHit(20f);
+                }
             }
         }
     }

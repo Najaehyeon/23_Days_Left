@@ -128,6 +128,7 @@ namespace _23DaysLeft.Monsters
             Vector3 fleeDir = (transform.position - playerTr.position).normalized;
             Vector3 fleeTarget = transform.position + fleeDir * creatureData.FleeDistance;
 
+            if (navMeshAgent.isStopped) return;
             if (NavMesh.SamplePosition(fleeTarget, out var hit, 2f, NavMesh.AllAreas))
             {
                 navMeshAgent.SetDestination(hit.position);
@@ -141,6 +142,7 @@ namespace _23DaysLeft.Monsters
 
             if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
             {
+                if (navMeshAgent.isStopped) return;
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
                 {
                     navMeshAgent.SetDestination(hit.position);

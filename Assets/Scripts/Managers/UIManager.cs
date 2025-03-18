@@ -35,7 +35,7 @@ namespace _23DaysLeft.Managers
             }
             else
             {
-                Debug.LogWarning("UIManager: Not exist creature health bar.");
+                Debug.Log("UIManager: Not exist creature health bar.");
             }
         }
         

@@ -11,6 +11,8 @@ namespace _23DaysLeft.Monsters
 {
     public class CreatureSpawner : MonoBehaviour
     {
+        [SerializeField] private OnGui onGui;
+        
         [Header("Spawn Creatures")]
         [SerializeField] private Creatures[] spawnList;
 
@@ -61,6 +63,7 @@ namespace _23DaysLeft.Monsters
                 spawnPos = hit.position;
             }
 
+            onGui.creatures.Add(creature.Controller);
             creature.Init(spawnPos);
             creature.transform.parent = transform;
             spawnCount++;

@@ -978,7 +978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63e7e92cbe6acd458c8d3000fb4199a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolDatas: []
 --- !u!4 &1832684533
 Transform:
   m_ObjectHideFlags: 0
