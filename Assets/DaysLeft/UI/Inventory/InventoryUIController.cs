@@ -2,6 +2,7 @@ namespace DaysLeft.Menu
 {
     using DaysLeft.Inventory;
     using UnityEngine;
+    using UnityEngine.UIElements;
 
     public class InventoryUIController : UIController
     {
@@ -10,6 +11,8 @@ namespace DaysLeft.Menu
 
         [SerializeField]
         private UIScreen MainScreen;
+        [SerializeField]
+        private GameObject Background;
         
         public void ShowItemInfo(Vector3 position, ItemInstance itemInstance)
         {
@@ -30,11 +33,13 @@ namespace DaysLeft.Menu
         {
             if(!MainScreen.gameObject.activeSelf)
             {
+                Background.SetActive(true);
                 Show<ViewUIInventory>();
                 return true;
             }
             else
             {
+                Background.SetActive(false);
                 Hide();
                 return false;
             }

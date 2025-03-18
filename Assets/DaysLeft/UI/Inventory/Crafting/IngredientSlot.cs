@@ -21,6 +21,22 @@ public class IngredientSlot : ScreenPlugin
         itemQuantity = ingredientQuantity;
 
         icon.sprite = ingredient.Icon;
-        text.text = ingredientQuantity.ToString();                
+
+        int remainNum = 0;
+
+        foreach(var item in Global.Instance.Player.inventory.QueryAll(itemId))
+        {
+            remainNum += item.Quantity;
+        }
+
+        text.text = $"{remainNum} / {ingredientQuantity}";
+        if(remainNum > ingredientQuantity)
+        {
+            text.color = Color.white;
+        }
+        else
+        {
+            text.color = Color.red;
+        }
     }
 }

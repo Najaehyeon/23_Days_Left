@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2138a1a9738f51943850e8f4a86e39f1, type: 3}
-  m_Name: 91_Item_Consume_Fish
+  m_Name: 2003_Item_Consume_Fish
   m_EditorClassIdentifier: 
   ID: 91
   Name: Fish
