@@ -177,7 +177,8 @@ namespace _23DaysLeft.Monsters
             stateMachine.StateChange(CreatureState.Attack);
             if (IsTargetInAttackRange())
             {
-                // player.OnHit(creatureData.AttackPower);
+                if (playerTr.TryGetComponent(out PlayerController controller))
+                    controller.GetHit(creatureData.AttackPower);
             }
         }
 
