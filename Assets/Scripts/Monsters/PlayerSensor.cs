@@ -42,8 +42,6 @@ namespace _23DaysLeft.Player
                 if (detectable != null)
                 {
                     currentDetectables.Add(detectable);
-                    Debug.Log(detectable);
-                    Debug.Log(transform.gameObject.name);
                     detectable.OnPlayerDetected(transform);
                 }
             }

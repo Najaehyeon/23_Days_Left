@@ -13,8 +13,8 @@ namespace _23DaysLeft.Monsters
         protected readonly int hashWalk = Animator.StringToHash("IsWalk");
         protected readonly int hashRun = Animator.StringToHash("IsRun");
         protected readonly int hashCombat = Animator.StringToHash("IsCombat");
-        protected readonly int hashAttack = Animator.StringToHash("Attack");
-        protected readonly int hashHit = Animator.StringToHash("Hit");
+        protected readonly int hashAttack = Animator.StringToHash("IsAttack");
+        protected readonly int hashHit = Animator.StringToHash("IsHit");
         protected readonly int hashDie = Animator.StringToHash("Die");
 
         private float enterTime;
@@ -76,6 +76,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Enter()
         {
+            navMeshAgent.enabled = false;
             anim.SetBool(hashAttack, true);
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             enterTime = 0;
@@ -83,7 +84,7 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Update()
         {
-            navMeshAgent.velocity = Vector3.zero;
+            Debug.Log(enterTime);
             enterTime += Time.deltaTime * currentState.normalizedTime;
             if (enterTime >= 1f)
             {
@@ -93,19 +94,21 @@ namespace _23DaysLeft.Monsters
         
         protected override void Attack_Exit()
         {
+            navMeshAgent.enabled = true;
             anim.SetBool(hashAttack, false);
         }
         
         protected override void Hit_Enter()
         {
-            anim.SetTrigger(hashHit);
+            navMeshAgent.velocity = Vector3.zero;
+            navMeshAgent.enabled = false;
+            anim.SetBool(hashHit, true);
             currentState = anim.GetCurrentAnimatorStateInfo(0);
             enterTime = 0;
         }
         
         protected override void Hit_Update()
         {
-            navMeshAgent.velocity = Vector3.zero;
             enterTime += Time.deltaTime * currentState.normalizedTime;
             if (enterTime >= 1f)
             {
@@ -115,6 +118,8 @@ namespace _23DaysLeft.Monsters
         
         protected override void Hit_Exit()
         {
+            navMeshAgent.enabled = true;
+            anim.SetBool(hashHit, false);
         }
         
         protected override void Die_Enter()

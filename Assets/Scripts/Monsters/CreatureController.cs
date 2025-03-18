@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _23DaysLeft.Managers;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -128,7 +129,7 @@ namespace _23DaysLeft.Monsters
             Vector3 fleeDir = (transform.position - playerTr.position).normalized;
             Vector3 fleeTarget = transform.position + fleeDir * creatureData.FleeDistance;
 
-            if (navMeshAgent.isStopped) return;
+            if (!navMeshAgent.enabled) return;
             if (NavMesh.SamplePosition(fleeTarget, out var hit, 2f, NavMesh.AllAreas))
             {
                 navMeshAgent.SetDestination(hit.position);
@@ -142,7 +143,7 @@ namespace _23DaysLeft.Monsters
 
             if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
             {
-                if (navMeshAgent.isStopped) return;
+                if (!navMeshAgent.enabled) return;
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
                 {
                     navMeshAgent.SetDestination(hit.position);
@@ -202,6 +203,7 @@ namespace _23DaysLeft.Monsters
             Global.Instance.UIManager.UpdateCreatureHpBar(this, currentHp);
             if (currentHp <= 0)
             {
+                Global.Instance.UIManager.InactiveCreatureHpBar(this);
                 Die();
             }
         }
@@ -229,7 +231,7 @@ namespace _23DaysLeft.Monsters
 
         private IEnumerator DieCoroutine()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(5f);
             Global.Instance.PoolManager.Despawn(gameObject);
             for (int i = 0; i < creatureData.DropItems.Length; i++)
             {

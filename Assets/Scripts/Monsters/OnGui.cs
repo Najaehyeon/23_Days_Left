@@ -17,6 +17,14 @@ namespace _23DaysLeft.Utils
             {
                 Cursor.lockState = CursorLockMode.None;
             }
+            
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                for (int i = 0; i < creatures.Count; i++)
+                {
+                    creatures[i].OnHit(20f);
+                }
+            }
         }
 
         public void OnGUI()
@@ -25,15 +33,6 @@ namespace _23DaysLeft.Utils
 
             GUIStyle buttonStyle = new(GUI.skin.button);
             buttonStyle.fontSize = 25;
-            
-            // hit
-            if (GUILayout.Button("Hit", buttonStyle))
-            {
-                for (int i = 0; i < creatures.Count; i++)
-                {
-                    creatures[i].OnHit(20f);
-                }
-            }
         }
     }
 }

@@ -15,10 +15,10 @@ namespace _23DaysLeft.UI
 
         public void SetInfo(Transform target, float maxHp)
         {
+            if (!mainCamera) mainCamera = Camera.main;
             transform.localScale = Vector3.one;
             maxHealth = maxHp;
             targetTr = target;
-            if (!mainCamera) mainCamera = Camera.main;
         }
 
         private void Update()
