@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace _23DaysLeft.UI
 {
-    public class TestButton : MonoBehaviour
+    public class StartButton : MonoBehaviour
     {
         [SerializeField] private GameObject eventSystem;
         [SerializeField] private Button startBtn;
