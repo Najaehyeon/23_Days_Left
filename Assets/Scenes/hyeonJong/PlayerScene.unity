@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
       propertyPath: startTime
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 386274188406399208, guid: efa5b22a4544e09459b8b9f75d019a27, type: 3}
       propertyPath: currentTime
