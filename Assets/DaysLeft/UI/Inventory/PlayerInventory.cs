@@ -2,9 +2,7 @@ namespace DaysLeft.Inventory
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using UnityEngine;
-    using DaysLeft.Item;
 
     public class PlayerInventory
     {
@@ -71,7 +69,23 @@ namespace DaysLeft.Inventory
         /// <param name="newItem">ItemInstance</param>
         public void AddNew(int itemID)
         {
-            ItemInstance newItem = new(itemID);
+            ItemInstance newItem ;
+
+            if (itemID >= 0 && itemID < 1000)
+            {
+                newItem = new ItemInstance(itemID);
+            }
+            else if (itemID >= 1000 && itemID < 2000)
+            {
+                newItem = new WeaponInstance(itemID);
+            }
+            else if (itemID >= 2000 && itemID < 3000)
+            {
+                newItem = new ConsumeInstance(itemID);
+            }
+            else
+                newItem = null;
+
             if (!newItem.HasData)
                 Debug.LogError("Try add new item that have no data.");
 
@@ -93,7 +107,6 @@ namespace DaysLeft.Inventory
             if(CurCapacity < MaxCapacity && newItem.Weight <= MaxWeight - CurWeight)
             {
                 _items[CurEmptyIndex] = newItem;
-                Debug.Log("주었음");
                 OnContentsChanged?.Invoke();
             }
         }
@@ -112,10 +125,14 @@ namespace DaysLeft.Inventory
             while (targetItems[0].MaxQuantity < consumeQuantity)
             {
                 consumeQuantity -= targetItems[0].MaxQuantity;
+                targetItems[0] = null;
                 targetItems.RemoveAt(0);
             }
 
             targetItems[0].Quantity -= consumeQuantity;
+            if (targetItems[0].Quantity <= 0)
+                targetItems[0] = null;
+
             OnContentsChanged?.Invoke();
             return true;
         }

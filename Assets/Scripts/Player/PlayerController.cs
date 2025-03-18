@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         // ���콺 Ŀ���� ȭ�� �߾ӿ� ����
-        Cursor.lockState = CursorLockMode.Locked;
         inventory = CharacterManager.Instance.Player.inventory;
         isDead = false;
         health = MaxHealth;

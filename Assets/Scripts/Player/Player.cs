@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     {
         CharacterManager.Instance.Player = this;
         controller =  GetComponent<PlayerController>();
-        Global.Instance.Player = this;
         inventory = new();
+        Global.Instance.Player = this;
         attackController = GetComponent<PlayerAttackController>();
     }
 }
