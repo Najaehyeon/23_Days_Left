@@ -16,11 +16,11 @@ MonoBehaviour:
   MaxHp: 100
   OriginSpeed: 2
   Prefab: {fileID: 810085087943447243, guid: aedf3c340bfa96147926ffe33b06e692, type: 3}
-  CombatType: 1
+  CombatType: 0
   Defense: 2
   AttackPower: 5
   AttackDelay: 1.5
-  HitDelay: 1.5
+  HitDelay: 0.8
   CombatSpeed: 3
   MinWanderDistance: 10
   MaxWanderDistance: 15
