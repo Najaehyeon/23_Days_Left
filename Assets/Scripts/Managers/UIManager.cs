@@ -33,10 +33,6 @@ namespace _23DaysLeft.Managers
             {
                 creatureHealthBars[creature].ChangeHealth(currenHp);
             }
-            else
-            {
-                Debug.Log("UIManager: Not exist creature health bar.");
-            }
         }
         
         public void InactiveCreatureHpBar(CreatureController creature)
