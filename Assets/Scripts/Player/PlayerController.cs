@@ -209,7 +209,11 @@ public class PlayerController : MonoBehaviour
     public void GetHit(float damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health > 0)
+        {
+            _animator.SetTrigger("DoGetHit");
+        }
+        else if (health <= 0)
         {
             _animator.SetTrigger("DoDie");
             isDead = true;
