@@ -12,6 +12,9 @@ namespace DaysLeft.Menu
         public UIItemInfo       ItemInfoPopupHandler;
         public UICraftingInfo   CraftingInfoPopupHandler;
 
+        [SerializeField]
+        private UIScreen MainScreen;
+        
         public void ShowItemInfo(Vector3 position, ItemInstance itemInstance)
         {
             ItemInfoPopupHandler.ShowItemInfo(position, itemInstance);
@@ -25,6 +28,20 @@ namespace DaysLeft.Menu
         public void ShowCraftingInfo(Recipe recipe)
         {
             CraftingInfoPopupHandler.ShowItemInfo(recipe);
+        }
+
+        public bool Toggle()
+        {
+            if(!MainScreen.gameObject.activeSelf)
+            {
+                Show<ViewUIInventory>();
+                return true;
+            }
+            else
+            {
+                Hide();
+                return false;
+            }
         }
     }
 }

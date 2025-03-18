@@ -74,8 +74,8 @@ namespace DaysLeft.Menu
             if (_screens != null && _screens.Length > 0)
             {
                 // First screen is displayed by default
-                _screens[0].Show();
-                _activeScreen = _screens[0];
+                //_screens[0].Show();
+                //_activeScreen = _screens[0];
             }
         }
 
@@ -104,6 +104,16 @@ namespace DaysLeft.Menu
             {
                 Debug.LogError($"Show() - Screen type '{typeof(S).Name}' not found");
             }
+        }
+
+        public void Hide()
+        {
+            if (_activeScreen != null)
+            {
+                _activeScreen.Hide();
+                _activeScreen = null;
+            }
+
         }
 
         /// <summary>
