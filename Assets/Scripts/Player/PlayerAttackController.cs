@@ -30,8 +30,8 @@ public class PlayerAttackController : MonoBehaviour
     public GameObject equippedBow;
 
     [Header("Target")]
-    public ResourceObject resourceObject;
     public AttackTargetType attackTargetType;
+    public ResourceObject resourceObject;
 
     [Header("Stat")]
     public float attackDamage;
@@ -40,10 +40,10 @@ public class PlayerAttackController : MonoBehaviour
     public float durability;
 
     [Header("Attack System")]
+    private Animator _animator;
     public float attackRate;
     private float afterLastAttackTime;
     private int randomPunchHand;
-    private Animator _animator;
 
     private void Awake()
     {
