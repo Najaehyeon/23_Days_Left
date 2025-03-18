@@ -1,8 +1,6 @@
 namespace DaysLeft.Menu
 {
     using DaysLeft.Inventory;
-    using DaysLeft.Item;
-    using System.Collections.Generic;
     using UnityEngine;
 
     public class ViewUIInventory : UIScreen

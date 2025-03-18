@@ -1,13 +1,10 @@
-using DaysLeft.Item;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ResourceObject : MonoBehaviour
 {
     public float resourceMaxHealth = 100f;
     public float resourceCurHealth;
-    public float gatherCount = 2; // Ã¤ÁıÇÒ ¼ö ÀÖ´Â ³²Àº ÀÚ¿ø
+    public float gatherCount = 2; // ì±„ì§‘í•  ìˆ˜ ìˆëŠ” ë‚¨ì€ ìì›
     public GameObject dropResource;
     public WeaponItemData weaponItemData;
     public DayNightCycle _dayNightCycle;

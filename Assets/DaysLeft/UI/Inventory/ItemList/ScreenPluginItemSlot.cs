@@ -1,7 +1,6 @@
 namespace DaysLeft.Inventory
 {
     using TMPro;
-    using DaysLeft.Item;
     using UnityEngine;
     using UnityEngine.UI;
     using DaysLeft.Menu;
@@ -20,6 +19,8 @@ namespace DaysLeft.Inventory
         private Transform   ItemTransform;
         [SerializeField]
         private Canvas      ItemIconCanvas;
+        [SerializeField]
+        private Button      ItemButton;
 
         private InventoryUIController _controller;
 
@@ -34,6 +35,19 @@ namespace DaysLeft.Inventory
             else
                 ItemQuantity.text = "";
             ItemIcon.sprite = _data.Icon;
+            ItemIcon.color = Color.white;
+
+            if(_data is ConsumeInstance)
+                ItemButton.onClick.AddListener(UseItem);
+        }
+
+        public void UseItem()
+        {
+            if(_data is ConsumeInstance data)
+            {
+                data.Consume();
+                Global.Instance.Player.inventory.TrySubtract(data.ID, 1);
+            }
         }
 
         public void Clear()
@@ -41,6 +55,7 @@ namespace DaysLeft.Inventory
             _data = null;
             ItemQuantity.text = null;
             ItemIcon.sprite  = null;
+            ItemIcon.color = Color.clear;
         }
 
         public override void Show(UIScreen screen)
@@ -92,18 +107,39 @@ namespace DaysLeft.Inventory
 
             GameObject obj = eventData.pointerCurrentRaycast.gameObject;
 
-            if(obj.TryGetComponent(out ScreenPluginItemSlot slot))
+            if (obj.TryGetComponent(out ScreenPluginItemSlot slot))
             {
-                if(slot._data == null)
-                {
-                    slot.Set(_data);
-                    this.Clear();
+                if (slot is ScreenPluginWeaponSlot)
+                { 
+                    if (_data is WeaponInstance _weaponData)
+                    {
+                        Global.Instance.Player.attackController.Equip(_weaponData);
+                        if (slot._data == null)
+                        {
+                            slot.Set(_data);
+                            this.Clear();
+                        }
+                        else
+                        {
+                            WeaponInstance targetData = new WeaponInstance(slot._data as WeaponInstance);
+                            slot.Set(_data);
+                            this.Set(targetData);
+                        }
+                    }
                 }
                 else
                 {
-                    ItemInstance targetData = new ItemInstance(slot._data);
-                    slot.Set(_data);
-                    this.Set(targetData);
+                    if (slot._data == null)
+                    {
+                        slot.Set(_data);
+                        this.Clear();
+                    }
+                    else
+                    {
+                        ItemInstance targetData = new ItemInstance(slot._data);
+                        slot.Set(_data);
+                        this.Set(targetData);
+                    }
                 }
             }
 

@@ -12,22 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa1fb529e6a33347a42c6b6fb4d53b1, type: 3}
   m_Name: 1001_Item_Weapon_Axe
   m_EditorClassIdentifier: 
-  ID: 1000
+  ID: 1001
   Name: Axe
   Description: Can choping wood. Maybe it make you chob chob.
   Rarity: 0
-  weight: 0
-  Price: 0
-  SellPrice: 0
-  Currency: 0
+  weight: 10
+  Price: 10
+  SellPrice: 10
+  Currency: 10
   Stackable: 0
-  Icon: {fileID: 21300000, guid: 1fb46228a3bcb5042a763829cc07f9e5, type: 3}
+  Icon: {fileID: 21300000, guid: 6a08ec4b334ea1c46b8171679417a74f, type: 3}
   Prefab: {fileID: 5676840300738598790, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
-  weaponName: 
-  weaponDescription: 
-  weaponIcon: {fileID: 0}
+  type: 2
   attackDamage: 10
   digWoodDamage: 10
   mineOreDamage: 10
   durability: 100
-  currentDurability: 0

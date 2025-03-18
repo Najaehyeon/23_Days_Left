@@ -1,11 +1,7 @@
 namespace DaysLeft.Menu
 {
     using DaysLeft.Inventory;
-    using DaysLeft.Item;
-    using DaysLeft.Inventory;
-    using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class InventoryUIController : UIController
     {
