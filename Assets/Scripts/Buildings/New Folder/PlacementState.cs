@@ -59,12 +59,12 @@ public class PlacementState : IBuildingState
     /// angle으로 넘어오는건 TempInputManager.angle으로 회전각
     /// </summary>
     /// <param name="gridPosition"></param>
-    public void OnAction(Vector3Int gridPosition, float angle)
+    public void OnAction(Vector3Int gridPosition, float angle, Transform parent)
     {
         // PlaceStructure
 
         /// 영역검사할때도 격자의 회전을 반영해야한다
-        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjIndex, angle);
+        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjIndex, angle, parent);
         if (placementValidity == false)
         {
             soundFeedback.PlaySound(SoundType.wrongPlacement);
@@ -83,7 +83,7 @@ public class PlacementState : IBuildingState
         selectedData.AddObjectAt(gridPosition,
             database.objectsData[selectedObjIndex].Size,
             database.objectsData[selectedObjIndex].ID,
-            index, angle);
+            index, angle, parent);
 
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
@@ -95,14 +95,14 @@ public class PlacementState : IBuildingState
     /// <param name="gridPosition"></param>
     /// <param name="selectedObjIndex"></param>
     /// <returns></returns>
-    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjIndex, float angle)
+    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjIndex, float angle, Transform parent)
     {
         GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? tree : buildingData;
 
         /// gridPosition는 그리드의 좌표
         /// database.objectsData[selectedObjIndex]는 preview 오브젝트
         /// CanPlaceObjAt는 마우스가 있는 gridPosition에 preview오브젝트를 놓을 수 있으면 true를 리턴
-        return selectedData.CanPlaceObjAt(gridPosition, database.objectsData[selectedObjIndex].Size, angle);
+        return selectedData.CanPlaceObjAt(gridPosition, database.objectsData[selectedObjIndex].Size, angle, parent);
     }
 
     /// <summary>
@@ -110,11 +110,11 @@ public class PlacementState : IBuildingState
     /// angle은 TempInputManager.angle 이다
     /// </summary>
     /// <param name="gridPosition"></param>
-    public void UpdateState(Vector3Int gridPosition, float angle)
+    public void UpdateState(Vector3Int gridPosition, float angle, Transform parent)
     {
         /// gridPosition는 그리드의 좌표
         /// selectedObjIndex는 UI에서 선택한 인덱스(preview 오브젝트)
-        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjIndex, angle);
+        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjIndex, angle, parent);
 
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
     }

@@ -21,7 +21,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private AudioClip correctPlacementClip, wrongPlacementClip;
     [SerializeField] private AudioSource source;
 
-    private GridData floorData, furnitureData;
+    private GridData fenceData, buildingData;
+    [SerializeField] public Transform gridParent;   // 그리드의 부모
 
     /// <summary>
     /// 미리 보여주는 preview 오브젝트
@@ -44,8 +45,8 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         StopPlacement();
-        floorData = new GridData();
-        furnitureData = new GridData();
+        fenceData = new GridData();
+        buildingData = new GridData();
     }
 
     /// <summary>
@@ -60,8 +61,8 @@ public class PlacementSystem : MonoBehaviour
                                            grid,
                                            preview,
                                            database,
-                                           floorData,
-                                           furnitureData,
+                                           fenceData,
+                                           buildingData,
                                            objectPlacer,
                                            soundFeedback);
 
@@ -81,7 +82,7 @@ public class PlacementSystem : MonoBehaviour
 
         /// 오브젝트 생성
         /// preview의 회전상태를 반영해야한다
-        buildingState.OnAction(gridPosition, tempInputManager.angle);
+        buildingState.OnAction(gridPosition, tempInputManager.angle, gridParent);
     }
 
     /// <summary>
@@ -117,7 +118,7 @@ public class PlacementSystem : MonoBehaviour
         // grid 내에서 커서가 이동하면 연산하지 않는다
         if (lastDetectedPosition != gridPosition)
         {
-            buildingState.UpdateState(gridPosition, tempInputManager.angle);    /// gridPosition은 월드좌표가 아님에 주의한다
+            buildingState.UpdateState(gridPosition, tempInputManager.angle, gridParent);    /// gridPosition은 월드좌표가 아님에 주의한다
             lastDetectedPosition = gridPosition;
         }
         // R키를 누르면 시계방향으로 회전

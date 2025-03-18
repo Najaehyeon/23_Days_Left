@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IBuildingState
 {
     void EndState();
-    void OnAction(Vector3Int gridPosition, float angle);
-    void UpdateState(Vector3Int gridPosition, float angle);
+    //void OnAction(Vector3Int gridPosition, float angle);
+    void OnAction(Vector3Int gridPosition, float angle, Transform parentTransform);
+    void UpdateState(Vector3Int gridPosition, float angle, Transform parent);
 }
