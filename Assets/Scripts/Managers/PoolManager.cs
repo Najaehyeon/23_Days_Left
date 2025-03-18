@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace _23DaysLeft.Managers
 {
-    public class PoolManager : Singleton<PoolManager>
+    public class PoolManager : MonoBehaviour
     {
-        [SerializeField] private PoolData[] poolDatas;
         private readonly Dictionary<string, Queue<GameObject>> poolDictionary = new();
         private readonly Dictionary<string, GameObject> prefabDictionary = new();
         private readonly Dictionary<string, Transform> poolParentDictionary = new();
@@ -16,10 +15,7 @@ namespace _23DaysLeft.Managers
         public void Start()
         {
             poolParent = new GameObject("PoolParent").transform;
-            for (int i = 0; i < poolDatas.Length; i++)
-            {
-                CreatePool(poolDatas[i].Prefab, poolDatas[i].PoolSize);
-            }
+            poolParent.SetParent(transform);
         }
 
         public void CreatePool(GameObject prefab, int poolSize)
@@ -125,17 +121,18 @@ namespace _23DaysLeft.Managers
 
         public void ReleaseAllPool()
         {
+            foreach (var pool in poolDictionary)
+            {
+                foreach (var obj in pool.Value)
+                {
+                    Destroy(obj);
+                }
+            }
+            
             poolDictionary.Clear();
             prefabDictionary.Clear();
             poolParentDictionary.Clear();
             despawnedObjects.Clear();
         }
-    }
-
-    [Serializable]
-    public class PoolData
-    {
-        public GameObject Prefab;
-        public int PoolSize;
     }
 }

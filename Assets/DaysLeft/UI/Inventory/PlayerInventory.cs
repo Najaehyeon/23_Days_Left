@@ -93,6 +93,7 @@ namespace DaysLeft.Inventory
             if(CurCapacity < MaxCapacity && newItem.Weight <= MaxWeight - CurWeight)
             {
                 _items[CurEmptyIndex] = newItem;
+                Debug.Log("주었음");
                 OnContentsChanged?.Invoke();
             }
         }

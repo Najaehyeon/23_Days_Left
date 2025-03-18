@@ -1,4 +1,5 @@
 using DaysLeft.Menu;
+using DaysLeft.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody _rigidbody; // �÷��̾��� �������� (�߷�, �浹 ó��)
     Animator _animator; // �ִϸ��̼� ��Ʈ�ѷ�
 
+    PlayerInventory inventory;
+    public int itemId = -1;
+    public GameObject gatheringObject;
+
     private void Awake()
     {
         // Rigidbody �� Animator ������Ʈ�� ������ ����
@@ -40,6 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         // ���콺 Ŀ���� ȭ�� �߾ӿ� ����
         Cursor.lockState = CursorLockMode.Locked;
+        inventory = CharacterManager.Instance.Player.inventory;
     }
 
     private void FixedUpdate()
@@ -175,15 +181,26 @@ public class PlayerController : MonoBehaviour
             _animator.SetTrigger("DoJump");
         }
     }
-
-    public void OnInventoryInput(InputAction.CallbackContext context)
+    public void OnInteractInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
-            if (InventoryUIController.Toggle())
-                Cursor.lockState = CursorLockMode.None;
-            else
-                Cursor.lockState = CursorLockMode.Locked;
+            gatheringObject.SetActive(true);
+            _animator.SetTrigger("DoInteract");
+            Invoke("gatheringLock", 0.5f);
+        }
+    }
+
+    void gatheringLock()
+    {
+        if (itemId == -1)
+        {
+            gatheringObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            gatheringObject.SetActive(false);
         }
     }
 }
