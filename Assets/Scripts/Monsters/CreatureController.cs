@@ -20,6 +20,7 @@ namespace _23DaysLeft.Monsters
         protected CreatureStateMachine stateMachine;
         protected CreatureData creatureData;
         protected NavMeshAgent navMeshAgent;
+        protected CreatureSpawner creatureSpawner;
 
         // state
         protected WaitForSeconds idleWaitTime;
@@ -31,7 +32,6 @@ namespace _23DaysLeft.Monsters
         // status
         protected float currentHp;
         protected bool isDead = true;
-        private bool isSpawned;
 
         public virtual void Init(Creature creature)
         {
@@ -41,12 +41,14 @@ namespace _23DaysLeft.Monsters
             navMeshAgent = creature.NavMeshAgent;
             currentHp = creatureData.MaxHp;
             lastAttackTime = creatureData.AttackDelay;
+            lastHitTime = creatureData.HitDelay;
             idleWaitTime = new WaitForSeconds(creatureData.IdleTime);
             isDead = false;
 
             // 이벤트 등록
             stateMachine.OnHitAnimationEnd += OnHitEnd;
             stateMachine.OnAttackAnimationEnd += OnAttackEnd;
+            CharacterManager.Instance.Player.controller.OnPlayerDead += OnPlayerFaraway;
 
             // 상태 코루틴
             StartCoroutine(Wandering());
@@ -141,7 +143,7 @@ namespace _23DaysLeft.Monsters
             Vector3 direction = (playerTr.position - transform.position).normalized;
             Vector3 desiredPos = playerTr.position - direction * creatureData.AttackDistance;
 
-            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.5f)
+            if (Vector3.Distance(playerTr.position, transform.position) > creatureData.AttackDistance + 0.3f)
             {
                 if (!navMeshAgent.enabled) return;
                 if (NavMesh.SamplePosition(desiredPos, out var hit, 1f, NavMesh.AllAreas))
@@ -177,14 +179,14 @@ namespace _23DaysLeft.Monsters
             stateMachine.StateChange(CreatureState.Attack);
             if (IsTargetInAttackRange())
             {
-                var controller = CharacterManager.Instance._player.controller;
+                var controller = CharacterManager.Instance.Player.controller;
                 controller.GetHit(creatureData.AttackPower);
             }
         }
 
         protected bool IsTargetInAttackRange()
         {
-            return Vector3.Distance(playerTr.position, transform.position) <= creatureData.AttackDistance;
+            return Vector3.Distance(playerTr.position, transform.position) <= creatureData.AttackDistance + 0.3f;
         }
 
         protected virtual void OnAttackEnd()
@@ -227,6 +229,7 @@ namespace _23DaysLeft.Monsters
         {
             isDead = true;
             stateMachine.StateChange(CreatureState.Die);
+            creatureSpawner.CreatureDied();
             StartCoroutine(DieCoroutine());
         }
 
@@ -237,8 +240,13 @@ namespace _23DaysLeft.Monsters
             for (int i = 0; i < creatureData.DropItems.Length; i++)
             {
                 var dropItem = creatureData.DropItems[i];
-                Instantiate(dropItem.Prefab, transform.position, Quaternion.identity);
+                Global.Instance.PoolManager.Spawn(dropItem.Name, transform.position + Vector3.up);
             }
+        }
+
+        public void CreatureSpawned(CreatureSpawner spawner)
+        {
+            creatureSpawner = spawner;
         }
 
         public virtual void OnPlayerDetected(Transform player)

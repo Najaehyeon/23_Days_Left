@@ -28,4 +28,5 @@ MonoBehaviour:
   FleeDistance: 10
   FieldOfView: 120
   AttackDistance: 1
-  DropItems: []
+  DropItems:
+  - {fileID: 11400000, guid: d22856cbfa3fa234a89cff2024826d8a, type: 2}

@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
 
     public void GetHit(float damage)
     {
+        Debug.Log("Player GetHit");
         health -= damage;
         if (health > 0)
         {

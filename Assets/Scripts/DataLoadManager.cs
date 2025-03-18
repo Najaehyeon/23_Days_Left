@@ -51,6 +51,11 @@ public class DataLoadManager : MonoBehaviour
         }
     }
     
+    public List<ItemData> GetItemList()
+    {
+        return itemDatas;
+    }
+    
     public List<CreatureData> GetCreatureList()
     {
         return creatureDatas.Values.ToList();

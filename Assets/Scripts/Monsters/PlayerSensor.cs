@@ -23,7 +23,7 @@ namespace _23DaysLeft.Player
             // TODO: 최대 몬스터 수 정해지면 변경
             buffer = new Collider[10];
             lastDetectTime = detectInterval;
-            CharacterManager.Instance._player.controller.OnPlayerDead += PlayerDead;
+            CharacterManager.Instance.Player.controller.OnPlayerDead += PlayerDead;
         }
 
         private void Update()

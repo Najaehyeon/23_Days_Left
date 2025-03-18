@@ -29,7 +29,7 @@ namespace _23DaysLeft.Monsters
         public float AttackDistance = 1f;
         
         [Header("Creature Drops")]
-        public ResourceItemData[] DropItems;
+        public ItemData[] DropItems;
     }
 
     public enum CombatType

@@ -16,7 +16,7 @@ namespace _23DaysLeft.Utils
                 _                 => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
             };
         }
-        
+
         public static string ToName(this Creatures creatures)
         {
             return creatures switch
@@ -38,5 +38,58 @@ namespace _23DaysLeft.Utils
                 _                         => throw new ArgumentOutOfRangeException(nameof(creatures), creatures, null)
             };
         }
+
+        public static string GetClipName(this SoundType soundType)
+        {
+            return soundType switch
+            {
+                SoundType.MonsterHit   => "MonsterHit",
+                SoundType.LoadingBGM   => "CampFire",
+                SoundType.AnimalDead   => "AnimalDead",
+                SoundType.SkeletonDead => "SkeletonDead",
+                SoundType.GolemDead    => "GolemDead",
+                SoundType.BossDead     => "BossDead",
+                _                      => throw new ArgumentOutOfRangeException(nameof(soundType), soundType, null)
+            };
+        }
     }
+
+    #region Enum
+
+    public enum SceneType
+    {
+        Title,
+        Loading,
+        Main,
+    }
+
+    public enum Creatures
+    {
+        Colobus,
+        Squid,
+        Taipan,
+        Skeleton_Easy,
+        Skeleton_Normal,
+        Skeleton_Hard,
+        Golem,
+        PinkGolem,
+        GreenGolem,
+        PurpleGolem,
+        RedGolem,
+        GiantGolem,
+        GreenGiantGolem,
+        RedGiantGolem,
+    }
+
+    public enum SoundType
+    {
+        LoadingBGM,
+        MonsterHit,
+        AnimalDead,
+        SkeletonDead,
+        GolemDead,
+        BossDead,
+    }
+
+    #endregion
 }

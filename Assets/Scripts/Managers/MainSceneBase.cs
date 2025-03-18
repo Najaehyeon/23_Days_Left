@@ -42,6 +42,13 @@ namespace _23DaysLeft.Managers
 
         private void CreatePool()
         {
+            // Item
+            for (int i = 90; i < 94; i++)
+            {
+                var item = Global.Instance.DataLoadManager.Query(i);
+                Global.Instance.PoolManager.CreatePool(item.Prefab, 10);
+            }
+            
             // Monster
             var creatures = Global.Instance.DataLoadManager.GetCreatureList();
             foreach (var creature in creatures)

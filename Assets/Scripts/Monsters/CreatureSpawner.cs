@@ -16,14 +16,11 @@ namespace _23DaysLeft.Monsters
 
         [Header("Spawn Settings")]
         [SerializeField] private float radius = 30f;
-
         [SerializeField] private int spawnY = 3;
         [SerializeField] private int maxCount = 10;
         [SerializeField] private float spawnDelay = 20f;
 
-        private List<Creature> spawnedCreatures = new();
         private WaitForSeconds waitTime;
-        private Camera mainCamera;
         private bool isSceneInit;
         private int spawnCount = 0;
         
@@ -31,7 +28,6 @@ namespace _23DaysLeft.Monsters
         {
             MainSceneBase.Instance.OnMainSceneInitComplete += () => isSceneInit = true;
             waitTime = new WaitForSeconds(spawnDelay);
-            mainCamera = Camera.main;
             StartCoroutine(SpawnCoroutine());
         }
 
@@ -62,6 +58,7 @@ namespace _23DaysLeft.Monsters
             }
 
             creature.Init(spawnPos);
+            creature.Controller.CreatureSpawned(this);
             creature.transform.parent = transform;
             spawnCount++;
         }
@@ -80,22 +77,10 @@ namespace _23DaysLeft.Monsters
             spawnPos.y = spawnY;
             return spawnPos;
         }
-
-        public void DespawnCreature(int count)
+        
+        public void CreatureDied()
         {
-            if (spawnedCreatures.Count == 0) return;
-
-            if (count > spawnedCreatures.Count)
-            {
-                count = spawnedCreatures.Count;
-            }
-
-            for (int i = 0; i < count; i++)
-            {
-                var creature = spawnedCreatures[i];
-                spawnedCreatures.RemoveAt(i);
-                Global.Instance.PoolManager.Despawn(creature.gameObject);
-            }
+            spawnCount--;
         }
 
         private void OnDrawGizmos()
@@ -103,23 +88,5 @@ namespace _23DaysLeft.Monsters
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, radius);
         }
-    }
-
-    public enum Creatures
-    {
-        Colobus,
-        Squid,
-        Taipan,
-        Skeleton_Easy,
-        Skeleton_Normal,
-        Skeleton_Hard,
-        Golem,
-        PinkGolem,
-        GreenGolem,
-        PurpleGolem,
-        RedGolem,
-        GiantGolem,
-        GreenGiantGolem,
-        RedGiantGolem,
     }
 }
