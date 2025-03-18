@@ -1,38 +1,56 @@
 using DaysLeft.Menu;
 using DaysLeft.Inventory;
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    Rigidbody _rigidbody; // �÷��̾��� �������� (�߷�, �浹 ó��)
+    Animator _animator;   // �ִϸ��̼� ��Ʈ�ѷ�
+
+    PlayerInventory inventory;
+    public int itemId = -1;
+    public GameObject gatheringObject;
+    public Action OnPlayerDead;
+
     [Header("Other Controller")]
     [SerializeField]
     private InventoryUIController InventoryUIController;
 
     [Header("Move")]
     public float moveSpeed; // �÷��̾� �̵� �ӵ�
-    Vector3 moveDir; // ���� �̵� ���� ����
+
+    Vector3 moveDir;          // ���� �̵� ���� ����
     Vector2 currentMoveInput; // �Էµ� �̵� ���� (WASD)
+    public bool isAttack = false;
+    public bool isGathering = false;
 
     [Header("Look")]
     public float sensitivity; // ���콺 ���� (ȸ�� �ӵ� ����)
-    float curCamXRot; // ���� ī�޶� X�� ȸ���� (����)
-    float curCamYRot; // ���� ī�޶� Y�� ȸ���� (�¿�)
-    Vector2 mouseDelta; // ���콺 �̵� �Է� ��
+
+    float curCamXRot;                 // ���� ī�޶� X�� ȸ���� (����)
+    float curCamYRot;                 // ���� ī�޶� Y�� ȸ���� (�¿�)
+    Vector2 mouseDelta;               // ���콺 �̵� �Է� ��
+    public Transform cameraContainer; // ī�޶� ���� ������Ʈ
+    public Transform playerBody;      // �÷��̾��� ��ü
 
     [Header("Jump")]
     public float jumpPower; // ���� ��
 
-    public Transform cameraContainer; // ī�޶� ���� ������Ʈ
-    public Transform playerBody; // �÷��̾��� ��ü
     public LayerMask groundLayerMask; // �ٴ� ������ ���� ���̾� ����ũ
 
-    Rigidbody _rigidbody; // �÷��̾��� �������� (�߷�, �浹 ó��)
-    Animator _animator; // �ִϸ��̼� ��Ʈ�ѷ�
+    [Header("Status")]
+    public float MaxHealth = 100f;
+    private float health;
+    public float MaxHunger = 100f;
+    private float hunger;
+    public float hungerSpeed;
 
-    PlayerInventory inventory;
-    public int itemId = -1;
-    public GameObject gatheringObject;
+    private bool isDead;
+
+    public bool IsDead => isDead;
 
     private void Awake()
     {
@@ -45,17 +63,27 @@ public class PlayerController : MonoBehaviour
     {
         // ���콺 Ŀ���� ȭ�� �߾ӿ� ����
         inventory = CharacterManager.Instance.Player.inventory;
+        isDead = false;
+        health = MaxHealth;
+        hunger = MaxHunger;
     }
 
     private void FixedUpdate()
     {
-        // �̵� ó�� (���� ������ �����)
-        Move();
+        if (!isDead && !isAttack && !isGathering)
+        {
+            Move();
+        }
+    }
+
+    private void Update()
+    {
+        if (isDead) return;
+        Hungry();
     }
 
     private void LateUpdate()
     {
-        // ī�޶� ȸ�� ó�� (LateUpdate�� �����Ӹ��� �����)
         Look();
     }
 
@@ -66,7 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         // ī�޶��� ���� ���͸� �������� �̵� ���� ����
         Vector3 camForward = cameraContainer.forward;
-        camForward.y = 0; // ����(y) ������ �����Ͽ� ���� �������� �̵�
+        camForward.y = 0;       // ����(y) ������ �����Ͽ� ���� �������� �̵�
         camForward.Normalize(); // ũ�⸦ 1�� ����ȭ
 
         // ī�޶��� ���� ���͸� �������� �¿� �̵� ���� ����
@@ -76,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
         // �Էµ� �̵� ������ ������� ���� �̵� ������ ���
         moveDir = camForward * currentMoveInput.y + camRight * currentMoveInput.x;
-        moveDir *= moveSpeed; // �̵� �ӵ� ����
+        moveDir *= moveSpeed;              // �̵� �ӵ� ����
         moveDir.y = _rigidbody.velocity.y; // y��(�߷�) �� ����
 
         // Rigidbody�� �̿��� �̵� ó��
@@ -110,7 +138,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Turn()
     {
-        playerBody.forward = moveDir; // �̵� �������� ȸ��
+        playerBody.forward = moveDir;                                                   // �̵� �������� ȸ��
         playerBody.localEulerAngles = new Vector3(0, playerBody.localEulerAngles.y, 0); // X, Z�� ȸ�� ����
     }
 
@@ -137,6 +165,7 @@ public class PlayerController : MonoBehaviour
                 return true;
             }
         }
+
         return false;
     }
 
@@ -171,7 +200,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
+        if (context.phase == InputActionPhase.Started && IsGrounded() && !isDead && !isAttack && !isGathering)
         {
             // ���� �� Rigidbody�� ���� �߰�
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
@@ -180,26 +209,59 @@ public class PlayerController : MonoBehaviour
             _animator.SetTrigger("DoJump");
         }
     }
+
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && !isDead && !isAttack && !isGathering)
         {
+            isGathering = true;
             gatheringObject.SetActive(true);
             _animator.SetTrigger("DoInteract");
-            Invoke("gatheringLock", 0.5f);
+            Invoke("gatheringLock", 1.8f);
         }
     }
 
     void gatheringLock()
     {
-        if (itemId == -1)
+        gatheringObject.SetActive(false);
+        isGathering = false;
+    }
+
+    public void GetHit(float damage)
+    {
+        Debug.Log("Player GetHit");
+        health -= damage;
+        if (health > 0)
         {
-            gatheringObject.SetActive(false);
-            return;
+            _animator.SetTrigger("DoGetHit");
         }
-        else
+        else if (health <= 0)
         {
-            gatheringObject.SetActive(false);
+            _animator.SetTrigger("DoDie");
+            isDead = true;
+            OnPlayerDead?.Invoke();
         }
+        
+        Global.Instance.UIManager.OnChangePlayerHealth(health / MaxHealth);
+    }
+
+    public void Eat(float amount)
+    {
+        hunger = Mathf.Min(hunger + amount, 100);
+    }
+
+    void Hungry()
+    {
+        if (hunger > 0)
+        {
+            hunger -= hungerSpeed * Time.deltaTime;
+            health += Time.deltaTime * 0.5f;
+        }
+        else if (hunger <= 0)
+        {
+            health -= Time.deltaTime;
+        }
+
+        Global.Instance.UIManager.OnChangePlayerStamina(hunger / MaxHunger);
     }
 }

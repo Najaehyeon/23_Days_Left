@@ -23,6 +23,8 @@ public enum AttackTargetType
 
 public class PlayerAttackController : MonoBehaviour
 {
+    PlayerController playerController;
+
     [Header("EquippedWeapon")]
     public EquippedWeaponType equippedWeaponType = EquippedWeaponType.Hand;
     public GameObject equippedSword;
@@ -54,6 +56,8 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Start()
     {
+        playerController = CharacterManager.Instance.Player.controller;
+
         attackDamage = 10f;
         digWoodDamage = 10f;
         mineOreDamage = 5f;
@@ -63,6 +67,10 @@ public class PlayerAttackController : MonoBehaviour
     private void Update()
     {
         afterLastAttackTime += Time.deltaTime;
+        if (afterLastAttackTime > 1)
+        {
+            playerController.isAttack = false;
+        }
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
@@ -70,6 +78,7 @@ public class PlayerAttackController : MonoBehaviour
         if(context.phase == InputActionPhase.Started && afterLastAttackTime >= attackRate)
         {
             afterLastAttackTime = 0f;
+            playerController.isAttack = true;
             switch (equippedWeaponType)
             {
                 // 각 공격 애니메이션에서 이벤트로 ApplyDamage() 메서드 실행

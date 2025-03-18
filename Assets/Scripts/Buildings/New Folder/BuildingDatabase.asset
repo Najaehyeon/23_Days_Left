@@ -21,10 +21,10 @@ MonoBehaviour:
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 2, y: 2}
     <Prefab>k__BackingField: {fileID: 1735999700264770970, guid: 4d5084a68e3245f4f9cb036c5537b156, type: 3}
-  - <Name>k__BackingField: "\uACC4\uB2E81"
+  - <Name>k__BackingField: "\uBE0C\uB9BF\uC9C0"
     <ID>k__BackingField: 2
-    <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 6045875302585792110, guid: 8faf2aedfe397d74e99ad84284689183, type: 3}
+    <Size>k__BackingField: {x: 1, y: 2}
+    <Prefab>k__BackingField: {fileID: 8446212485356257512, guid: 523c9ea6f342d59478d7857c849b17a1, type: 3}
   - <Name>k__BackingField: "\uACC4\uB2E82"
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}

@@ -7,30 +7,32 @@ using UnityEngine.EventSystems;
 
 public class TempInputManager : MonoBehaviour
 {
-    [SerializeField] private Camera sceneCamera;    // 3ÀÎÄª ½ÃÁ¡ÀÇ ¸ŞÀÎÄ«¸Ş¶ó°¡ ÀÖ´Âµ¥ ±»ÀÌ ÇÊ¿äÇÒ±î?
+    [SerializeField] private Camera sceneCamera;    // 3ì¸ì¹­ ì‹œì ì˜ ë©”ì¸ì¹´ë©”ë¼ê°€ ìˆëŠ”ë° êµ³ì´ í•„ìš”í• ê¹Œ?
 
     public Vector3 lastPos;
 
-    [SerializeField] private LayerMask placementLayerMask;  // ³»·Á³õÀ» ÁöÁ¡ÀÇ layer°¡ GridÀÏ ¶§¸¸ ³»·Á³õÀ» ¼ö ÀÖ´Ù
+    [SerializeField] private LayerMask placementLayerMask;  // ë‚´ë ¤ë†“ì„ ì§€ì ì˜ layerê°€ Gridì¼ ë•Œë§Œ ë‚´ë ¤ë†“ì„ ìˆ˜ ìˆë‹¤
 
-    // Å¬¸¯ÇÏ¸é ´Ù¸¥ Å¬·¡½º¿¡ ¾Ë¸®´Â ¿ëµµ
+    public float angle; /// íšŒì „ê°ì„ ì €ì¥
+
+    // í´ë¦­í•˜ë©´ ë‹¤ë¥¸ í´ë˜ìŠ¤ì— ì•Œë¦¬ëŠ” ìš©ë„
     public event Action OnClicked, OnExit;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
-            OnClicked?.Invoke();    // ÀÖÀ¸¸é È£Ãâ(¾ÈÀüÇÏ°Ô ÀÌº¥Æ® È£Ãâ)
+            OnClicked?.Invoke();    // ìˆìœ¼ë©´ í˜¸ì¶œ(ì•ˆì „í•˜ê²Œ ì´ë²¤íŠ¸ í˜¸ì¶œ)
         if (Input.GetKeyDown(KeyCode.Escape))
             OnExit?.Invoke();
     }
-    public bool IsPointerOverUi() => EventSystem.current.IsPointerOverGameObject(); // ¸¶¿ì½º°¡ UIÀ§¿¡ ÀÖ´ÂÁö È®ÀÎÇØ¼­ ÀÖÀ¸¸é true, ¾øÀ¸¸é false
+    public bool IsPointerOverUi() => EventSystem.current.IsPointerOverGameObject(); // ë§ˆìš°ìŠ¤ê°€ UIìœ„ì— ìˆëŠ”ì§€ í™•ì¸í•´ì„œ ìˆìœ¼ë©´ true, ì—†ìœ¼ë©´ false
 
 
     //
     public Vector3 GetSelectedMapPos()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = sceneCamera.nearClipPlane; // Ä«¸Ş¶ó¿¡¼­ ·»´õ¸µ µÇÁö ¾ÊÀº ¹°Ã¼¸¦ ¼±ÅÃÇÒ ¼ö ¾ø°Ô ¸¸µê
+        mousePos.z = sceneCamera.nearClipPlane; // ì¹´ë©”ë¼ì—ì„œ ë Œë”ë§ ë˜ì§€ ì•Šì€ ë¬¼ì²´ë¥¼ ì„ íƒí•  ìˆ˜ ì—†ê²Œ ë§Œë“¦
         Ray ray = sceneCamera.ScreenPointToRay(mousePos);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100, placementLayerMask))

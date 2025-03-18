@@ -17,6 +17,7 @@ namespace _23DaysLeft.Managers
         public void Init(MainSceneUIList ui)
         {
             uiList = ui;
+            uiList.PlayerConditionPanel.Init();
         }
         
         public void ActiveCreatureHpBar(CreatureController creature, Transform target, float maxHp)
@@ -61,6 +62,16 @@ namespace _23DaysLeft.Managers
         public void InactiveBossInfoPanel()
         {
             uiList.BossInfoPanel.Hide();
+        }
+
+        public void OnChangePlayerHealth(float value)
+        {
+            uiList.PlayerConditionPanel.OnChangeHealth?.Invoke(value);
+        }
+        
+        public void OnChangePlayerStamina(float value)
+        {
+            uiList.PlayerConditionPanel.OnChangeHunger?.Invoke(value);
         }
     }
 }

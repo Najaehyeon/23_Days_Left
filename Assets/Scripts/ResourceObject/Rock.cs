@@ -11,7 +11,7 @@ public class Rock : ResourceObject
 
     public override void RespawnResource()
     {
-        if (_dayNightCycle.currentTime == 0.4f)
+        if (_dayNightCycle.currentTime >= 0.4f && _dayNightCycle.currentTime < 0.41f)
         {
             resourceCurHealth = resourceMaxHealth;
             gatherCount = 2;
