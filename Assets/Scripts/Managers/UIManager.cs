@@ -1,26 +1,28 @@
 using System.Collections.Generic;
 using _23DaysLeft.Monsters;
 using _23DaysLeft.UI;
+using System;
 using UnityEngine;
 
 namespace _23DaysLeft.Managers
 {
     public class UIManager : Singleton<UIManager>
     {
-        [Header("Canvas")]
-        [SerializeField] private Canvas screenCanvas;
-        [SerializeField] private Canvas worldCanvas;
+        private MainSceneUIList uiList;
+        public Action<float> OnChangeLoadingProgress;
         
-        [Header("UI")]
-        [SerializeField] private BossInfoPanel bossInfoPanel;
-
         private Dictionary<CreatureController, CreatureHealthBar> creatureHealthBars = new();
         private const string creatureHpBar = "CreatureHealthBar";
+
+        public void Init(MainSceneUIList ui)
+        {
+            uiList = ui;
+        }
         
         public void ActiveCreatureHpBar(CreatureController creature, Transform target, float maxHp)
         {
             var hpBar = PoolManager.Instance.Spawn<CreatureHealthBar>(creatureHpBar);
-            hpBar.transform.SetParent(worldCanvas.transform);
+            hpBar.transform.SetParent(uiList.WorldCanvas.transform);
             hpBar.SetInfo(target, maxHp);
             creatureHealthBars.Add(creature, hpBar);
         }
@@ -51,18 +53,18 @@ namespace _23DaysLeft.Managers
         
         public void ActiveBossInfoPanel(string name, float maxHp)
         {
-            bossInfoPanel.SetInfo(name, maxHp);
-            bossInfoPanel.Show();
+            uiList.BossInfoPanel.SetInfo(name, maxHp);
+            uiList.BossInfoPanel.Show();
         }
         
         public void UpdateBossInfoPanel(float currentHp)
         {
-            bossInfoPanel.ChangeHealth(currentHp);
+            uiList.BossInfoPanel.ChangeHealth(currentHp);
         }
         
         public void InactiveBossInfoPanel()
         {
-            bossInfoPanel.Hide();
+            uiList.BossInfoPanel.Hide();
         }
     }
 }

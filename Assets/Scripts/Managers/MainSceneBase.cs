@@ -1,22 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
+using _23DaysLeft.UI;
+using System;
 using UnityEngine;
 
-public class MainSceneBase : MonoBehaviour
+namespace _23DaysLeft.Managers
 {
-    private static MainSceneBase instance;
-    public static MainSceneBase Instance => !instance ? null : instance;
-    
-    // 씬이 로드되었을 때 할 일
-    // 씬에서 사용 할 데이터들
+    public class MainSceneBase : MonoBehaviour
+    {
+        [SerializeField] private MainSceneUIList uiList;
 
-    public void Awake()
-    {
-        instance = this;
-    }
-    
-    public void OnDestroy()
-    {
-        instance = null;
+        public Action OnMainSceneInitComplete;
+        private static MainSceneBase instance;
+        public static MainSceneBase Instance => !instance ? null : instance;
+
+        /// 씬이 로드되었을 때 할 일
+        // pool 만들기
+        // uiManager 초기화
+        // 플레이어 생성
+
+        public void Awake()
+        {
+            instance = this;
+        }
+
+        private void Start()
+        {
+            CreatePool();
+            InitUIManager();
+            OnMainSceneInitComplete?.Invoke();
+        }
+
+        private void InitUIManager()
+        {
+            UIManager.Instance.Init(uiList);
+        }
+
+        private void CreatePool()
+        {
+            var creatures = Global.Instance.DataLoadManager.GetCreatureList();
+            foreach (var creature in creatures)
+            {
+                PoolManager.Instance.CreatePool(creature.Prefab, 10);
+            }
+
+            var boss = Global.Instance.DataLoadManager.GetBossList();
+            foreach (var b in boss)
+            {
+                PoolManager.Instance.CreatePool(b.Prefab, 1);
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+using _23DaysLeft.Managers;
 using UnityEngine;
 
 /// <summary>
@@ -9,6 +10,9 @@ public class Global : Singleton<Global>
     public AudioManager     AudioManager;
     public DataLoadManager  DataLoadManager;
     public RecipeManager    RecipeManager;
+    public PoolManager      PoolManager;
+    public UIManager        UIManager;
+    public SceneLoader      SceneLoader;
 
     [HideInInspector]
     public Player           Player;

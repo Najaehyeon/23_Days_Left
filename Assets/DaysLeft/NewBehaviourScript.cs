@@ -13,8 +13,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void OnPressedAddRandomItem()
     {
-        ItemInstance itemInstance = new(Random.Range(1,2));
-        
-        _playerInventory.Add(itemInstance);
+       
+        _playerInventory.AddNew(Random.Range(0, 2));
     }
 }

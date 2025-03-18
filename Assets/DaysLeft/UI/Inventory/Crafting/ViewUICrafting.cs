@@ -13,7 +13,13 @@ namespace DaysLeft.Inventory
              
             foreach(var plugin in Plugins)
                 if(plugin is ScreenPluginCraftingItemSlot craftingPlugin)
-                    craftingPlugin.Set( recipes.GetAndRemoveAt(0) );
+                    if(recipes.Count > 0)
+                        craftingPlugin.Set( recipes.TryGetAndRemoveAt(0) );
+        }
+
+        public void OnPressedExitButton()
+        {
+            Controller.Show<ViewUIInventory>();
         }
     }
 }

@@ -1,10 +1,22 @@
-using System;
+using _23DaysLeft.Managers;
 using _23DaysLeft.Monsters;
+using System;
 
 namespace _23DaysLeft.Utils
 {
     public static class Extensions
     {
+        public static string GetName(this SceneType scene)
+        {
+            return scene switch
+            {
+                SceneType.Title   => "TitleScene",
+                SceneType.Loading => "LoadingScene",
+                SceneType.Main    => "MainScene",
+                _                 => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
+            };
+        }
+        
         public static string ToName(this Creatures creatures)
         {
             return creatures switch
