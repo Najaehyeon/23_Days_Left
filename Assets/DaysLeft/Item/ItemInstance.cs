@@ -2,7 +2,7 @@ namespace DaysLeft.Item
 {
     using UnityEngine;
 
-    public class ItemInstance
+    public class ItemInstance : MonoBehaviour
     {
         protected ItemData _itemData;
         public ItemInstance(int id)
