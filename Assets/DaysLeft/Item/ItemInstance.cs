@@ -14,6 +14,13 @@ namespace DaysLeft.Item
             else
                 _itemData = dataLoad.Query(id);
         }
+        public ItemInstance(ItemData data)
+        {
+            if (data == null)
+                Debug.LogError("Wrong data");
+            else
+                _itemData = data;
+        }
 
         public int ID               => _itemData.ID;
         public string Name          => _itemData.Name;

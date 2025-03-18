@@ -16,10 +16,10 @@ namespace DaysLeft.Item
         [Header("Damage")]
         public float attackDamage;
         public float digWoodDamage;
-        public float mineOreDamage; // (Ore = ±¤¼®)
+        public float mineOreDamage; // (Ore = ê´‘ì„)
 
         [Header("Status")]
-        public float durability; // ÃÑ ³»±¸µµ (durability = ³»±¸µµ)
-        public float currentDurability; // ÇöÀç ³»±¸µµ
+        public float durability; // ì´ ë‚´êµ¬ë„ (durability = ë‚´êµ¬ë„)
+        public float currentDurability; // í˜„ì¬ ë‚´êµ¬ë„
     }
 }
