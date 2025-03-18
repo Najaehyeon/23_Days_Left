@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     [Header("Status")]
     public float health;
     private bool isDead;
+    
+    public bool IsDead => isDead;
 
     private void Awake()
     {
