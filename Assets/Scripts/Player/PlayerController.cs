@@ -1,5 +1,6 @@
 using DaysLeft.Menu;
 using DaysLeft.Inventory;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     PlayerInventory inventory;
     public int itemId = -1;
     public GameObject gatheringObject;
+    public Action OnPlayerDead;
 
     [Header("Other Controller")]
     [SerializeField]
@@ -38,6 +40,8 @@ public class PlayerController : MonoBehaviour
     [Header("Status")]
     public float health;
     private bool isDead;
+    
+    public bool IsDead => isDead;
 
     private void Awake()
     {
@@ -217,6 +221,7 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger("DoDie");
             isDead = true;
+            OnPlayerDead?.Invoke();
         }
     }
 }
