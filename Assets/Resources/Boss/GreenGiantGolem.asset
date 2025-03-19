@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2923f2fce787b6945a64368c3dd72ab7, type: 3}
   m_Name: GreenGiantGolem
   m_EditorClassIdentifier: 
-  Name: "2\uCC28 \uBCF4\uC2A4"
+  Name: Green Giant Golem
   MaxHp: 250
   OriginSpeed: -1
   Prefab: {fileID: 1956538050164469845, guid: f963d60158ec0b04eaff66548ed2329d, type: 3}
