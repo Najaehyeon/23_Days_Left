@@ -18,6 +18,11 @@ public class TempInputManager : MonoBehaviour
     // 클릭하면 다른 클래스에 알리는 용도
     public event Action OnClicked, OnExit;
 
+    private void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         // 카메라를 연결하는 것
