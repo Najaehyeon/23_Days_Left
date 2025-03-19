@@ -8,7 +8,7 @@ namespace _23DaysLeft.Managers
     public class MainSceneBase : MonoBehaviour
     {
         [SerializeField] private MainSceneUIList uiList;
-        [SerializeField] private GameObject playerPrefab; // 임시
+        [SerializeField] private GameObject playerPrefab;
         [SerializeField] private Transform playerSpawnPoint;
 
         public Action OnMainSceneInitComplete;
@@ -44,11 +44,14 @@ namespace _23DaysLeft.Managers
         private void CreatePool()
         {
             // Item
-            for (int i = 90; i < 94; i++)
+            for (int i = 2002; i < 2006; i++)
             {
                 var item = Global.Instance.DataLoadManager.Query(i);
                 Global.Instance.PoolManager.CreatePool(item.Prefab, 10);
             }
+
+            var leather = Global.Instance.DataLoadManager.Query(2);
+            Global.Instance.PoolManager.CreatePool(leather.Prefab, 10);
             
             // Monster
             var creatures = Global.Instance.DataLoadManager.GetCreatureList();
@@ -75,17 +78,17 @@ namespace _23DaysLeft.Managers
         {
             var player = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
             player.transform.parent = playerSpawnPoint;
-            // 플레이어의 자식 오브젝트에서 "Main Camera" 찾기
+            
             var mainCamera = player.transform.Find("CameraContainer/Main Camera");
-
             if (mainCamera != null)
             {
-                tempInputManager.sceneCamera = mainCamera.GetComponent<Camera>();
+                if (mainCamera.TryGetComponent(out Camera camera))
+                    tempInputManager.sceneCamera = camera;
+                else
+                    Debug.LogError("Main Camera의 Camera 컴포넌트를 찾을 수 없습니다!");
             }
             else
-            {
                 Debug.LogError("Main Camera를 찾을 수 없습니다!");
-            }
         }
     }
 }

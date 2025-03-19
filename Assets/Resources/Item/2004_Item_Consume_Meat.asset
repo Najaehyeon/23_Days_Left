@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2138a1a9738f51943850e8f4a86e39f1, type: 3}
   m_Name: 2004_Item_Consume_Meat
   m_EditorClassIdentifier: 
-  ID: 92
+  ID: 2004
   Name: Meat
   Description: 
   Rarity: 0
