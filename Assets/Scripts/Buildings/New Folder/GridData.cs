@@ -143,22 +143,64 @@ public class GridData
                 // 기존 오브젝트의 회전값과 현재 회전값의 차이 계산
                 float angleDiff = (existingData.angle - angle) % 360;
 
-                // pivot을 기존 occupiedPositions[0]을 기준으로 설정
+                /// pivot을 기존 occupiedPositions[0]을 기준으로 설정
+                /// occupiedPositions[1] 부터는 회전축이 될 수 없다!
                 Vector3Int pivot = Vector3Int.RoundToInt(existingData.occupiedPositions[0]);
 
-                Vector3 originPos = new Vector3(pos.x, pos.y, pos.z);
-                // RotatePosition에서는 pos의 x, z를 0.5씩 더하여 중심을 맞춘 후 회전 적용
-                Vector3Int rotatedPos = RotatePosition(originPos, pivot, angleDiff);
-
-                // 변환된 좌표가 현재 배치하려는 위치와 충돌하는지 확인
-                if (positionToOccupy.Contains(rotatedPos))
+                ///// 회전축이 같은 경우
+                if (pivot == pos)
                 {
-                    return false; // 충돌 발생 → 배치 불가능
+                    Vector3 originPos = new Vector3(pos.x, pos.y, pos.z);
+                    // RotatePosition에서는 pos의 x, z를 0.5씩 더하여 중심을 맞춘 후 회전 적용
+                    Vector3Int rotatedPos = RotatePosition(originPos, pivot, angleDiff);
+
+                    // 변환된 좌표가 현재 배치하려는 위치와 충돌하는지 확인
+                    if (positionToOccupy.Contains(rotatedPos))
+                    {
+                        return false; // 충돌 발생 → 배치 불가능
+                    }
+                }
+                else /// 회전축이 다른 경우
+                {
+                    // 음수 각도 처리: -360 ~ 360 사이의 값을 0 ~ 360 사이로 변환
+                    if (angleDiff < 0)
+                    {
+                        angleDiff += 360;  // 음수일 경우 360을 더하여 양수로 변환
+                    }
+                    // 회전 차이에 따라 위치를 변경
+                    Vector3Int offset = Vector3Int.zero;
+                    switch ((int)angleDiff)
+                    {
+                        // 현재(positionToOccupy오브젝트) - 이전(placedObjects) 의 차이다
+                        case 90:
+                            offset = new Vector3Int(1, 0, 0); // x가 1 차이
+                            break;
+                        case 180:
+                            offset = new Vector3Int(1, 0, 1); // x와 z가 1씩 차이
+                            break;
+                        case 270:
+                            offset = new Vector3Int(0, 0, 1); // z가 1 차이
+                            break;
+                        default:
+                            // 기본적으로 0도인 경우, 회전 없이 원래 위치
+                            offset = Vector3Int.zero;
+                            break;
+                    }
+
+                    // 기존 오브젝트의 회전 차이에 따른 새로운 위치를 계산
+                    Vector3Int adjustedPos = pos + offset;
+
+                    // 변환된 좌표가 현재 배치하려는 위치와 충돌하는지 확인
+                    if (positionToOccupy.Contains(adjustedPos))
+                    {
+                        return false; // 충돌 발생 → 배치 불가능
+                    }
                 }
             }
         }
         return true;
     }
+
     // 쓰는 곳이 없으면 지울 예정
     // 삭제하는 곳에서 쓰던데, 삭제는 따로 구현하지 않을 계획
     internal int GetRepresentationIndex(Vector3Int gridPosition)

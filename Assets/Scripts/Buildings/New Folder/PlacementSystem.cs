@@ -21,7 +21,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private AudioClip correctPlacementClip, wrongPlacementClip;
     [SerializeField] private AudioSource source;
 
-    private GridData floorData, furnitureData;
+    private GridData fenceData, buildingData;
 
     /// <summary>
     /// 미리 보여주는 preview 오브젝트
@@ -44,8 +44,8 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         StopPlacement();
-        floorData = new GridData();
-        furnitureData = new GridData();
+        fenceData = new GridData();
+        buildingData = new GridData();
     }
 
     /// <summary>
@@ -60,8 +60,8 @@ public class PlacementSystem : MonoBehaviour
                                            grid,
                                            preview,
                                            database,
-                                           floorData,
-                                           furnitureData,
+                                           fenceData,
+                                           buildingData,
                                            objectPlacer,
                                            soundFeedback);
 
