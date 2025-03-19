@@ -62,6 +62,7 @@ namespace _23DaysLeft.Monsters
             currentHp = Mathf.Max(currentHp - damage, 0);
             if (currentHp <= 0)
             {
+                Global.Instance.UIManager.InactiveBossInfoPanel();
                 Die();
             }
         }

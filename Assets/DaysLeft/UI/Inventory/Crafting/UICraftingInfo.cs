@@ -45,11 +45,14 @@ namespace DaysLeft.Inventory
                     Plugins.Add(ingSlot);
                 }
             }
+
+            Description.text = $"<color=yellow>{recipe.target.Name}</color>\n\n{recipe.target.Description}";
         }
 
         private void Craft()
         {
             PlayerInventory inven = Global.Instance.Player.inventory;
+
 
             foreach (var plugin in Plugins)
                 if (plugin.TryGetComponent(out IngredientSlot ingSlot))

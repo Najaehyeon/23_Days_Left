@@ -16,10 +16,12 @@ public class ObjectPlacer : MonoBehaviour
     public int PlaceObject(GameObject prefab, Vector3 position)
     {
         /// tempInputManager에서 회전각을 가져온다
+        /// 이건 preview오브젝트가 회전한 각이기도 하지만, 
+        /// 회전축이 회전한 각이기도 하다
         float angle = tempInputManager.angle; 
 
         GameObject newObject = Instantiate(prefab);
-        newObject.transform.position = position; // 격자 오브젝트를 그 좌표로 이동
+        newObject.transform.position = position; // 오브젝트를 그리드 좌표를 월드 좌표로 환산한 값으로 이동
         newObject.transform.rotation = Quaternion.Euler(0, angle, 0); // Y축 기준으로 회전
 
         placedGameObjects.Add(newObject);   // 생성한 게임오브젝트 저장

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Other Controller")]
     [SerializeField]
-    private InventoryUIController InventoryUIController;
+    private InventoryUIController _inventoryUIController;
 
     [Header("Move")]
     public float moveSpeed; // �÷��̾� �̵� �ӵ�
@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
         // Rigidbody �� Animator ������Ʈ�� ������ ����
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
+        _inventoryUIController = FindAnyObjectByType<InventoryUIController>();
     }
 
     private void Start()
@@ -248,6 +249,13 @@ public class PlayerController : MonoBehaviour
             Invoke("gatheringLock", 1.8f);
         }
     }
+    public void OnInventoryInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && !isDead && !isAttack && !isGathering)
+        {
+            _inventoryUIController.Toggle();
+        }
+    }
 
     void gatheringLock()
     {
@@ -291,5 +299,6 @@ public class PlayerController : MonoBehaviour
         }
 
         Global.Instance.UIManager.OnChangePlayerStamina(hunger / MaxHunger);
+        Global.Instance.UIManager.OnChangePlayerHealth(health / MaxHealth);
     }
 }

@@ -1,6 +1,8 @@
+using _23DaysLeft.Monsters;
+using _23DaysLeft.Utils;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -24,8 +26,13 @@ public class DayNightCycle : MonoBehaviour
     [Header("Other Lighting")]
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
+    
+    [Header("Boss Spawn Settings")]
+    [Range(2, 24)] public int firstSpawnDay = 8;
+    [Range(2, 24)] public int secondSpawnDay = 16;
+    [Range(2, 24)] public int thirdSpawnDay = 24;
 
-    public int dayCount = 1; // 현재 일수
+    public int dayCount = 1;   // 현재 일수
     private float elapsedTime; // 경과한 시간
 
     private void Start()
@@ -45,6 +52,7 @@ public class DayNightCycle : MonoBehaviour
         if (elapsedTime >= fullDayLength * dayCount + (fullDayLength * startTime))
         {
             dayCount++;
+            StartCoroutine(BossSpawn());
             Global.Instance.UIManager.OnChangeDay(dayCount);
         }
 
@@ -71,5 +79,60 @@ public class DayNightCycle : MonoBehaviour
         {
             go.SetActive(true);
         }
+    }
+
+    private IEnumerator BossSpawn()
+    {
+        CreatureData bossData;
+        if (dayCount == firstSpawnDay)
+        {
+            bossData = Global.Instance.DataLoadManager.GetBossData(Creatures.GiantGolem.ToName());
+        }
+        else if (dayCount == secondSpawnDay)
+        {
+            bossData = Global.Instance.DataLoadManager.GetBossData(Creatures.GreenGiantGolem.ToName());
+        }
+        else if (dayCount == thirdSpawnDay)
+        {
+            bossData = Global.Instance.DataLoadManager.GetBossData(Creatures.RedGiantGolem.ToName());
+        }
+        else
+        {
+            yield break;
+        }
+        
+        if (!bossData)
+        {
+            Debug.LogError("Boss Data is null");
+            yield break;
+        }
+        
+        while (currentTime < 0.8f)
+        {
+            yield return null;
+        }
+        
+        var boss = Global.Instance.PoolManager.Spawn<Creature>(bossData.name);
+        var spawnPos = GetBossSpawnPos();
+        boss.Init(spawnPos);
+        Global.Instance.UIManager.ActiveBossInfoPanel(bossData.Name, bossData.MaxHp);
+    }
+
+    private Vector3 GetBossSpawnPos()
+    {
+        var playerPos = Global.Instance.Player.transform;
+        var spawnPos = playerPos.position + Random.onUnitSphere * 10f;
+        var count = 0;
+        while (count < 30)
+        {
+            if (NavMesh.SamplePosition(spawnPos, out var hit, 10f, NavMesh.AllAreas))
+            {
+                spawnPos = hit.position;
+                break;
+            }
+            count++;
+        }
+        
+        return spawnPos;
     }
 }

@@ -21,5 +21,5 @@ MonoBehaviour:
   SellPrice: 0
   Currency: 0
   Stackable: 1
-  Icon: {fileID: 21300000, guid: ea6ba5a76fefc7644b69b82f6efe3e2d, type: 3}
+  Icon: {fileID: 21300000, guid: 79a5d1e0e28d35f4f92aac75f9a8cdb8, type: 3}
   Prefab: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}

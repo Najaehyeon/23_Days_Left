@@ -1,12 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Assets/Monster.meta
-guid: d9f054baa514d1d4c997aa680b702435
-folderAsset: yes
-DefaultImporter:
-========
-guid: 523c9ea6f342d59478d7857c849b17a1
+guid: e1694a9d4c44b2044a1fff8a82a5c03a
 PrefabImporter:
->>>>>>>> feat/building:Assets/Assets/Build/Prefabs/MadePrefPreFabs/Use/WoodBridge.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

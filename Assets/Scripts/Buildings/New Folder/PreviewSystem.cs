@@ -89,36 +89,6 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.transform.position += pivot;
     }
 
-    //private void PrepareCursor(Vector2Int size, float rotationAngle)
-    //{
-    //    Vector2Int rotatedSize = size;
-
-    //    // 90도 단위로만 회전한다고 가정
-    //    int angle = Mathf.RoundToInt(rotationAngle) % 360;
-
-    //    rotatedSize = new Vector2Int(size.y, size.x);
-    //    switch (angle)
-    //    {
-    //        case 90:    /// x = 2, z = -1
-    //        case -270:
-    //            cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, -rotatedSize.y);
-    //            break;
-    //        case 180:   /// x = -1, z = -2
-    //        case -180:
-    //            cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, -rotatedSize.y);
-    //            break;
-    //        case 270:   /// x = -2, z = 1
-    //        case -90:
-    //            cellIndicator.transform.localScale = new Vector3(-rotatedSize.x, 1, rotatedSize.y);
-    //            break;
-    //        case 0:     /// x = 1, z = 2
-    //        case 360:
-    //        default:
-    //            cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, rotatedSize.y);
-    //            break;
-    //    }
-    //}
-
     // 선택한 오브젝트의 크기를 리턴한다
     public Vector2Int GetCurrentSize()
     {

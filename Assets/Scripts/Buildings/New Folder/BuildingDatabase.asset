@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: BuildingDatabase
   m_EditorClassIdentifier: 
   objectsData:
-  - <Name>k__BackingField: "\uB098\uBB341"
+  - <Name>k__BackingField: "\uC6B8\uD0C0\uB9AC"
     <ID>k__BackingField: 0
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 3325735990687581655, guid: b6e8bb8678c4131408604bc110a35c7b, type: 3}
+    <Prefab>k__BackingField: {fileID: 8629839115445800377, guid: c232ae50f586dad4193bfb116c28fd0e, type: 3}
   - <Name>k__BackingField: "\uC9D1"
     <ID>k__BackingField: 1
-    <Size>k__BackingField: {x: 2, y: 2}
-    <Prefab>k__BackingField: {fileID: 1735999700264770970, guid: 4d5084a68e3245f4f9cb036c5537b156, type: 3}
-  - <Name>k__BackingField: "\uBE0C\uB9BF\uC9C0"
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7710918991225264928, guid: 4d5084a68e3245f4f9cb036c5537b156, type: 3}
+  - <Name>k__BackingField: "\uACC4\uB2E8"
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 2}
-    <Prefab>k__BackingField: {fileID: 8446212485356257512, guid: 523c9ea6f342d59478d7857c849b17a1, type: 3}
-  - <Name>k__BackingField: "\uACC4\uB2E82"
+    <Prefab>k__BackingField: {fileID: 3138197708638634133, guid: 8faf2aedfe397d74e99ad84284689183, type: 3}
+  - <Name>k__BackingField: "\uBE0C\uB9BF\uC9C0"
     <ID>k__BackingField: 3
-    <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 6713347716404936215, guid: afe35988da73e7e418018709a89d0372, type: 3}
+    <Size>k__BackingField: {x: 1, y: 2}
+    <Prefab>k__BackingField: {fileID: 1364067612080057437, guid: e1694a9d4c44b2044a1fff8a82a5c03a, type: 3}

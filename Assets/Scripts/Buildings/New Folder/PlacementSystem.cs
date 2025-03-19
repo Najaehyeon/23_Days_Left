@@ -21,7 +21,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private AudioClip correctPlacementClip, wrongPlacementClip;
     [SerializeField] private AudioSource source;
 
-    private GridData floorData, furnitureData;
+    private GridData fenceData, buildingData;
 
     /// <summary>
     /// 미리 보여주는 preview 오브젝트
@@ -37,15 +37,15 @@ public class PlacementSystem : MonoBehaviour
     /// <summary>
     /// PlacementState에 접근가능한 IBuildingState 인터페이스
     /// </summary>
-    IBuildingState buildingState;   
+    IBuildingState buildingState;
 
     [SerializeField] private SoundFeedBack soundFeedback;
 
     private void Start()
     {
         StopPlacement();
-        floorData = new GridData();
-        furnitureData = new GridData();
+        fenceData = new GridData();
+        buildingData = new GridData();
     }
 
     /// <summary>
@@ -60,8 +60,8 @@ public class PlacementSystem : MonoBehaviour
                                            grid,
                                            preview,
                                            database,
-                                           floorData,
-                                           furnitureData,
+                                           fenceData,
+                                           buildingData,
                                            objectPlacer,
                                            soundFeedback);
 
@@ -81,7 +81,7 @@ public class PlacementSystem : MonoBehaviour
 
         /// 오브젝트 생성
         /// preview의 회전상태를 반영해야한다
-        buildingState.OnAction(gridPosition);
+        buildingState.OnAction(gridPosition, tempInputManager.angle);
     }
 
     /// <summary>
@@ -112,11 +112,12 @@ public class PlacementSystem : MonoBehaviour
             return;
         Vector3 mousePos = tempInputManager.GetSelectedMapPos(); // 마우스로 선택한 위치 가져온다
         Vector3Int gridPosition = grid.WorldToCell(mousePos);   // 마우스가 있는 위치를 3d로 변환하여 그리드의 어느 격자 내에 있는지 알아낸다
+        /// gridPosition은 grid의 좌표(월드 좌표가 아니다)
 
         // grid 내에서 커서가 이동하면 연산하지 않는다
         if (lastDetectedPosition != gridPosition)
         {
-            buildingState.UpdateState(gridPosition);
+            buildingState.UpdateState(gridPosition, tempInputManager.angle);    /// gridPosition은 월드좌표가 아님에 주의한다
             lastDetectedPosition = gridPosition;
         }
         // R키를 누르면 시계방향으로 회전

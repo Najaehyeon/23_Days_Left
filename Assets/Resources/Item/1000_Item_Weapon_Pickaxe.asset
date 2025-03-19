@@ -24,7 +24,7 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 1fb46228a3bcb5042a763829cc07f9e5, type: 3}
   Prefab: {fileID: 5676840300738598790, guid: 2ce7f3f60a7219d478bdc624979d8024, type: 3}
   type: 3
-  attackDamage: 10
-  digWoodDamage: 10
-  mineOreDamage: 10
+  attackDamage: 99999
+  digWoodDamage: 1
+  mineOreDamage: 99999
   durability: 100

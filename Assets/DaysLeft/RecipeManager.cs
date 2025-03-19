@@ -42,10 +42,10 @@ public class RecipeManager : MonoBehaviour
         ItemData _target = _dataLoadManager.Query(int.Parse(strings[0]));
         Dictionary<ItemData, int> _ingredients = new();
 
-        for (int i = 1; i < strings.Length; ++i)
+        for (int i = 1; i < strings.Length; i += 2)
         {
-            int itemId = int.Parse(strings[i].Substring(0, 1));
-            int quantity = int.Parse(strings[i].Substring(1, 1));
+            int itemId = int.Parse(strings[i]);
+            int quantity = int.Parse(strings[i + 1]);
 
             _ingredients.Add(_dataLoadManager.Query(itemId), quantity);
         }
