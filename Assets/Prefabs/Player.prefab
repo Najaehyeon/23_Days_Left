@@ -1494,8 +1494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: -1
   gatheringObject: {fileID: 2045070930249695980}
-  InventoryUIController: {fileID: 0}
-  moveSpeed: 5
+  _inventoryUIController: {fileID: 0}
+  moveSpeed: 6
   isAttack: 0
   isGathering: 0
   sensitivity: 0.05
