@@ -46,7 +46,12 @@ namespace DaysLeft.Inventory
                 }
             }
 
-            Description.text = $"<color=yellow>{recipe.target.Name}</color>\n\n{recipe.target.Description}";
+            if(recipe.target is WeaponItemData target)
+                Description.text = $"<color=yellow>{target.Name}</color>\n\n{target.Description}\n\nDMG: {target.attackDamage}\nMining: {target.mineOreDamage}\nChoping: {target.digWoodDamage}";
+            else if (recipe.target is ArmorItemData armor)
+                Description.text = $"<color=yellow>{armor.Name}</color>\n\n{armor.Description}\n\n{armor.Type}\n\n{armor.Material}";
+            else
+                Description.text = $"<color=yellow>{recipe.target.Name}</color>\n\n{recipe.target.Description}";
         }
 
         private void Craft()
