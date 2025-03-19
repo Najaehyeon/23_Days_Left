@@ -171,7 +171,6 @@ public class PlayerAttackController : MonoBehaviour
                 resourceObject.mineResource(mineOreDamage);
                 break;
         }
-        Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.SwordSoundEffectts1.GetClipName());
     }
 
     public void Equip(WeaponInstance instance)

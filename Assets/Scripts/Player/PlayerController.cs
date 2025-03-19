@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         {
-            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.WalkSoundEffectts1.GetClipName());
+            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.WalkSoundEffects1.GetClipName());
             yield return new WaitForSeconds(0.35f);
         }
     }
