@@ -10,7 +10,7 @@ namespace _23DaysLeft.Monsters
         public float MaxHp;
         public float OriginSpeed;
         public GameObject Prefab;
-        public Utils.SoundType DeadSound;
+        public Utils.SoundTypeEnum DeadSound;
         
         [Header("Combat Info")]
         public CombatType CombatType;

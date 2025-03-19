@@ -4,6 +4,8 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using _23DaysLeft.Utils;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +28,8 @@ public class PlayerController : MonoBehaviour
     Vector2 currentMoveInput; // �Էµ� �̵� ���� (WASD)
     public bool isAttack = false;
     public bool isGathering = false;
+
+    private Coroutine StepSound;
 
     [Header("Look")]
     public float sensitivity; // ���콺 ���� (ȸ�� �ӵ� ����)
@@ -80,6 +84,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
         Hungry();
+        if (currentMoveInput == Vector2.zero)
+        {
+            StopCoroutine(StepSound);
+            StepSound = null;
+        }
     }
 
     private void LateUpdate()
@@ -174,15 +183,34 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnMoveInput(InputAction.CallbackContext context)
     {
+
         if (context.phase == InputActionPhase.Performed)
         {
             // �Է��� ������ ���� �̵� ������ ����
             currentMoveInput = context.ReadValue<Vector2>();
+            StartFootStep();
         }
+
         else if (context.phase == InputActionPhase.Canceled)
         {
             // Ű���� ���� ���� �̵��� ����
             currentMoveInput = Vector2.zero;
+        }
+    }
+
+    private void StartFootStep()
+    {
+        if (StepSound != null)
+            StopAllCoroutines();
+
+        StepSound = StartCoroutine(FootStepSound());
+    }
+    private IEnumerator FootStepSound()
+    {
+        while (true)
+        {
+            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.WalkSoundEffectts1.GetClipName());
+            yield return new WaitForSeconds(0.35f);
         }
     }
 

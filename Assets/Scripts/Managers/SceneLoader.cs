@@ -20,7 +20,7 @@ namespace _23DaysLeft.Managers
         {
             // 로딩 씬을 먼저 로드
             yield return SceneManager.LoadSceneAsync(SceneType.Loading.GetName(), LoadSceneMode.Additive);
-            Global.Instance.AudioManager.PlayBGM(Utils.SoundType.LoadingBGM.GetClipName());
+            Global.Instance.AudioManager.PlayBGM(Utils.SoundTypeEnum.LoadingBGM.GetClipName());
             Global.Instance.UIManager.OnChangeLoadingProgress?.Invoke(0);
             Cursor.lockState = CursorLockMode.Locked;
             

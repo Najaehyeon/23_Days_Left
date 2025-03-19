@@ -1,8 +1,10 @@
+using _23DaysLeft.Utils;
 using _23DaysLeft.Monsters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Diagnostics;
 
 public enum EquippedWeaponType
 {
@@ -23,6 +25,7 @@ public enum AttackTargetType
 
 public class PlayerAttackController : MonoBehaviour
 {
+
     PlayerController playerController;
 
     [Header("EquippedWeapon")]
@@ -84,6 +87,7 @@ public class PlayerAttackController : MonoBehaviour
                 // 각 공격 애니메이션에서 이벤트로 ApplyDamage() 메서드 실행
                 case EquippedWeaponType.Hand:
                     RandomHandPunchAnimation();
+
                     break;
                 case EquippedWeaponType.Sword:
                     _animator.SetTrigger("DoOneHandAttack"); 
@@ -107,10 +111,12 @@ public class PlayerAttackController : MonoBehaviour
         if (randomPunchHand == 0)
         {
             _animator.SetTrigger("DoPunchR");
+            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.Punch1.GetClipName());
         }
         if (randomPunchHand == 1)
         {
             _animator.SetTrigger("DoPunchL");
+            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.Punch2.GetClipName());
         }
     }
 
@@ -153,6 +159,7 @@ public class PlayerAttackController : MonoBehaviour
                 resourceObject.mineResource(mineOreDamage);
                 break;
         }
+        Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.SwordSoundEffectts1.GetClipName());
     }
 
     public void Equip(WeaponInstance instance)

@@ -1,3 +1,4 @@
+using _23DaysLeft.Utils;
 using System.Collections;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ public class Tree : ResourceObject
         if (resourceCurHealth > 0)
         {
             resourceCurHealth -= damage;
+            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.WoodSoundEffectts1.GetClipName());
             // 나무 캐는 효과음
             if (resourceCurHealth <= 50 && gatherCount == 2)
             {

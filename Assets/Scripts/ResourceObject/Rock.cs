@@ -1,3 +1,4 @@
+using _23DaysLeft.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class Rock : ResourceObject
         if (resourceCurHealth > 0)
         {
             resourceCurHealth -= damage;
+            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.StoneMiningSound1.GetClipName());
             // 깡깡 소리 효과음 추가 해야함
             if (resourceCurHealth <= 50 && gatherCount == 2)
             {
@@ -37,6 +39,7 @@ public class Rock : ResourceObject
         }
         else
         {
+            Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.StoneMiningSound5.GetClipName());
             // 틱틱 소리 효과음 추가 해야함
         }
     }

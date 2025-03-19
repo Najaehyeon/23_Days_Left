@@ -206,7 +206,7 @@ namespace _23DaysLeft.Monsters
             stateMachine.StateChange(CreatureState.Hit);
             currentHp = Mathf.Max(currentHp - damage, 0);
             Global.Instance.UIManager.UpdateCreatureHpBar(this, currentHp);
-            Global.Instance.AudioManager.PlaySFX(Utils.SoundType.MonsterHit.GetClipName());
+            Global.Instance.AudioManager.PlaySFX(Utils.SoundTypeEnum.MonsterHit.GetClipName());
             if (currentHp <= 0)
             {
                 Global.Instance.UIManager.InactiveCreatureHpBar(this);
