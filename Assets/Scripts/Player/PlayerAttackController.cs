@@ -142,6 +142,7 @@ public class PlayerAttackController : MonoBehaviour
                 break;
             case EquippedWeaponType.Sword:
                 AttackByTarget();
+                Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.SwordSoundEffectts1.GetClipName());
                 break;
             case EquippedWeaponType.Axe:
                 AttackByTarget();
@@ -171,7 +172,7 @@ public class PlayerAttackController : MonoBehaviour
                 resourceObject.mineResource(mineOreDamage);
                 break;
         }
-        Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.SwordSoundEffectts1.GetClipName());
+
     }
 
     public void Equip(WeaponInstance instance)
