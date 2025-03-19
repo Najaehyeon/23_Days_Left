@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class TempInputManager : MonoBehaviour
 {
-    [SerializeField] private Camera sceneCamera;    // 3인칭 시점의 메인카메라가 있는데 굳이 필요할까?
+    [SerializeField] public Camera sceneCamera;    // 3인칭 시점의 메인카메라가 있는데 굳이 필요할까?
 
     public Vector3 lastPos;
 
@@ -17,6 +17,11 @@ public class TempInputManager : MonoBehaviour
 
     // 클릭하면 다른 클래스에 알리는 용도
     public event Action OnClicked, OnExit;
+
+    private void Start()
+    {
+        // 카메라를 연결하는 것
+    }
 
     private void Update()
     {
