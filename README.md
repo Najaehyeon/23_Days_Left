@@ -14,6 +14,66 @@
 <table align="center">
   <tr>
     <td>
+      <img style="width:360px;" src="/Docs/Img/example_move.png">
+    </td>
+    <td width=450 style="word-break:break-all" >
+      플레이어 움직임
+    </td>
+    <td> by 강현종 <br> 나재현 </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td>
+      <img style="width:360px;" src="/Docs/Img/example_weather.png">
+    </td>
+    <td width=450 style="word-break:break-all" >
+      날씨와 시간 변화
+    </td>
+    <td> by 나재현 </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td>
+      <img style="width:360px;" src="/Docs/Img/example_mining.png">
+    </td>
+    <td width=450 style="word-break:break-all" >
+      자원 채취
+    </td>
+    <td> by 나재현 </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td>
+      <img style="width:360px;" src="/Docs/Img/example_mob_spawn.png">
+    </td>
+    <td width=450 style="word-break:break-all" >
+      몬스터 삼 천 마리까지 거뜬히 소환한다.
+    </td>
+    <td> by 김자은 </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td>
+      <img style="width:360px;" src="/Docs/Img/example_mob_ai.png">
+    </td>
+    <td width=450 style="word-break:break-all" >
+      자체적인 최적화 기법이 포함된 몬스터 AI.
+    </td>
+    <td> by 김자은 </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td>
       <img style="width:360px;" src="/Docs/Img/example_building_system.png">
     </td>
     <td width=450 style="word-break:break-all" >
@@ -26,10 +86,22 @@
 <table align="center">
   <tr>
     <td>
+      <img style="width:360px;" src="/Docs/Img/example_grid.png">
+    </td>
+    <td width=450 style="word-break:break-all" >
+      건축 시스템 기반이 되는 그리드 구조.
+    </td>
+    <td> by 임성균 </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td>
       <img style="width:360px;" src="/Docs/Img/example_inventory.png">
     </td>
     <td width=450 style="word-break:break-all" >
-      아이템 설명 툴팁, 장비 장착, 슬롯 스왑의 기능을 포함한다.
+      아이템 설명 툴팁, 슬롯 스왑의 기능을 포함한다.
     </td>
     </td>
     <td> by 유승민 </td>
