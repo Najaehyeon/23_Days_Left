@@ -79,7 +79,7 @@
     </tr>
     <tr>
       <td width="100" align="center">
-        <img src="/Docs/Img/member_imsung.png"
+        <img src="/Docs/Img/mamber_imsung.png"
           width="100%" height="100%">
       </td>
       <td width="100" align="center">임성균</td>
@@ -95,7 +95,7 @@
     </tr>
     <tr>
       <td width="100" align="center">
-        <img src="/Docs/Img/member_kimja.png"
+        <img src="/Docs/Img/mamber_kimja.png"
           width="100%" height="100%">
       </td>
       <td width="100" align="center">김자은</td>
@@ -115,7 +115,7 @@
           width="100%" height="100%">
       </td>
       <td width="100" align="center">강현종</td>
-      <td width="200" align="center">- Sacred Mother of Player -</td>
+      <td width="200" align="center">- Lord of Na`vi -</td>
       <td width="200" align="center">
         <a href=""></a>
       </td>
