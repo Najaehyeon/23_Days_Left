@@ -1542,15 +1542,15 @@ MonoBehaviour:
   equippedAxe: {fileID: 4982723339225259229}
   equippedPickaxe: {fileID: 5659687875944278570}
   equippedBow: {fileID: 4575949431323889486}
-  HelmetPlate: {fileID: 0}
-  ChestPlate: {fileID: 0}
-  PantsPlate: {fileID: 0}
-  BootsPlate: {fileID: 0}
-  ShoulderPlate: {fileID: 0}
-  GlovesPlate: {fileID: 0}
-  ChestLeather: {fileID: 0}
-  PantsLeather: {fileID: 0}
-  BootsLeather: {fileID: 0}
+  HelmetPlate: {fileID: 3876290706271347231}
+  ChestPlate: {fileID: 4219856047504569478}
+  PantsPlate: {fileID: 1767965707549652646}
+  BootsPlate: {fileID: 9111738891490291664}
+  ShoulderPlate: {fileID: 5721673447178419191}
+  GlovesPlate: {fileID: 945919330429904655}
+  ChestLeather: {fileID: 2950323211389690505}
+  PantsLeather: {fileID: 7396880576231466084}
+  BootsLeather: {fileID: 1625853415351499638}
   attackTargetType: 0
   resourceObject: {fileID: 0}
   creatureController: {fileID: 0}
