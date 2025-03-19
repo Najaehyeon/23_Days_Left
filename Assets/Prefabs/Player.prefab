@@ -1461,6 +1461,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: be01e06a-19ef-4db6-969b-0fb8c21e9e41
     m_ActionName: Player/Atttack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2675695308785652307}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnBuildInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: df44f66f-c54c-4f7b-ac36-0739ca676434
+    m_ActionName: Player/Build[/Keyboard/b]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1495,6 +1511,7 @@ MonoBehaviour:
   itemId: -1
   gatheringObject: {fileID: 2045070930249695980}
   _inventoryUIController: {fileID: 0}
+  _BuildUIController: {fileID: 0}
   moveSpeed: 6
   isAttack: 0
   isGathering: 0
@@ -1525,6 +1542,15 @@ MonoBehaviour:
   equippedAxe: {fileID: 4982723339225259229}
   equippedPickaxe: {fileID: 5659687875944278570}
   equippedBow: {fileID: 4575949431323889486}
+  HelmetPlate: {fileID: 0}
+  ChestPlate: {fileID: 0}
+  PantsPlate: {fileID: 0}
+  BootsPlate: {fileID: 0}
+  ShoulderPlate: {fileID: 0}
+  GlovesPlate: {fileID: 0}
+  ChestLeather: {fileID: 0}
+  PantsLeather: {fileID: 0}
+  BootsLeather: {fileID: 0}
   attackTargetType: 0
   resourceObject: {fileID: 0}
   creatureController: {fileID: 0}
