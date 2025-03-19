@@ -271,5 +271,6 @@ public class PlayerController : MonoBehaviour
         }
 
         Global.Instance.UIManager.OnChangePlayerStamina(hunger / MaxHunger);
+        Global.Instance.UIManager.OnChangePlayerHealth(health / MaxHealth);
     }
 }
