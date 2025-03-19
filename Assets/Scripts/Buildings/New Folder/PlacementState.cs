@@ -13,7 +13,7 @@ public class PlacementState : IBuildingState
     Grid grid;
     PreviewSystem previewSystem;
     ObjectsDatabaseSO database;
-    GridData tree;  // 나무 위에는 빌딩을 지을 수 있다
+    GridData fenceData;  // 나무 위에는 빌딩을 지을 수 있다
     GridData buildingData;
     ObjectPlacer objectPlacer;
     SoundFeedBack soundFeedback;
@@ -31,7 +31,7 @@ public class PlacementState : IBuildingState
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.database = database;
-        this.tree = treeData;
+        this.fenceData = treeData;
         this.buildingData = buildingData;
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
@@ -79,7 +79,7 @@ public class PlacementState : IBuildingState
         //Quaternion rotation = Quaternion.Euler(0, angle, 0);
 
         // 이 객체의 인덱스를 데이터에 추가
-        GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? tree : buildingData;   // 나무와 건물을 구분한다
+        GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? fenceData : buildingData;   // 나무와 건물을 구분한다
         selectedData.AddObjectAt(gridPosition,
             database.objectsData[selectedObjIndex].Size,
             database.objectsData[selectedObjIndex].ID,
@@ -90,14 +90,13 @@ public class PlacementState : IBuildingState
 
     /// <summary>
     /// preview 오브젝트가 차지하는 그리드의 종류를 판단한다
-    /// angle은 TempInputManager.angle 이다
     /// </summary>
     /// <param name="gridPosition"></param>
     /// <param name="selectedObjIndex"></param>
     /// <returns></returns>
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjIndex, float angle)
     {
-        GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? tree : buildingData;
+        GridData selectedData = database.objectsData[selectedObjIndex].ID == 0 ? fenceData : buildingData;
 
         /// gridPosition는 그리드의 좌표
         /// database.objectsData[selectedObjIndex]는 preview 오브젝트
