@@ -32,3 +32,4 @@ MonoBehaviour:
   DropItems:
   - {fileID: 11400000, guid: f9ccf24cb8b0d1e4ca08da4f1a952634, type: 2}
   - {fileID: 11400000, guid: bd06198db0f2ff843acf600531257f64, type: 2}
+  - {fileID: 11400000, guid: 01fc664a8af2b8344995141800011643, type: 2}
