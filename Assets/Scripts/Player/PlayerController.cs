@@ -92,6 +92,9 @@ public class PlayerController : MonoBehaviour
         Hungry();
         if (currentMoveInput == Vector2.zero)
         {
+            if (StepSound == null)
+                return;
+
             StopCoroutine(StepSound);
             StepSound = null;
         }
