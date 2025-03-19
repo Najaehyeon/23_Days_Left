@@ -8,9 +8,9 @@ namespace _23DaysLeft.Utils
         {
             return scene switch
             {
-                SceneType.Title   => "TitleTest",
+                SceneType.Title   => "TitleMenu",
                 SceneType.Loading => "LoadingScene",
-                SceneType.Main    => "MonsterTest",
+                SceneType.Main    => "PlayerScene",
                 _                 => throw new ArgumentOutOfRangeException(nameof(scene), scene, null)
             };
         }
