@@ -51,22 +51,15 @@ namespace _23DaysLeft.Utils
                 SoundTypeEnum.Punch2       => "Punch Sound 2",
                 SoundTypeEnum.StoneMiningSound1 => "stone mining sound 1",
                 SoundTypeEnum.StoneMiningSound2 => "stone mining sound 2",
-                SoundTypeEnum.StoneMiningSound3 => "stone mining sound 3",
-                SoundTypeEnum.StoneMiningSound4 => "stone mining sound 4",
                 SoundTypeEnum.StoneMiningSound5 => "stone mining sound 5",
-                SoundTypeEnum.SwordSoundEffectts1 => "Sword SoundEffectts 1",
-                SoundTypeEnum.SwordSoundEffectts2 => "Sword SoundEffectts 2",
-                SoundTypeEnum.WalkSoundEffectts1 => "Walk SoundEffectts 1",
-                SoundTypeEnum.WalkSoundEffectts2 => "Walk SoundEffectts 2",
-                SoundTypeEnum.WalkSoundEffectts3 => "Walk SoundEffectts 3",
-                SoundTypeEnum.WalkSoundEffectts4 => "Walk SoundEffectts 4",
-                SoundTypeEnum.WalkSoundEffectts5 => "Walk SoundEffectts 5",
-                SoundTypeEnum.WalkSoundEffectts6 => "Walk SoundEffectts 6",
-                SoundTypeEnum.WoodSoundEffectts1 => "Wood SoundEffectts 1",
-                SoundTypeEnum.WoodSoundEffectts2 => "Wood SoundEffectts 2",
-                SoundTypeEnum.WoodSoundEffectts3 => "Wood SoundEffectts 3",
-
-
+                SoundTypeEnum.SwordSoundEffects1 => "Sword SoundEffectts 1",
+                SoundTypeEnum.SwordSoundEffects2 => "Sword SoundEffectts 2",
+                SoundTypeEnum.WalkSoundEffects1 => "Walk SoundEffectts 1",
+                SoundTypeEnum.WalkSoundEffects2 => "Walk SoundEffectts 2",
+                SoundTypeEnum.WoodSoundEffects1 => "Wood SoundEffectts 1",
+                SoundTypeEnum.WoodSoundEffects2 => "Wood SoundEffectts 2",
+                SoundTypeEnum.BossJumpAttack => "JumpAttack Sound",
+                SoundTypeEnum.BossKickAttack => "KickAttack Sound",
                 _                      => throw new ArgumentOutOfRangeException(nameof(soundTypeEnum), soundTypeEnum, null)
             };
         }
@@ -111,22 +104,15 @@ namespace _23DaysLeft.Utils
         Punch2,
         StoneMiningSound1,
         StoneMiningSound2,
-        StoneMiningSound3,
-        StoneMiningSound4,
         StoneMiningSound5,
-        SwordSoundEffectts1,
-        SwordSoundEffectts2,
-        WalkSoundEffectts1,
-        WalkSoundEffectts2,
-        WalkSoundEffectts3,
-        WalkSoundEffectts4,
-        WalkSoundEffectts5,
-        WalkSoundEffectts6,
-        WoodSoundEffectts1,
-        WoodSoundEffectts2,
-        WoodSoundEffectts3,
-
-
+        SwordSoundEffects1,
+        SwordSoundEffects2,
+        WalkSoundEffects1,
+        WalkSoundEffects2,
+        WoodSoundEffects1,
+        WoodSoundEffects2,
+        BossJumpAttack,
+        BossKickAttack,
     }
 
     #endregion

@@ -1,3 +1,4 @@
+using _23DaysLeft.Utils;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -115,7 +116,7 @@ namespace _23DaysLeft.Monsters
             {
                 Debug.Log("NormalAttack Hit");
                 var damage = creatureData.AttackPower * attackMultipler;
-                // player.OnHit();
+                CharacterManager.Instance.Player.controller.GetHit(damage);
             }
         }
 
@@ -126,7 +127,8 @@ namespace _23DaysLeft.Monsters
             {
                 Debug.Log("KickAttack Hit");
                 var damage = creatureData.AttackPower * attackMultipler;
-                // player.OnHit();
+                CharacterManager.Instance.Player.controller.GetHit(damage);
+                Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.BossKickAttack.GetClipName());
             }
         }
 
@@ -137,7 +139,8 @@ namespace _23DaysLeft.Monsters
             {
                 Debug.Log("JumpAttack Hit");
                 var damage = creatureData.AttackPower * attackMultipler;
-                // player.OnHit();
+                CharacterManager.Instance.Player.controller.GetHit(damage);
+                Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.BossKickAttack.GetClipName());
             }
         }
 
