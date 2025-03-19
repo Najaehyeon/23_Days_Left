@@ -14,6 +14,7 @@ namespace _23DaysLeft.Managers
         public Action OnMainSceneInitComplete;
         private static MainSceneBase instance;
         public static MainSceneBase Instance => !instance ? null : instance;
+        public TempInputManager tempInputManager;
 
         public void Awake()
         {
@@ -74,6 +75,17 @@ namespace _23DaysLeft.Managers
         {
             var player = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
             player.transform.parent = playerSpawnPoint;
+            // 플레이어의 자식 오브젝트에서 "Main Camera" 찾기
+            var mainCamera = player.transform.Find("CameraContainer/Main Camera");
+
+            if (mainCamera != null)
+            {
+                tempInputManager.sceneCamera = mainCamera.GetComponent<Camera>();
+            }
+            else
+            {
+                Debug.LogError("Main Camera를 찾을 수 없습니다!");
+            }
         }
     }
 }

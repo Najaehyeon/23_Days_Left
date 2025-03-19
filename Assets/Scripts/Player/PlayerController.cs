@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private InventoryUIController _inventoryUIController;
 
+    [SerializeField]
+    private BuildUIController _BuildUIController;
+
+
     [Header("Move")]
     public float moveSpeed; // �÷��̾� �̵� �ӵ�
 
@@ -58,6 +62,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
         _inventoryUIController = FindAnyObjectByType<InventoryUIController>();
+        _BuildUIController = FindAnyObjectByType<BuildUIController>();
     }
 
     private void Start()
@@ -226,6 +231,13 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started && !isDead && !isAttack && !isGathering)
         {
             _inventoryUIController.Toggle();
+        }
+    }
+    public void OnBuildInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && !isDead && !isAttack && !isGathering)
+        {
+            _BuildUIController.Toggle();
         }
     }
 
