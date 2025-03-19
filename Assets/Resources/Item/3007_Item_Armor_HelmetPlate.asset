@@ -9,17 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd3784d5a915b024a9e4cdb9aca0322a, type: 3}
-  m_Name: 1_Item_Resource_Rock
+  m_Script: {fileID: 11500000, guid: eb976d9feb3d1c94492c67c57535d0db, type: 3}
+  m_Name: 3007_Item_Armor_HelmetPlate
   m_EditorClassIdentifier: 
-  ID: 1
-  Name: Rock
-  Description: 
+  ID: 3007
+  Name: Plate Helmet
+  Description: Unbreakable.
   Rarity: 0
   weight: 0
   Price: 0
   SellPrice: 0
   Currency: 0
-  Stackable: 1
-  Icon: {fileID: 21300000, guid: 79a5d1e0e28d35f4f92aac75f9a8cdb8, type: 3}
-  Prefab: {fileID: 9011734363461338382, guid: e729ae3ebe87664449eb7c8803906c88, type: 3}
+  Stackable: 0
+  Icon: {fileID: 21300000, guid: b227c6c1c35b36940b602110d9556b13, type: 3}
+  Prefab: {fileID: 0}
+  Type: 0
+  Material: 1
+  DefencePower: 0
+  Durability: 0

@@ -1,6 +1,7 @@
 using _23DaysLeft.Monsters;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,6 +32,17 @@ public class PlayerAttackController : MonoBehaviour
     public GameObject equippedAxe;
     public GameObject equippedPickaxe;
     public GameObject equippedBow;
+
+    [Header("EquippedArmor")]
+    public GameObject HelmetPlate;
+    public GameObject ChestPlate;
+    public GameObject PantsPlate;
+    public GameObject BootsPlate;
+    public GameObject ShoulderPlate;
+    public GameObject GlovesPlate;
+    public GameObject ChestLeather;
+    public GameObject PantsLeather;
+    public GameObject BootsLeather;
 
     [Header("Target")]
     public AttackTargetType attackTargetType;
@@ -199,5 +211,68 @@ public class PlayerAttackController : MonoBehaviour
         attackDamage = instance.AttackDamage;
         mineOreDamage = instance.MineOreDamage;
         digWoodDamage = instance.DigWoodDamage;
+    }
+    public void Equip(ArmorInstance instance)
+    {
+        if (instance == null)
+            Debug.LogError("Null weapon assignd to player");
+
+        switch (instance.armorType)
+        {
+            case ArmorType.Helmet:
+                if(instance.materialType == MaterialType.Plate)
+                {
+                    HelmetPlate.SetActive(true);
+                }
+                break;
+            case ArmorType.Chest:
+                if (instance.materialType == MaterialType.Plate)
+                {
+                    ChestPlate.SetActive(true);
+                    ChestLeather.SetActive(false);
+                }
+                else if (instance.materialType == MaterialType.Leather)
+                {
+                    ChestPlate.SetActive(false);
+                    ChestLeather.SetActive(true);
+                }
+                break;
+            case ArmorType.Panth:
+                if (instance.materialType == MaterialType.Plate)
+                {
+                    PantsPlate.SetActive(true);
+                    PantsLeather.SetActive(false);
+                }
+                else if (instance.materialType == MaterialType.Leather)
+                {
+                    PantsPlate.SetActive(false);
+                    PantsLeather.SetActive(true);
+                }
+                break;
+            case ArmorType.Boots:
+                if (instance.materialType == MaterialType.Plate)
+                {
+                    BootsPlate.SetActive(true);
+                    BootsLeather.SetActive(false);
+                }
+                else if (instance.materialType == MaterialType.Leather)
+                {
+                    BootsPlate.SetActive(false);
+                    BootsLeather.SetActive(true);
+                }
+                break;
+            case ArmorType.Glove:
+                if (instance.materialType == MaterialType.Plate)
+                {
+                    GlovesPlate.SetActive(true);
+                }                
+                break;
+            case ArmorType.Shoulders:
+                if (instance.materialType == MaterialType.Plate)
+                {
+                    ShoulderPlate.SetActive(true);
+                }
+                break;
+        }
     }
 }

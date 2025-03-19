@@ -83,6 +83,10 @@ namespace DaysLeft.Inventory
             {
                 newItem = new ConsumeInstance(itemID);
             }
+            else if (itemID >= 3000 && itemID < 4000)
+            {
+                newItem = new ArmorInstance(itemID);
+            }
             else
                 newItem = null;
 
@@ -106,7 +110,9 @@ namespace DaysLeft.Inventory
 
             if(CurCapacity < MaxCapacity && newItem.Weight <= MaxWeight - CurWeight)
             {
-                _items[CurEmptyIndex] = newItem;
+                int index = CurEmptyIndex;
+                _items[index] = newItem;
+                _items[index].Quantity++;
                 OnContentsChanged?.Invoke();
             }
         }

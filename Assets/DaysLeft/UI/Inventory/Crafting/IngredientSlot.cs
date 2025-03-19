@@ -30,7 +30,7 @@ public class IngredientSlot : ScreenPlugin
         }
 
         text.text = $"{remainNum} / {ingredientQuantity}";
-        if(remainNum > ingredientQuantity)
+        if(remainNum >= ingredientQuantity)
         {
             text.color = Color.white;
         }

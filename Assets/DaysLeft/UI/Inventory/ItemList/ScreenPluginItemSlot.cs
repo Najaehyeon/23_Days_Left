@@ -127,6 +127,24 @@ namespace DaysLeft.Inventory
                         }
                     }
                 }
+                else if (slot is ScreenPluginArmorSlot)
+                {
+                    if( _data is ArmorInstance _armorData)
+                    {
+                        Global.Instance.Player.attackController.Equip(_armorData);
+                        if (slot._data == null)
+                        {
+                            slot.Set(_data);
+                            this.Clear();
+                        }
+                        else
+                        {
+                            ArmorInstance targetData = new ArmorInstance(slot._data as ArmorInstance);
+                            slot.Set(_data);
+                            this.Set(targetData);
+                        }
+                    }
+                }
                 else
                 {
                     if (slot._data == null)
