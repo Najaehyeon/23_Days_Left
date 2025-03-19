@@ -142,7 +142,7 @@ public class PlayerAttackController : MonoBehaviour
                 break;
             case EquippedWeaponType.Sword:
                 AttackByTarget();
-                Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.SwordSoundEffectts1.GetClipName());
+                Global.Instance.AudioManager.PlaySFX(SoundTypeEnum.SwordSoundEffects1.GetClipName());
                 break;
             case EquippedWeaponType.Axe:
                 AttackByTarget();
