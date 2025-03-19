@@ -108,6 +108,7 @@ public class DayNightCycle : MonoBehaviour
         var boss = Global.Instance.PoolManager.Spawn<Creature>(bossData.name);
         var spawnPos = GetBossSpawnPos();
         boss.Init(spawnPos);
+        Global.Instance.UIManager.ActiveBossInfoPanel(bossData.Name, bossData.MaxHp);
     }
 
     private Vector3 GetBossSpawnPos()
