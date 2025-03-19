@@ -26,6 +26,18 @@
 <table align="center">
   <tr>
     <td>
+      <img style="width:360px;" src="/Docs/Img/example_move.png">
+    </td>
+    <td width=450 style="word-break:break-all" >
+      플레이어 에니메이션
+    </td>
+    <td> by 강현종 </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td>
       <img style="width:360px;" src="/Docs/Img/example_weather.png">
     </td>
     <td width=450 style="word-break:break-all" >
