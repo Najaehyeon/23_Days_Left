@@ -10,16 +10,16 @@ public class Weather : MonoBehaviour
     [SerializeField] float rainningTime;
 
     [Header("Fog Settings")]
-    public float clearFogDensity = 0.002f;  // ¸¼Àº ³¯¾¾ÀÇ ¾È°³ ¹Ğµµ
-    public float rainFogDensity = 0.02f;    // ºñ ¿À´Â ³¯¾¾ÀÇ ¾È°³ ¹Ğµµ
+    public float clearFogDensity = 0.002f;  // ë§‘ì€ ë‚ ì”¨ì˜ ì•ˆê°œ ë°€ë„
+    public float rainFogDensity = 0.02f;    // ë¹„ ì˜¤ëŠ” ë‚ ì”¨ì˜ ì•ˆê°œ ë°€ë„
     public Color clearAmbientLight = Color.white;
     public Color rainAmbientLight = Color.gray;
-    public float fogChangeSpeed = 0.5f; // ¾È°³ º¯È­ ¼Óµµ
+    public float fogChangeSpeed = 0.5f; // ì•ˆê°œ ë³€í™” ì†ë„
 
     private void Start()
     {
-        nextRainTime = Random.Range(120, 600); // 1 ~ 5ÀÏ¿¡ ÇÑ ¹ø¾¿ ºñ ³»¸²
-        rainningTime = Random.Range(60, 120); // ¹İ³ªÀı ~ ÇÏ·çµ¿¾È ºñ³»¸²
+        nextRainTime = Random.Range(120, 600); // 1 ~ 5ì¼ì— í•œ ë²ˆì”© ë¹„ ë‚´ë¦¼
+        rainningTime = Random.Range(60, 120); // ë°˜ë‚˜ì ˆ ~ í•˜ë£¨ë™ì•ˆ ë¹„ë‚´ë¦¼
     }
 
     private void Update()
@@ -36,19 +36,19 @@ public class Weather : MonoBehaviour
 
     IEnumerator Rain()
     {
-        // ºñ ½ÃÀÛ
+        // ë¹„ ì‹œì‘
         rainParticle.SetActive(true);
         StartCoroutine(ChangeFogDensity(RenderSettings.fogDensity, rainFogDensity));
         StartCoroutine(ChangeAmbientLight(RenderSettings.ambientLight, rainAmbientLight));
 
         yield return new WaitForSeconds(rainningTime);
 
-        // ºñ Á¾·á
+        // ë¹„ ì¢…ë£Œ
         rainParticle.SetActive(false);
         StartCoroutine(ChangeFogDensity(RenderSettings.fogDensity, clearFogDensity));
         StartCoroutine(ChangeAmbientLight(RenderSettings.ambientLight, clearAmbientLight));
 
-        // ´ÙÀ½ ºñ ³»¸®´Â ½Ã°£ ¼³Á¤
+        // ë‹¤ìŒ ë¹„ ë‚´ë¦¬ëŠ” ì‹œê°„ ì„¤ì •
         afterLastRainTime = 0;
         nextRainTime = Random.Range(120, 600);
     }
