@@ -9,7 +9,7 @@
 </div>
 
 <br/>
-<h2 id="team"> :people_holding_hands: 팀 정보 (Team Information)</h2>
+<h2 id="team"> :people_holding_hands: 소개</h2>
 
 ![image](https://github.com/user-attachments/assets/28ae7340-66a4-4819-941c-f61ed07b61da)
 
